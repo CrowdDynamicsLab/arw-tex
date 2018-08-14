@@ -1,0 +1,35 @@
+%!TEX root = draft.tex
+\section{Problem Statement}
+\label{sec:Problem Statement}
+
+Consider an attributed directed network $G=(V,E,B)$, where $V$ \& $E$ are
+sets of nodes \& edges and each node has an attribute value $b \in B$.
+The goal is to develop a directed network growth model that preserves structural
+and attribute based properties observed in $G$. The growth model should be
+normative, accurate and parsimonious:
+\begin{enumerate}
+    \item \textbf{Normative}: The model should account for normative behavior. In real-world
+    networks, multiple sociological phenomena influence how individuals form edges under
+    constraints of limited global information and under partial network access.
+    \item \textbf{Accurate}: The model should preserve key structural
+    and attribute based properties such as heavy tailed degree distribution, skewed
+    local clustering, negatively correlated degree-clustering relationship
+    and attribute mixing patterns.
+    \item \textbf{Parsimonious}: The model should be simple but expressive enough to generate
+    networks with varying structural properties.
+\end{enumerate}
+
+% \harshay{Normative or Intuitive?}
+
+% Extensive research on network growth has led to development of well-known growth
+% models that generate realistic networks. However, the edge formation mechanisms
+% of most network growth models tend to make strong assumptions about either
+% knowledge (e.g. complete degree/fitness distribution known) or access (e.g. pick
+% nodes uniformly at random).
+%
+% The goal of this paper is to model network growth under information and resource
+% constraints using edge formsation mechanisms. The growth model should be able to
+% jointly explain global structural properties of real networks such as degree
+% distribution, clustering coefficient distribution, degree-clustering
+% relationship and degree correlations The model should incorporate information \&
+% resource constraints that influence edge formation in real networks.

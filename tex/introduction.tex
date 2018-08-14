@@ -1,0 +1,81 @@
+%!TEX root = draft.tex
+
+\section{Introduction}
+\label{sec:Introduction}
+
+% what is the problem?
+
+We develop a resource constrained model of network growth that explains the
+emergence of key structural properties. The problem is important for several
+reasons. Individuals form real-world networks acting under resource constraints
+and while using local information. These networks that individuals form exhibit
+rich structural properties. However, we lack an understanding of mechanisms that
+are resource constrained and which use local information explain the emergence
+of these structural related properties.
+
+% why is it important?
+
+Classic models of network growth, make unrealistic assumptions about what agents
+who form edges do. Consider as a simple stylized example, the process of finding
+the a set of papers to cite when writing an article. In the preferential
+attachment model \cite{barabasi1999emergence} of network growth, a node making
+$m$ citations would pick a paper uniformly at random from \textit{all} papers in
+the domain, and either cite it or copy one of its references. We would repeat
+this process, till we've exhausted our budget of $m$ references. Notice that the
+process assumes access to the entire dataset, and that one would pick papers
+uniformly at random. An equivalent formulation of this copying model
+is to cite papers from the entire dataset in proportion to their in degree. The
+latter formulation assumes that agent making citations know the entire in-degree
+distribution. While preferential attachment models explains the emergence of
+the power-law degree distribution, the attachment model is an unrealistic
+representation of how agents make decisions on edge formation.
+
+%why is it hard?
+
+The problem of developing a model of network growth, where agents act under
+resource constraints, including access to only local information is hard. The
+problem lies in identifying simple mechanisms, with few parameters, where the
+agents only use local information and \textit{jointly} preserve the properties
+related structure.
+
+% what did we do?
+
+We propose a random walk based model of network growth that jointly explains the
+emergence of the following properties: heavy-tailed in-degree distributions,
+local clustering and clustering-degree relationships. In the growth model, an
+incoming node picks a recent node as the seed. It will link to this node with
+some constant linking probability. Then, it follows the outgoing link or the
+incoming link of this seed node and arrives at a new node. At each new node, it
+decides to link with the same constant linking probability. Then it has to
+decide whether to jump back to the seed node, or following incoming or outgoing
+links. The process repeats until the agent has exhausted its budget for linking.
+To summarize, new nodes concurrently acquire information and form edges
+by exploring the local neighborhoods of existing nodes, without access to the
+entire network.
+
+Our main contributions are as follows:
+\begin{itemize}
+    \item We propose a model
+    of network growth using a local edge formation mechanism that incoporates the
+    resource constraints that influence individuals' edge formation mechanisms in
+    real-world networks.
+    \item We propose a model that jointly explains multiple
+    structural properties, including in-degree distribution, clustering, degree
+    clustering relationship and edge densification.
+\end{itemize}
+
+
+We conducted extensive experimental results, against state of the art
+baselines, on large citation network datasets. We show that our growth model
+outperforms that best competing model in jointly and accurately preserving
+multiple structural properties---degree distribution, clustering and
+degree-clustering relationship---by a significant margin.
+
+The rest of the paper is organized as follows. In~\Cref{sec:Related Work}, we
+describe the related work. Then, in~\Cref{sec:Preliminaries}, we define key
+structural properties and introduce the datasets. We formally state the goal of
+the paper in~\Cref{sec:Problem Statement}. In~\Cref{sec:Empirical Analysis}
+and~\Cref{sec:Proposed Model}, we report prominent structural characteristics
+of citation networks and propose a network growth model respectively. This is
+followed by~\Cref{sec:Experiments}, where we validate our model against
+multiple baselines.

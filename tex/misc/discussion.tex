@@ -1,0 +1,47 @@
+%!TEX root = main.tex
+
+% \section{Discussion}
+% \label{sec:Discussion and limitations}
+%
+% In this work, we address the problem of modeling growth of real-world
+% bibliographic networks. Our proposed model is an improvement over existing
+% random walk growth models that preserves multiple key network structural
+% properties such as degree distribution, clustering coefficient distribution and their
+% joint relationship. A standard modeling assumption is that \textit{new} nodes joining a
+% network can potentially make connection to \textit{any} existing node in the network in
+% some prescribed manner. Our experiments suggest that local link formation
+% process in which \textit{new} nodes explore local network neighborhoods
+% and makes connections in the explored locality can explain multiple structural
+% properties of real-world networks.
+%
+% We note that clustering coefficient is an important characteristic of
+% real-world networks. We observe that clustering is not
+% uniformly distributed over the network and clustering at nodal level to be
+% highly right skewed. The skewness implies that some parts of the network is more
+% clustered than the other parts. In addition to skewness, clustering at nodal
+% level is correlated to nodal degree. We propose a random-walk model the that
+% gives rise to prominent characteristics of the network such as skewed local
+% clustering.
+%
+% Finally, we show, via attributed network modeling, the extensibility
+% of our proposed random walk model. The modeling suggests that our
+% growth model can be adapted to account for growth of other kinds of
+% information such as attributes and link types. Modeling other informative
+% networks such as multiplex networks and heterogeneous information networks
+% should be the focus of future work.
+
+\section{Limitations}
+Now, we discuss the limitations of our work. First, our work is limited to
+bibliographic datasets because of availibility of temporal data. We use the
+temporal out-degree sequence of incoming nodes in the network to model the
+network growth. In absence of temporal information, our growth model can be
+adapted by relying on the densification power law exponent. Second, our random
+walk model is sensitive to the initial graph. Since random walks explore the
+locality of a network and cannot access the entire network , the initial graph
+should have a giant weakly connected component. We recognise that the
+intialization problem can be addressed by having non-local source of information
+such as multiple seed nodes. Third, we note that our model fails to preserve
+certain network properties such as path length distribution. This is because
+our model does not account for nodes that serve as ``local bridges'' in the network.
+Modeling local and global processes simulatenously in a joint random walk model
+should lead to preservation of the discussed key network properties.
