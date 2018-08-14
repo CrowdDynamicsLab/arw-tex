@@ -1,15 +1,34 @@
-%!TEX root = main.tex
+
+%!TEX root = draft.te
 \section{Conclusion}
 \label{sec:Conclusion}
-In this paper, we model resource-constrained network growth model in which nodes
-use a random walk process to form edges under constraints of limited information
-and network access constraints. The problem is important because edge formation
-in real networks is usually a local process. In typical network growth
-scenarios, nodes in the network either have limited information about the other
-nodes in the network or the system allows access to only restricted portion of
-the existing network. It therefore becomes imperative to model how the local
-processes of link formation gives rise to network characteristics. In this work,
-we show that multiple structural properties of real networks can arise from the
-local process of exploration and link formation. Our results indicate significant
-improvement over the next best competing model \textsc{HZ}
-\cite{herrera2011generating} by a significant margin.
+In this paper, we develop a network growth model that explains the
+structure of attributed networks through a local edge formation mechanism. Our
+model \texttt{ARW} is normative, accurate and simple. We incorporated multiple
+sociological phenomena into our model to intuitively prototype how individuals
+form edges under constraints of limited information and partial network access.
+Through our experiments, we validated the efficacy of our model in jointly preserving
+multiple structural properties of real-world networks. We also showed that our
+model can preserve local assortativity distributions of attributed networks.
+% Furthermore, we discussed the weaknesses of global processes such as
+% preferential attachment \& triangle closing and addressed the limitations of our
+% model.
+
+Our work signifies the need to understand how local processes of link formation
+give rise to structural characteristics of real-world networks.
+We identify three future directions: understanding the emergence of higher-order clustering [49]
+through local processes, modeling the effect of homophily on the formation of temporal motifs [38]
+and learning individual preferences in evolving networks with multiple attributes.
+
+% In this paper, we model resource-constrained network growth model in which nodes
+% use a random walk process to form edges under constraints of limited information
+% and network access constraints. The problem is important because edge formation
+% in real networks is usually a local process. In typical network growth
+% scenarios, nodes in the network either have limited information about the other
+% nodes in the network or the system allows access to only restricted portion of
+% the existing network. It therefore becomes imperative to model how the local
+% processes of link formation gives rise to network characteristics. In this work,
+% we show that multiple structural properties of real networks can arise from the
+% local process of exploration and link formation. Our results indicate significant
+% improvement over the next best competing model \textsc{HZ}
+% \cite{herrera2011generating} by a significant margin.
