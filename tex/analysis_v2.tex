@@ -11,21 +11,27 @@ empirical studies in sociology and common assumptions in network modeling.
 \subsection{Datasets}
 \label{sec:Datasets}
 
-We consider six large-scale citation networks from diverse sources: research articles,
-utility patents and judicial cases.
-We focus on citation networks for three reasons. First, nodes in citation networks
-form all outgoing edges to existing nodes at the time of joining the network; Nodes do
-not form or delete edges at a later time. This allows us to analyze
-the edge formation mechanisms of new nodes that join the network form edges.
-% Other edge dynamics such as edge deletion and addition of edges between existing
-% nodes are important and we plan to investigate them at a later time.
-Second, citation network datasets include the time (e.g., publication year of academic
-papers) at which nodes join the network. As a result, local edge formation
-processes and global structural properties can be better understood by studying
-network snapshots at different stages of the growth process. Third, the citation
-networks are large networks that tend to have one or more nodal attributes (e.g. category of patents)
-and span multiple decades. As a result, the structural and content properties of the citation
-networks considered are well-defined.
+We consider six citation networks of different scales (size, time) from diverse sources: research articles, utility patents and judicial cases. We focus on citation networks for two reasons. First, since nodes in citation networks form all outgoing edges to existing nodes at the time of joining the network, citation networks provide a clean basis to study edge formation mechanisms in attributed networks. Second, citation network span long periods of time (e.g. the \texttt{USSC} judicial citation network span several hundred years). Consequently, identifying local edge formation processes that successfully model growth for this duration is non-trivial.
+
+% and global structural properties can be better understood by studying network snapshots at different stages of the growth process.
+
+
+% datasets include the time (e.g., publication year of academic papers) at which nodes join the network. As a result, local edge formation processes and global structural properties can be better understood by studying network snapshots at different stages of the growth process. Third, the citation networks are large networks that tend to have one or more nodal attributes (e.g. category of patents)
+% and span multiple decades. As a result, the structural and content properties of the citation
+% networks considered are well-defined.
+
+% Nodes do
+% not form or delete edges at a later time. This allows us to analyze
+% the edge formation mechanisms of new nodes that join the network form edges.
+% % Other edge dynamics such as edge deletion and addition of edges between existing
+% % nodes are important and we plan to investigate them at a later time.
+% Second, citation network datasets include the time (e.g., publication year of academic
+% papers) at which nodes join the network. As a result, local edge formation
+% processes and global structural properties can be better understood by studying
+% network snapshots at different stages of the growth process. Third, the citation
+% networks are large networks that tend to have one or more nodal attributes (e.g. category of patents)
+% and span multiple decades. As a result, the structural and content properties of the citation
+% networks considered are well-defined.
 
 \begin{table}[b]
  {
@@ -48,7 +54,7 @@ networks considered are well-defined.
 \end{table}
 
 Now, we briefly describe the datasets considered in this paper. Three of the six
-network datasets have nodal attribute data; That is, each node has a categorical attribute value.
+network datasets have nodal attribute data (each node has an associated categorical attribute value).
 \Cref{table:datasets} provides summary statistics of the following networks:
 \begin{enumerate}
     % (V,E) = (22049, 138871), used (V,E): 18665 115358
@@ -69,7 +75,7 @@ network datasets have nodal attribute data; That is, each node has a categorical
     physics phenomenology) papers in the ArXiv e-print.
 
     % used: (V,E) = (556661, 6647769) after removing nodes w. missing time + categorial data
-    \item{\textbf{APS Journals}} (\texttt{APS}) \footnote{https://journals.aps.org/datasets} is an attributed academic citation network maintained by
+    \item{\textbf{APS Journals}} (\texttt{APS} \url{https://journals.aps.org/datasets} is an attributed academic citation network maintained by
     the American Physical Society (\texttt{APS}).
     The attribute value of each paper is the \texttt{APS} journal in which it was published.
 
@@ -83,8 +89,9 @@ network datasets have nodal attribute data; That is, each node has a categorical
     Computer Science and Neuroscience papers, released in June 2017 by Semantic Scholar.
 \end{enumerate}
 
-Next, we study the structural and content properties of these networks in \cref{subsec:factors} and empirically
-validate the effectiveness of the proposed model using these network datasets in~\Cref{sec:Experiments}.
+Next, we study the structural and content properties of these networks. 
+% in \cref{subsec:factors} and empirically
+% validate the effectiveness of the proposed model using these network datasets in~\Cref{sec:Experiments}.
 %
 % In this section, we outlined the citation network datasets that we use in our analysis and experiments.
 % Next, we discuss common factors that affect edge formation mechanisms and identify common global structural
@@ -102,21 +109,15 @@ such as degree distribution, local clustering and attribute assortativity
 quantify the extent to which local edge formation phenomena shape global network
 structure.
 
-\textbf{Preferential Attachment \& Degree Distribution}
-In the preferential attachment process  \cite{simon1955class,barabasi1999emergence},
-nodes with higher degree receive links at a faster rate because incoming nodes tend to
-link to well-connected nodes that have more visibility. As a result, initial differences in node
-connectivity get reinforced over time, giving rise to a rich-get-richer effect.
-This phenomenon  explains why the citation networks datasets exhibit heavy
-tailed degree distributions; It also implies that most papers receive zero or a few
+\textbf{Heavy tailed degree distribution:} All citation datasets in~\Cref{table:netstats} exhibit heavy tailed degree distributions. These distributions arise out of the well known preferential attachment process~\cite{simon1955class,barabasi1999emergence}, where, incoming nodes connect with nodes in proportion to their degree. As a result, initial differences in node
+connectivity get reinforced over time, giving rise to heavy
+tailed degree distributions (also known as the ``rich get richer'' effect) in citation networks; It also implies that most papers receive zero or a few
 citations, but a small but significant percent of the nodes turn into popular
-hubs that receive many citations. Log-normal fits describe the indegree
-distribution of all network datasets, well consistent with Broido \& Clauset's
-\cite{broido2018scale} observation that real-world networks with truly power law
+hubs that receive many citations. Log-normal fits describe the in-degree
+distribution of all network datasets, well consistent with~\citet{broido2018scale} observation that real-world networks with truly power law
 degree distributions are rare; The parameters of the log-normal fits are
-listed in \cref{table:netstats}. Our model explains the emergence of heavy
-tailed indegree distributions through a \textit{local} process that
-adjusts bias towards linking to well-connected nodes
+listed in~\cref{table:netstats}. 
+% Our model explains the emergence of heavy tailed in-degree distributions through a \textit{local} process that adjusts bias towards linking to well-connected nodes
 
 \begin{table}
  \center
@@ -133,36 +134,32 @@ adjusts bias towards linking to well-connected nodes
    \bottomrule
   \end{tabular}
   \vspace{1mm}
-  \caption{Global network properties: lognormal (\texttt{LN}) indegree distribution mean \& standard deviation $(\mu, \sigma)$,
+  \caption{Global network properties: lognormal (\texttt{LN}) in-degree distribution mean and standard deviation $(\mu, \sigma)$,
   densification power law (\texttt{DPL}) exponent $\alpha$, average local clustering coefficient (${\texttt{LCC}}$)
   and attribute assortativity (\texttt{AA}) coefficient of six network datasets.}
   \label{table:netstats}
  }
 \end{table}
 
-\textbf{Triadic Closure \& Clustering}
-In the triadic closure phenomenon \cite{simmel1950sociology,
-newman2001clustering}, nodes with common neighbor(s) have an increased
+\textbf{High Local Clustering:} Real-world networks tend to exhibit high average local clustering, as shown in~\Cref{table:netstats}. We can explain local clustering due to the phenomena of triadic closure~\cite{simmel1950sociology,
+newman2001clustering}, where nodes with common neighbor(s) have an increased
 likelihood of forming a connection.
 % Empirical studies
 % \cite{kossinets2006empirical} show that the probability of edge formation
 % increases with the number of common neighbors.
-The local clustering coefficient
-of a node measures the prevalence of triadic closure in its neighborhood; It is
-the probability that two randomly chosen neighbors of the node $i$ are
-connected. In directed networks, the neighborhood of a node $i$ can refer to the
+The local clustering coefficient of a node measures the prevalence of triadic closure in its neighborhood; It is the probability that two randomly chosen neighbors of the node $i$ are connected. In directed networks, the neighborhood of a node $i$ can refer to the
 set of nodes that link to $i$, set of nodes that $i$ links to or the union of
 both sets. We define the neighborhood to be the set of all nodes that link to
-node $i$. Real-world networks tend to exhibit high average local clustering, as
-shown in \cref{table:netstats}. However, average local clustering is not a
+node $i$.  However, average local clustering is not a
 representative statistic of the \textit{skewed} local clustering distributions
-shown in \Cref{fig:cc_dc}. Furthermore, real-world networks exhibit a negative
-correlation between node indegree  and local clustering. As shown in
-\cref{fig:cc_dc}, the average local clustering  decreases as indegree increases.
-That is, low indegree nodes have small, tightly knit neighborhoods and high
-indegree nodes tend have large, star-shaped neighborhoods. We propose a model
-that explains how clustering in real-world networks can arise from local processes
-of exploration \& link formation.
+shown in~\Cref{fig:cc_dc}. Furthermore, real-world networks exhibit a negative
+correlation between node in-degree  and local clustering. As shown in~\Cref{fig:cc_dc}, the average local clustering  decreases as in-degree increases.
+That is, low in-degree nodes have small, tightly knit neighborhoods and high
+in-degree nodes tend have large, star-shaped neighborhoods. 
+
+% We propose a model
+% that explains how clustering in real-world networks can arise from local processes
+% of exploration \& link formation.
 
 \begin{figure}
  \centering
@@ -170,30 +167,31 @@ of exploration \& link formation.
  \caption{
     Local clustering in real-world networks have common characteristics:
     skewed local clustering distribution (left subplot) and a negatively correlated
-    relationship between indegree and average local clustering (right subplot).
+    relationship between in-degree and average local clustering (right subplot).
  }
  \label{fig:cc_dc}
 \end{figure}
 
 
 % Homophily and Assortativity
-\textbf{Homophily \& Global Assortativity}
-Real-world attributed networks tend to exhibit homophily
-\cite{mcpherson2001birds}, the phenomenon in which similar nodes are more likely
+\textbf{Homophily:}
+Real-world attributed networks exhibit homophily~\cite{mcpherson2001birds}, the phenomenon where similar nodes are more likely
 to be connected than dissimilar nodes. The assortativity coefficient
-~\cite{newman2002assortative} $r \in [-1, 1]$, defined as the ratio between the observed modularity and
-the maximum possible modularity with respect to set of attribute values $B=\{b_1...b_l\}$,
+~\cite{newman2002assortative} $r \in [-1, 1]$, 
+% defined as the ratio between the observed modularity and
+% the maximum possible modularity with respect to set of attribute values $B=\{b_1...b_l\}$,
 quantifies the level of homophily in an attributed network. Intuitively, it
 compares the observed fraction of edges between nodes with the same attribute
 value to the expected fraction of edges between nodes with same attribute value
 if the edges were rewired randomly.
 Attributed networks \texttt{ACL}, \texttt{APS} \& \texttt{Patents} exhibit
-varying level of homophily, as shown in \Cref{fig:mixing}, with assortativity
+varying level of homophily, as shown in~\Cref{fig:mixing}, with assortativity
 coefficient ranging from $0.07$ to $0.72$.
 The magnitude of the attribute assortativity
 signifies the extent to which attribute similarity influences edge formation.
-We embed attribute based preferences at the local level lead to generate networks
-with varying attribute mixing patterns. 
+
+% We embed attribute based preferences at the local level lead to generate networks
+% with varying attribute mixing patterns. 
 
 \begin{figure}
  \centering
@@ -207,22 +205,18 @@ with varying attribute mixing patterns.
  \label{fig:mixing}
 \end{figure}
 
-\textbf{Increasing Outdegree over Time}
-The average outdegree of nodes that join real-world networks tends to increase
+\textbf{Increasing Out-degree over Time:}
+The average out-degree of nodes that join real-world networks tends to increase
 as functions of network size and time. This phenomenon densifies networks and shrinks their
-diameter over time; Leskovec et al. \cite{leskovec2005graphs} show that
+diameter over time;~\citet{leskovec2005graphs} show that
 densification in many real networks exhibit a power law relationship between the
 number of edges $e(t)$ and nodes $n(t)$ at time $t$: $e(t) \propto
-n(t)^{\alpha}$. \Cref{table:netstats} lists the densification power law exponent $\alpha$ in
-the network datasets. In our proposed model, we increase the outdegree of incoming nodes
-at a linear or superlinear rate to account for the accelerated network growth
-observed in real networks.
+n(t)^{\alpha}$.~\Cref{table:netstats} lists the densification power law exponent $\alpha$ in
+the network datasets. 
 
-To summarize, factors such as preferential attachment, triadic closure and homophily not only effect how individuals
-form connections at the local level but also explain regularities in
-global structural properties of real-world networks.
-Next, we discuss empirical studies in sociology that examine network formation
-and decision making.
+% In our proposed model, we increase the outdegree of incoming nodes at a linear or superlinear rate to account for the accelerated network growth observed in real networks.
+
+To summarize, factors such as preferential attachment, triadic closure and homophily not only effect how individuals form connections at the local level but also explain regularities arise in global structural properties of real-world networks. Next, we discuss empirical studies from sociology that examine network formation and decision making.
 
 \begin{figure*}[b]
     \centering
@@ -242,43 +236,28 @@ and decision making.
 
 Sociological studies on network formation seek to explain
 how individuals form edges in real-world networks.
-Empirical studies
-\cite{35626,block2014multidimensional} that investigate
+
+\textbf{Interplay of Triadic Closure and Homophily:} Empirical studies~\cite{35626,block2014multidimensional} that investigate
 the interplay between triadic closure and homophily in evolving networks
 indicate that \textit{both} structural proximity and homophily are statistically
-significant factors that simultaneously influence edge formation. While homophilic preferences
-\cite{mcpherson2001birds} induce edges between similar nodes,
-structural factors (e.g. network distance) act as constraints that restrict
-edge formation to structurally proximate nodes (e.g. friend of a friend).
-Furthermore, extensive work \cite{simon1972theories,gigerenzer1996reasoning,lipman1995information}
-on individual decision making have established that individuals are \textit{boundedly}
-rational actors. That is, individuals make decisions under constraints of limited
-information, cognitive capacity and time. This implies that individuals that join networks
-employ simple rules to form edges under constraints of limited information and partial network access.
-For example, a researcher cites academic papers without knowledge of or access
+significant factors that simultaneously influence edge formation. While homophilic preferences~\cite{mcpherson2001birds} induce edges between similar nodes, structural factors (e.g. network distance) act as constraints that restrict edge formation to structurally proximate nodes (e.g. friend of a friend). 
+
+\textbf{Bounded Rationality:} Extensive work~\cite{simon1972theories,gigerenzer1996reasoning,lipman1995information}
+on individual decision making indicates that individuals are \textit{boundedly}
+rational actors. That is, individuals make decisions under constraints of limited information, cognitive capacity and time. This implies that individuals that join networks employ simple rules to form edges under constraints of limited information and partial network access. For example, a researcher cites academic papers without knowledge of or access
 to the entire literature in her or his field.
 
-Based on these observations, a faithful characterization of edge formation in real-world
-networks necessitates bias towards nodes that are similar, proximate or
-well-connected under constraints of limited information and network access.
-Existing preferential attachment \& fitness-based models
-\cite{dorogovtsev2000structure,kim2017effect,singh2017relay,barabasi1999emergence}
-make two assumptions that are inconsistent with the findings of aforementioned
-empirical studies.
-First, by assuming that successive edge formations are independent, these model
-disregard the effect of triadic closure and structural proximity. Second, they
-implicitly require incoming nodes to have complete network access (e.g., connect
-to any node) or explicit knowledge of one or more properties (e.g., fitness) of
-every node in the network.
+These insights from the social sciences suggest that edge formation in real-world networks is biased towards nodes that are similar, proximate or
+well-connected and that these edges are made under constraints of limited information and network access.
+
+
+Current preferential attachment and fitness-based models
+\cite{dorogovtsev2000structure,kim2017effect,singh2017relay,barabasi1999emergence} make two assumptions that are at variance with these findings in the Social Sciences. First, by assuming that successive edge formations are independent, these models disregard the effect of triadic closure and structural proximity. Second, they implicitly require incoming nodes to have complete network access (e.g., be able to connect to any node) or explicit knowledge of one or more properties (e.g., fitness, degree) of \textit{every} node in the network. For example, a preferential attachment model, by making connections in proportion to degree, requires \textit{non-local} information: the degree distribution of the entire network.
 
 To summarize, citation networks tend to be homophilic networks that
 undergo accelerated network growth and exhibit regularities in structural
-properties: heavy tailed indegree distribution, skewed local clustering distribution,
-negatively correlated degree-clustering relationship and varying attribute mixing patterns.
-These global properties are a cumulative effect of resource constrained edge formation decisions.
+properties: heavy tailed in-degree distribution, skewed local clustering distribution, negatively correlated degree-clustering relationship and varying attribute mixing patterns. These global properties are modulated by the presence of resource constrained edge formation decisions.
 
-Next, we propose a growth model that unifies multiple
-sociological phenomena to explain how \textit{local} factors that affect
-edge formation lead to the emergence of global structural properties
-observed in real-world networks.
+Next, we propose a growth model that uses \textit{local} processes for 
+edge formation and which lead to the emergence of global structural and attribute properties observed in real-world networks.
 
