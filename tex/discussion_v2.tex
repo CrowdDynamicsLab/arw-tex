@@ -2,29 +2,29 @@
 
 \section{Discussion}
 \label{sec:Discussion}
-In this section, we discuss the insufficiency of the well-known triangle closing mechanism,
-importance of measuring distributional network properties
+In this section, we discuss the weaknesses of the well-known triangle closing mechanism
 and the limitations of our model \texttt{ARW}.
 
 \subsection{Dissecting the Triangle Closing Mechanism}
 \label{ss:tc}
 
-Network models (e.g., \texttt{SAN} \cite{gong2012evolution} \& \texttt{HK} \cite{holme2002growing})
-commonly use triangle closing mechanisms to generate networks with
+A set of network models (e.g., \texttt{SAN} \cite{gong2012evolution} \& \texttt{HK} \cite{holme2002growing})
+use triangle closing mechanisms to generate networks with
 varying average local clustering. However, our experimental results
 in \cref{sub:Experimental Results} show that models that rely on triangle closing
 cannot model the local clustering distribution or bivariate degree-clustering
 relationship accurately. To understand why, we examine the degree-clustering
-relationship in the \texttt{APS} network:
+relationship in the \texttt{APS} network, in~\cref{fig:triangle_closing}.
 \begin{figure}[h]
     \centering
-    \vspace{-7pt}
-    \includegraphics[width=.85\linewidth]{deg_cc_tc_om}
-    \caption{Triangle closing mechanisms in \texttt{SAN} and \texttt{HK} fail to
-    model average local clustering of low in-degree nodes. In contrast, the random walk
-    mechanism in \texttt{ARW} visits low in-degree nodes and ``closes triangles'' in
-    their neighborhoods to preserve local clustering with high accuracy.}
+    \vspace{-12pt}
+    \includegraphics[width=.8\linewidth]{deg_cc_tc_om}
+    \caption{Triangle closing mechanisms used in \texttt{SAN}  \texttt{HK} fail to
+    model average local clustering of low in-degree nodes. In contrast,
+    to accurately preserve local clustering, \texttt{ARW} uses \textit{random walks} to visit
+    low in-degree nodes and ``closes triangles'' in their neighborhoods .}
     \label{fig:triangle_closing}
+    \vspace{-5pt}
 \end{figure}
 
 \Cref{fig:triangle_closing} reveals that models based on triangle closing mechanisms,
@@ -58,11 +58,12 @@ low in-degree.
 % % initiate random walks in neighborhoods with varying local content properties.
 % To summarize, we believe that the analysis and evaluation of \textit{distributional}
 % network properties is crucial to accurately model network structure.
+
 \subsection{\texttt{ARW} Limitations}
 We discuss two limitations of our work. First, \texttt{ARW} does not preserve the average
 path length distribution of real-world networks. This is because the random walk
-mechanism is inherently local and does not form long-range connections to bridge
-distant regions in the network. Preliminary experiments on forming ``structural bridges''
+mechanism is inherently local and does not form \textit{long-range connections} to bridge
+distant regions of the network. Preliminary experiments on forming ``structural bridges''
 by initiating multiple random walks for every node indicate a tradeoff
 between modeling small average path length and high local clustering. Second,
 we only consider citation network datasets where nodes form all edges at the time of joining. We did so so that we could develop sound model for a simple baseline case. We can extend \texttt{ARW} to handle social networks, where individuals can form edges at any time. One way is to incorporate random walks that pause and resume intermittently, thus allowing for older nodes to connect with more recent arrivals.
@@ -74,7 +75,9 @@ nodes of different types in heterogeneous information networks.
 % \cite{yin2018higher} over time and the effect of homophily on the formation of
 % temporal motifs \cite{paranjape2017motifs} via local processes such as \texttt{ARW}.
 
-In this section, we first discussed the weaknesses of triangle closing mechanisms (they considerably underestimate local clustering) and discussed two limitations of our model \texttt{ARW}, including potential fixes.
+In this section, we discussed the weaknesses of triangle closing mechanisms
+(they considerably underestimate local clustering) and limitations of our model
+\texttt{ARW}, including potential fixes.
 % and the importance of distributional network properties. Then, we briefly described
 % simple methods to extend \texttt{ARW} and address current limitations of our model.
 %

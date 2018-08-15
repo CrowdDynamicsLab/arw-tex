@@ -1,15 +1,15 @@
 %!TEX root = draft.tex
 
 \begin{figure*}[t]
+	\vspace{-25pt}
 	\centering
-	\vspace{-15mm}
-	\makebox[\textwidth][c]{\includegraphics[width=.97\textwidth]{experiments_final3}}
-	\vspace{-5mm}
+	\makebox[\textwidth][c]{\includegraphics[width=.99\textwidth]{experiments_final3}}
+	\vspace{-16pt}
 	\caption{
 		Modeling network structure. We assess the extent to which network models
-		fit key structural properties of six real-world networks. Tables A, B and C
+		fit key structural properties of six real-world networks. Tables 5A, 5B and 5C
 		measure the accuracy of eight models in fitting the in-degree distribution,
-		local clustering distribution, in-degree-clustering relationship
+		local clustering distribution, in-degree \& clustering relationship
 		respectively and global attribute assortativity.
 		%  Models with green \checkmark fit the assortativity
 		% coefficient of attributed networks ---\texttt{ACL}, \texttt{APS} and
@@ -22,7 +22,7 @@
 		or are unable to generate networks with varying structural properties.
 		Our model, \texttt{ARW}, jointly preserves all three properties accurately and often
 		performs considerably better than existing models:
-		The cells are shaded gray or dark gray if the proposed model \texttt{ARW} performs
+		the cells are shaded gray or dark gray if the proposed model \texttt{ARW} performs
 		better at significance level $\alpha=0.01$ ( \lightgraybg{ }) or $\alpha=0.001$ ( \darkgraybg{ })
 		respectively.
 		% properties based on clustering. Models equipped with triangle closing
@@ -32,18 +32,22 @@
 		% \texttt{HZ} perform poorly because they are not expressive enough to
 		% generate networks with varying structural properties.
 	}
+	\vspace{-10pt}
+
 	\label{fig:exp_table}
 \end{figure*}
 
+\vspace{-9pt}
 \section{Experiments}
 \label{sec:Experiments}
 In this section, we evaluate the effectiveness of our model in preserving
 structural properties of six real-world networks described in~\Cref{sec:Datasets}.
-Our experiments compare \texttt{ARW} to eight state of the art growth models.
+Our experiments compare \texttt{ARW} to eight state-of-the-art growth models.
 In~\Cref{sub:Experimental Setup}, we describe existing growth models and the evaluation metrics
 used in the experiments. In~\Cref{sub:Experimental Results}, we discuss our
 experimental results.
 
+\vspace{-10pt}
 \subsection{Setup}
 \label{sub:Experimental Setup}
 
@@ -51,15 +55,15 @@ experimental results.
 In this subsection, we describe the evaluation metrics used to quantify the extent to
 which the following growth models preserve global structural properties of real-world networks.
 
-\textit{State of the art Growth Models}. We compare \texttt{ARW} to eight state of the art
+\textit{State-of-the-art Growth Models}. We compare \texttt{ARW} to eight state-of-the-art
 growth models representative of the key edge formation
 mechanisms: preferential attachment, fitness, triangle closing and random walks.
 Two of the eight models account for attribute homophily and preserve attribute mixing patterns,
-as listed in XYZ:
+as listed in~\cref{table:models}.
 %  We consider two preferential attachment models, two attributed
 % network growth models and two random walk models:
 
-\begin{table}[b]
+\begin{table}
  \center
  {
   \begin{tabular}[c]{llcc} \toprule
@@ -74,13 +78,14 @@ as listed in XYZ:
   Forest Fire~\cite{leskovec2005graphs} 					  & \texttt{FF} & \texttt{RW} & No  \\
    \bottomrule
   \end{tabular}
-  \vspace{1mm}
+  % \vspace{1mm}
   \caption{
   	  Existing Well-known Models: We evaluate the performance of our model \texttt{ARW} relative to 3 preferential attachment
 	  (\texttt{PA}) models, 2 pref. attachment \& triangle closing (\texttt{PA+TC}) models and 3 random walk (\texttt{RW}) models.
   }
   \label{table:models}
  }
+ \vspace{-10pt}
 \end{table}
 
 %
@@ -118,16 +123,18 @@ as listed in XYZ:
 % 	and high clustering.
 % \end{enumerate}
 
-\textit{Ensuring Fair Comparison}. To ensure fair comparison, we modify models outlined in~\cref{table:models} in three ways.
-First, for models that do not have an explicitly defined initial graph ---\texttt{DMS}, \texttt{SAN}, \texttt{FF}--- we use the
-initialization method described in~\Cref{sub:Model Fitting}, used for \texttt{ARW}. Second, we extend
-models that use constant node outdegree $m$, by increasing outdegree over time $m(t)$, in a manner identical to \texttt{ARW},
-using the method described in \Cref{sub:Model Fitting}. Third, we adjust models that generate undirected networks to
+\textit{Ensuring Fair Comparison}. To ensure fair comparison, we modify models outlined in~\cref{table:models}.
+First, for models that do not have an explicitly defined initial graph ---\texttt{DMS}, \texttt{SAN}, \texttt{KA}--- we use the
+initialization method used for \texttt{ARW}, described in~\cref{sub:Model Fitting}. Second, we extend
+models that use constant node outdegree $m$, by increasing outdegree over time $m(t)$,
+using the method described in~\cref{sub:Model Fitting}. Third, we adjust models that generate undirected networks to
 create directed edges and generate directed networks.
 
-\textit{Evaluation}. A network model fit should generate a network $\hat{G}$ that
-preserves the global network structure of the observed network $G$. We evaluate
-the fit by comparing four key global network properties of ${G}$ and $\hat{G}$:
+\textit{Evaluation}.
+% A network model fit should
+% preserve the global network structure of the observed network $G$.
+We evaluate
+the network model fit by comparing four key global network properties of ${G}$ and $\hat{G}$:
 degree distribution, local clustering distribution, degree-clustering relationship
 and attribute assortativity.
 We use the Kolmogorov-Smirnov (\texttt{KS}) statistic to compare the univariate degree
@@ -143,11 +150,11 @@ of nodes with in-degree $k$ in $G$.
 Jointly preserving multiple structural properties is a multi-objective optimization
 problem; Model parameters that accurately preserve the degree distribution
 (i.e. low \texttt{KS} statistic) may not preserve the clustering distribution.
-Therefore, we use grid search to select the optimal model parameters for each model that minimizes the
-$\ell^2$-norm of our evaluation metrics. Since the evaluation metrics have
+Therefore, for each model, we use grid search to select the model parameters
+that minimizes the $\ell^2$-norm of the evaluation metrics. The sensitivity of the
+Forest Fire model requires a manually guided grid search method. Since the metrics have
 different scales, we normalize the metrics before computing the $\ell^2$-norm
-to prevent any bias towards a particular metric. We note that the sensitivity of the Forest Fire (\texttt{FF}) model necessitates a manually guided grid search method.
-
+to prevent any bias towards a particular metric.
 % Next, we evaluate the performance of \texttt{ARW} in preserving multiple structural
 % properties of six network datasets, relative to state-of-the-art existing models outlined
 % in this subsection.
@@ -155,7 +162,8 @@ to prevent any bias towards a particular metric. We note that the sensitivity of
 \subsection{Results}
 \label{sub:Experimental Results}
 
-Now, we present results on the eight state of the art baselines, on the six datasets introduced in~\Cref{sec:Datasets}.
+Now, we evaluate the performance of \texttt{ARW} relatiev to eight well-known
+existing models on the datasets introduced in~\cref{sec:Datasets}.
 
 To evaluate the performance of network models, we first fit every model
 to each network dataset $G$. Then, we compare the structural properties of
@@ -166,10 +174,11 @@ fluctuations in $\hat{G}$ over 100 runs; data from these runs also help us condu
 \Cref{fig:exp_table} lists the evaluation metrics for every pair of model
 and dataset; The metrics measure the accuracy with which these models
 preserve key global network properties: degree distribution, local clustering distribution
-and in-degree-clustering relationship. We do not compare the extent to which these models preserve attribute assortativity because the attribute related model parameters can be independently tuned to obtain arbitrary assortivity precision. Instead, we indicate models that preserve assortativity up to two decimal
-places---\texttt{KA}, \texttt{SAN} and \texttt{ARW}---by green ticks (\checkmark) in~\Cref{fig:exp_table}.
+and in-degree-clustering relationship. We do not compare the extent to which these models preserve attribute assortativity because the attribute related model parameters can be independently tuned to obtain arbitrary assortativity precision. Instead, we indicate models that preserve assortativity up to two decimal
+places---\texttt{KA}, \texttt{SAN} and \texttt{ARW}---by green ticks (\checkmark) in~\cref{fig:exp_table}.
 
-We use permutation testing \cite{good2013permutation} to evaluate the relative performance of our model \texttt{ARW}. If
+We use permutation tests \cite{good2013permutation} to evaluate the relative
+performance of \texttt{ARW}. If
 \texttt{ARW} performs better than a model on a dataset with significance level
 $\alpha=0.01$ or $\alpha=0.001$, the corresponding cells in~\Cref{fig:exp_table}
 are shaded gray ( \lightgraybg{ }) or dark gray (~\darkgraybg{ }) respectively.
@@ -190,7 +199,7 @@ are shaded gray ( \lightgraybg{ }) or dark gray (~\darkgraybg{ }) respectively.
 % all four properties but cannot do so accurately.
 
 Preferential attachment models \texttt{DMS}, \texttt{RL}
-and \texttt{KA} preserve heavy tailed degree distributions but disregard
+and \texttt{KA} preserve in-degree distributions but disregard
 clustering. \texttt{DMS} outperforms other models in accurately modeling
 degree distribution (\Cref{fig:exp_table}A) because its ``initial attractiveness''
 parameter can be tuned to adjust preference towards low degree nodes. Unlike \texttt{KA}, however,
@@ -198,7 +207,7 @@ parameter can be tuned to adjust preference towards low degree nodes. Unlike \te
 % \texttt{KA} outperforms \texttt{DMS} in preserving global assortativity because \texttt{KA}
 % uses an attribute similarity parameter to model attribute mixing patterns.
 By assuming that successive edge formations are independent, both models disregard
-the effect of triadic closure and do not preserve local clustering. (\Cref{fig:exp_table}B \&~\Cref{fig:exp_table}C).
+triadic closure and local clustering. (\Cref{fig:exp_table}B \&~\Cref{fig:exp_table}C).
 
 \texttt{HK} and \texttt{SAN} are preferential attachment models
 that use triangle closing mechanisms to generate scale-free networks with high average
@@ -214,8 +223,8 @@ to preserve local clustering in \textit{all} datasets (see~\Cref{fig:exp_table}B
 % relationship observed in real networks.
 
 Existing random walk models \texttt{FF}, \texttt{SK} and \texttt{HZ}
-do not preserve network structure observed in real networks datasets with high
-accuracy, disregard disregard attribute homophily and do not account for attribute mixing patterns.
+do not accurately preserve structural properties of real-world network datasets,
+disregard attribute homophily and do not account for attribute mixing patterns.
 The recursive approach in \texttt{FF} considerably overestimates local clustering.
 % because nodes perform a probabilistic breadth-first search and link to \textit{all} visited/burned
 % nodes.
@@ -223,11 +232,12 @@ In \texttt{SK} and \texttt{HZ}, nodes perform a single random walk and link to
 each visited node with some probability $\mu$, which indirectly
 controls the effect on triadic closure. This leads to some improvement over \texttt{FF} in preserving local
 clustering distribution (\Cref{fig:exp_table}B) and in-degree-clustering relationship (\Cref{fig:exp_table}).
-
+Barring one to two datasets, \texttt{ARW} preserves all three properties significantly
+better ($\alpha < 0.001$) than existing random walk models.
 % However, the improvements are not substantial when compared to the performance
 % of our model \texttt{ARW}.
 
-The experiment results in~\Cref{fig:exp_table} validate the effectiveness
+The experiment results in~\Cref{fig:exp_table} clearly indicate the effectiveness
 of the proposed model \texttt{ARW} in \textit{jointly} preserving multiple
 global network properties. \texttt{ARW} can generate networks with varying
 degree distribution by adjusting nodes' preference towards high degree nodes
@@ -239,8 +249,6 @@ distribution  (\Cref{fig:exp_table}B) and in-degree \& clustering relationship
 link parameter $p_l$ in \texttt{ARW} control the effect of triadic closure.
 The attribute parameter $p_a$ can be tuned to match the attribute assortativity
 coefficient of attributed network datasets up to arbitrary precision.
-Barring one to two datasets, \texttt{ARW} preserves all three properties significantly
-better than existing random walk models.
 From~\Cref{fig:barplot}, it is straightforward to show that
 \texttt{ARW} improves upon the average $\ell^2$-norm of the second best performing model,
 \texttt{SAN} by a margin of 2.5x.
@@ -248,23 +256,24 @@ From~\Cref{fig:barplot}, it is straightforward to show that
 
 \begin{figure}
 	\centering
-	\vspace{-15pt}
-	\includegraphics[width=.8\linewidth]{barplots_final3}
+	\vspace{-16pt}
+	\includegraphics[width=.65\linewidth]{barplots_final3}
 	\caption{Jointly modeling multiple network properties: \texttt{ARW} outperforms
 		existing network models in jointly preserving key structural properties---in-degree
 		distribution, local clustering distribution and degree-clustering relationship---
 		by a margin of 2.5-10x.
-		% Unlike existing network models, \texttt{ARW} preserves multiple network
-		% properties simultaneously because it unifies different sociological processes
-		% into a single edge formation mechanism. Notably, \texttt{ARW} outperforms
-		% existing network models by a margin of 2.5-10x.
 	}
-	\vspace{-13pt}
+	\vspace{-8pt}
 	\label{fig:barplot}
 	% Existing network models perform poorly
 	% because they make strong modeling assumptions that disregard individual resource constraints
 	% and do not consider multiple factors that simultaneously influence edge formation.
 \end{figure}
+
+To summarize, \texttt{ARW} unifies multiple sociological phenomena
+into a single mechanism. As a result, it can jointly preserve key structural
+properties of real-world networks.
+
 
 % \Cref{fig:barplot} illustrates the performance of network models in jointly
 % modeling degree distribution, local clustering distribution and in-degree-clustering
@@ -291,11 +300,9 @@ From~\Cref{fig:barplot}, it is straightforward to show that
 % Preferential models \texttt{KA} and \texttt{DMS} perform poorly because
 % they disregard clustering whereas the recursive approach in \texttt{FF} overestimates
 % local clustering.
-To summarize, \texttt{ARW} unifies multiple factors that influence edge formation
-into a single mechanism. As a result, it can jointly preserve multiple structural
-properties of real-world networks with high accuracy. Next, we discuss limitations
-of the global assortativity coefficient and analyze local mixing patterns of
-real-world attributed networks.
+% Next, we discuss limitations
+% of the global assortativity coefficient and analyze local mixing patterns of
+% attributed networks.
 
 % \clearpage
 % \section{Modeling Local Mixing Patterns}
@@ -373,41 +380,12 @@ real-world attributed networks.
 % with outdegree $k_i$ is defined as follows:
 %
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 % can generate network
 % with tunable local clustering distribution and in-degree-clustering relationship
 % controls the effect of triadic closure using the jump parameter $p_j$ and link parameter
 % $\alpha$. $p_j$ effectively incorporates structural constraints that limit the extent to
 % which nodes explore the network whereas $\alpha$ indirectly controls the effect of
 % triadic closure on edge formation.
-
-
-
-
 
 % \subsection{Parameter space of \textsc{RW} model}
 %
@@ -435,7 +413,7 @@ real-world attributed networks.
 % \end{table}
 
 % To summarize, the experiment results on five citation networks against
-% show that our resource-constrained model (\textsc{rw}) outperform four baseline
+% show that our resource-constrained model (\textsc{rw}) outperform four existing
 % growth models in accurately preserving degree, clustering and its relationship.
 
 % Weighted relative error (\texttt{WRE})
