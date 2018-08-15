@@ -45,7 +45,7 @@ network at time $t$ first selects a seed node $S(u)$ using \textsc{Select-Seed}:
 	\node[align=left, text width=.93\linewidth, inner sep=.5em]{
 		(1) With probability $p_a$, randomly select $S(u)$ from the set of existing nodes that have attribute
 		value $B(u)$.
-		
+
 		\vspace{1mm}
 		(2) Otherwise, with probability $1-p_a$, randomly select $S(u)$ from the set of existing nodes that
 		do \textit{not} have attribute value $B(u)$.
@@ -75,14 +75,14 @@ traversals:
 			\item If $B(u)=B(v_i)$, $u$ links to $v_i$ with probability $\alpha \cdot p_a$
 			\item Otherwise, $u$ links to $v_i$ with probability $\alpha \cdot (1-p_a)$
 		\end{itemize}
-		
+
 		\vspace{1mm}
 		(2) Then, with probability $p_j$, $u$ jumps back to seed $s_u$.
-		
+
 		\vspace{1mm}
 		(3) Otherwise, with probability ${1-p_j}$, $u$ continues to walk. It picks an outgoing edge with probability $p_o$ \textit{or}
 		an incoming edge with probability $1-p_o$ to visit a neighbor of $v_i$.
-		
+
 		\vspace{1mm}
 		(4) Steps 1-3 are repeated until $u$ links to $m(t)$ nodes.
 	};
@@ -104,13 +104,39 @@ Notice that \texttt{ARW} has two exogenous parameters:  the average out-degree $
 Next, we explain how each parameter is necessary to conform to normative
 behavior of individuals in evolving networks.
 
+\begin{figure*}
+	\vspace{-20pt}
+    \centering
+    \includegraphics[width=.9\linewidth]{rw_diag}
+    \caption{Edge formation in \texttt{ARW}: consider
+    an incoming node $u$ with outdegree ${m=3}$ and attribute value {$B(u)=\textsc{red} \in \{\textsc{red},\textsc{green}\}$}.
+    In fig. 3a, $u$ joins the network and selects seed $v_a$ via \textsc{Select-Seed}.
+    Then, in fig. 3b, $u$ initiates a \textsc{Random-Walk} and traverses from $v_a$ to $v_b$ to $v_c$.
+    Finally, $u$ jumps back to its seed $v_a$ and restarts the walk, as shown in fig. 3c.
+    Node $u$ halts the random walk after linking to $v_a$, $v_c$ \& $v_d$.
+    }
+    \label{fig:randomwalk}
+	\vspace{-8pt}
+\end{figure*}
+
+
 \subsection{\texttt{ARW} and Normative Behavior}
 \label{sub:Model Interpretation}
 
-The Attributed Random Walk model accounts for multiple well-known sociological phenomena
+The Attributed Random Walk model unifies multiple well-known sociological phenomena
 into its edge formation mechanisms.
 
-\newtheorem{ph}{Phenomenon}
+\newtheoremstyle{exampstyle}
+  {2pt} % Space above
+  {2pt} % Space below
+  {\itshape} % Body font
+  {} % Indent amount
+  {\bfseries} % Theorem head font
+  {.} % Punctuation after theorem head
+  {.25em} % Space after theorem head
+  {} % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{exampstyle} \newtheorem{ph}{Phenomenon}
 
 \begin{ph}
 	(Limited Resources) Individuals are boundedly rational~\cite{simon1972theories,gigerenzer1996reasoning,lipman1995information}
@@ -162,7 +188,7 @@ The attribute parameter $p_a$ effectively controls the global assortativity coef
 \texttt{ARW} does not use the global degree distribution. In absence of this global information, \texttt{ARW} can control the degree of preferential attachment by adding structural bias to the random walk traversals by varying the outward link probability $p_o$. Random walks that traverse outgoing edges only (i.e. $p_o =1$) eventually visit old nodes that tend to have high in-degree. Similarly, random walks that traverse incoming edges only (i.e. $p_o=0$) visit recently joined nodes that tend to have low indegree. We use parameter $p_o$, to adjust the effect of preferential attachment on edge formation.
 
 To summarize: \texttt{ARW} accounts for five well-known sociological phenomena---bounded rationality; structural constraints; triadic closure; attribute homophily; preferential attachment---into a single edge
-formation mechanism based on random walks. 
+formation mechanism based on random walks.
 
 % Random walks inherently account for
 % limited information and partial network access. Furthermore, the jump parameter $p_j$, attribute parameter $p_a$,
@@ -186,8 +212,9 @@ over time and sample incoming nodes' attribute values.
 The parameter estimation task consists of finding the set of
 parameters values for $(\alpha, p_a, p_j, p_o)$ that best explain the structural properties
 of an observed network $G$. We use a straightforward grid search method to estimate
-the four parameters. Other derivative-free optimization methods such as the Nelder-Mead~\cite{nelder1965simplex}
-method can be used to speed-up parameter estimation.
+the four parameters.
+% Other derivative-free optimization methods such as the Nelder-Mead~\cite{nelder1965simplex}
+% method can be used to speed-up parameter estimation.
 % We describe the evaluation metrics and selection
 % criteria in \Cref{sub:Experimental Setup}.
 
@@ -215,13 +242,13 @@ Each incoming node $u$ that joins $\hat{G}$ at time $t$ corresponds to some
 node that joins the observed network $G$ in year $y(t)$; The number of edges $m(t)$
 that $u$ forms is equal to the average out-degree of nodes that join $G$ in year $y(t)$.
 
-\textit{Sampling Attribute Values}. 
+\textit{Sampling Attribute Values}.
 % In real networks $G=(V,E,B)$,
 % the distribution over the set of attribute values $P_{\textsc{g}}(B)$ changes over time.
 % For instance, the attribute distribution over journals in the \texttt{APS} citation
 % network changes over time as old journals decay in popularity and new journals gain traction.
 % The change in the attribute distribution over time is an exogenous factor and varies for every network.
-% To incorporate this phenomenon into \texttt{ARW}, 
+% To incorporate this phenomenon into \texttt{ARW},
 We sample the attribute value $B(u)$ of node $u$, that
 joins $\hat{G}$ at time $t$, from $P_{\textsc{g}}(B{\mbox{ | year}=y(t)})$, the observed attribute distribution conditioned on the year of arrival of node $u$.
 
@@ -250,6 +277,8 @@ To summarize, the \texttt{ARW} model
 intuitively describes how individuals form edges under resource constraints.
 \texttt{ARW} uses four parameters --- $\alpha$, $p_a$, $p_j$, $p_o$ --- to incorporate
 individuals' biases towards similar, proximate and high degree nodes.
+
 Next, our experiments in
 \cref{sec:Experiments} show that $\texttt{ARW}$ accurately preserves
 \textit{multiple} structural and attribute properties of real networks
+

@@ -3,6 +3,7 @@
 \section{Introduction}
 \label{sec:Introduction}
 
+
 % what is the problem?
 
 We develop a resource constrained model of network growth that explains the
@@ -53,10 +54,19 @@ To summarize, new nodes concurrently acquire information and form edges
 by exploring the local neighborhoods of existing nodes, without access to the
 entire network.
 
+\begin{figure}[t]
+ \centering
+ \includegraphics[width=\columnwidth]{intro_plot3}
+ \caption{
+ }
+ \label{fig:intro_plot}
+\end{figure}
+
+
 Our main contributions are as follows:
 \begin{itemize}
     \item We propose a model
-    of network growth using a local edge formation mechanism that incoporates the
+    of network growth using a local edge formation mechanism that incorporates the
     resource constraints that influence individuals' edge formation mechanisms in
     real-world networks.
     \item We propose a model that jointly explains multiple
@@ -79,3 +89,29 @@ and~\Cref{sec:Proposed Model}, we report prominent structural characteristics
 of citation networks and propose a network growth model respectively. This is
 followed by~\Cref{sec:Experiments}, where we validate our model against
 multiple baselines.
+
+
+\begin{table*}
+ {
+  \begin{tabular}[c]{llrrrc|rrrr} \toprule
+   Network &  Description & $|V|$           & $|E|$        & $T$        & $A$, $|A|$  &  \texttt{LN} $(\mu, \sigma)$ & \texttt{DPL} $\alpha$       &  Avg. ${\texttt{LCC}}$  & \texttt{AA} $r$           \\ \midrule
+   \texttt{USSC}~\cite{fowler2008authority}  & U.S. Supreme Court cases         & 30,288     & 216,738      & 1754-2002  & -   & (1.19, 1.18) & 2.32     & 0.12    & -     \\
+   \texttt{HEP-PH}~\cite{gehrke2003overview} & ArXiv Physics manuscripts     & 34,546     & 421,533      & 1992-2002  & -  &   (1.32, 1.41) & 1.67     & 0.12    & -                 \\
+   \texttt{Semantic}~\cite{ammar}&   Academic Search Engine  & 7,706,506  & 59,079,055   & 1991-2016  & -   &   (1.78, 0.96)  & 1.58     & 0.06    & -             \\   \midrule
+   \texttt{ACL}~\cite{acldata}    & NLP papers      & 18,665     & 115,311      & 1965-2016  & \textsc{venue}, 50  &   (1.93, 1.38)  & 1.43     & 0.07    & 0.07  \\
+   \texttt{APS}~\cite{aps}     & Physics journals     & 577,046    & 6,967,873    & 1893-2015  & \textsc{journal}, 13 &   (1.62, 1.20)  & 1.26     & 0.11    & 0.44 \\
+   \texttt{Patents}~\cite{leskovec2005graphs}   & U.S. NBER patents    & 3,923,922  & 16,522,438   & 1975-1999  & \textsc{category}, 6 &   (1.10, 1.01)   & 1.94     & 0.04    & 0.72 \\
+   % \texttt{PYPI}         & 25,169     & 71,371       & 2002-2018  & \textsc{category} & 9  \\
+  \bottomrule
+  \end{tabular}
+  \vspace{1mm}
+  \caption{Summary statistics \& global properties of six network datasets: $|V|$ nodes join the networks and form edges $|E|$ over
+  time period $T$. In attributed networks, each node has a categorical attribute value that belongs to set $A$ of size $|A|$.
+  The networks exhibit lognormal (\texttt{LN}) in-degree distribution with mean $\mu$ and standard deviation $\sigma$,
+  high average local clustering (${\texttt{LCC}}$) \& attribute assortativity (\texttt{AA}) coefficient and
+  densify over time with power law (\texttt{DPL}) exponent $\alpha$.}
+  \label{table:datasets}
+  \label{table:netstats}
+ }
+\end{table*}
+
