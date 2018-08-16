@@ -63,8 +63,8 @@ such as clustering and attribute mixing patterns.
 A set of models
 \cite{holme2002growing,klemm2002highly,leskovec2008microscopic}
 incorporate triadic closure using triangle closing mechanisms,
-which increase \textit{average} local clustering by forming edges between nodes
-with one or more common neighbors. However, as explained in \cref{ss:tc}, models
+which increase {average} local clustering by forming edges between nodes
+with one or more common neighbors. However, as explained in~\Cref{ss:tc}, models
 based on preferential attachment and triangle closing do not preserve the local
 clustering of low degree nodes.
 
@@ -74,7 +74,7 @@ account for the effect of attribute homophily on edge formation and preserve mix
 Existing models can be broadly categorized as (a) fitness-based model that define fitness as a function of
 attribute similarity and (b) microscopic models of network evolution that require
 complete temporal information about edge arrivals \& deletion. Our experiment
-results in \cref{sub:Experimental Results} show that well-known attributed network models
+results in~\Cref{sub:Experimental Results} show that well-known attributed network models
 \texttt{SAN} and \texttt{KA} preserve assortative
 mixing patterns, degree distribution to some extent, but not local clustering
 and degree-clustering correlation.
@@ -92,7 +92,7 @@ small diameter \cite{mehrabian2016sa} but do not preserve clustering. Models
 such as \texttt{SK} \cite{saramaki2004scale}
 and \texttt{HZ} \cite{herrera2011generating}, in which new nodes probabilistically link to
 each visited nodes incorporate triadic closure but are not flexible enough to preserve
-\textit{skewed} local clustering of real-world networks, as shown in \cref{sub:Experimental Results}.
+{skewed} local clustering of real-world networks, as shown in~\Cref{sub:Experimental Results}.
 We also observe that recursive random walk models such as \texttt{FF} \cite{leskovec2005graphs}
 preserve temporal properties such as shrinking diameter but considerably overestimate local clustering
 and degree-clustering relationship of real-world networks.
