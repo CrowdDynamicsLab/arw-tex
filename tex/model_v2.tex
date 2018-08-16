@@ -158,7 +158,7 @@ nodes probabilistically and halts the walk after forming $m(t)$ edges, as shown 
 We incorporate structural constraints into \texttt{ARW} using the jump parameter $p_j$.
 The jump parameter $p_j$ is the probability with which a new node jumps back to its seed node
 after each step of the random walk. This implies that the probability with which the new node
-is at most $k$ steps from its seed node is $1-p^k_j$; as a result, the jump parameter $p_j$
+is at most $k$ steps from its seed node is $(1-p_j)^k$; as a result, the jump parameter $p_j$
 controls the extent to which new nodes' random walks explore the network to form edges.
 
 \begin{ph}
