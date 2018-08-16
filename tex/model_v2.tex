@@ -1,13 +1,13 @@
 %!TEX root = draft.tex
-\vspace{-6pt}
+% \vspace{-6pt}
 \section{Attributed Random Walk Model}
 \label{sec:Proposed Model}
 We propose an Attributed Random Walk (\texttt{ARW}) model to explain the emergence
-of key structural properties of real-world networks through \textit{entirely local}
+of key structural properties of real-world networks through {entirely local}
 edge formation mechanisms.
 
-Consider a stylized example of how a researcher might go about finding relevant papers to cite. First, the researcher broadly identifies one or more \textit{relevant} papers,
-possibly with the help of external information sources (e.g. Google Scholar). These initial set of papers act as seed nodes.  Then, acting under time and information constraints, she will examine papers that cite a seed paper, as well as those papers cited by the seed. Thus she navigates a chain of references to identify \textit{similar} papers relevant to addressing that research question in which she is interested. Next, through careful analysis, she will cite a subset of these papers.
+Consider a stylized example of how a researcher might go about finding relevant papers to cite. First, the researcher broadly identifies one or more {relevant} papers,
+possibly with the help of external information sources (e.g. Google Scholar). These initial set of papers act as seed nodes.  Then, acting under time and information constraints, she will examine papers that cite a seed paper, as well as those papers cited by the seed. Thus she navigates a chain of references to identify {similar} papers relevant to addressing that research question in which she is interested. Next, through careful analysis, she will cite a subset of these papers.
 
 \texttt{ARW} grows a directed network as new nodes join the network. The
 mechanism is motivated by the stylized example: an incoming node selects a seed node and initiates a random walk to explore the network by navigating through neighborhoods of existing nodes. It halts the random walk after connecting to a few visited nodes.
@@ -62,7 +62,7 @@ network at time $t$ first selects a seed node $S(u)$ using \textsc{Select-Seed}:
 % into the model.
 
 \textsc{Seed-Select} accounts for homophilic preferences of incoming nodes using
-attribute parameter $p_a$. As shown in \cref{fig:randomwalk}, after selecting
+attribute parameter $p_a$. As shown in~\Cref{fig:randomwalk}, after selecting
 the seed $S(u)$, node $u$ initiates a
 random walk using \textsc{Random-Walk} to form $m(t)$ links.
 The \textsc{Random-Walk} mechanism consists of four parameters: the rate parameter $\alpha$
@@ -99,7 +99,7 @@ Then, \textsc{Seed-Select} simply selects an existing node uniformly at random
 and the probability of edge formation in \textsc{Random-Walk} is equal to
 the rate parameter $\alpha$ only.
 
-Notice that \texttt{ARW} has two exogenous parameters:  the average out-degree $m(t)$ and attribute $B(u)$ of the node joining the network. The parameter $m(t)$ is similar to the parameter $m$ in the classic Preferential-Attachment model~\cite{barabasi1999emergence}, except that $m(t)$ is the mean-field value of degree $m$ at time $t$. While it is straightforward to model $m(t)$ endogenously by incoporating a densification power-law \texttt{DPL} exponent $\alpha$ to \texttt{ARW}, we decided against it, since exogenous factors to may explain changes to $m(t)$. For example, the number of citations in a paper can be influenced by venue (e.g. \texttt{WSDM2019} allows for one page of references); also, our empirical data analysis shows that papers early in a citation network tend to have few citations on average, perhaps explained by availability of \textit{fewer} papers to cite. The attribute distribution $B(u)$ varies with time as new journals or venues crop up, necessitating an exogenous parameter.
+Notice that \texttt{ARW} has two exogenous parameters:  the average out-degree $m(t)$ and attribute $B(u)$ of the node joining the network. The parameter $m(t)$ is similar to the parameter $m$ in the classic Preferential-Attachment model~\cite{barabasi1999emergence}, except that $m(t)$ is the mean-field value of degree $m$ at time $t$. While it is straightforward to model $m(t)$ endogenously by incoporating a densification power-law \texttt{DPL} exponent $\alpha$ to \texttt{ARW}, we decided against it, since exogenous factors may also explain changes to $m(t)$. For example, the number of citations in a paper can be influenced by venue (e.g. \texttt{WSDM2019} allows for one page of references); also, our empirical data analysis shows that papers early in a citation network tend to have few citations on average, perhaps explained by availability of {fewer} papers to cite. The attribute distribution $B(u)$ varies with time as new journals or venues crop up, necessitating an exogenous parameter.
 
 
 
@@ -158,7 +158,7 @@ nodes probabilistically and halts the walk after forming $m(t)$ edges, as shown 
 We incorporate structural constraints into \texttt{ARW} using the jump parameter $p_j$.
 The jump parameter $p_j$ is the probability with which a new node jumps back to its seed node
 after each step of the random walk. This implies that the probability with which the new node
-is at most $k$ steps from its seed node is $1-p^k_j$; As a result, the jump parameter $p_j$
+is at most $k$ steps from its seed node is $1-p^k_j$; as a result, the jump parameter $p_j$
 controls the extent to which new nodes' random walks explore the network to form edges.
 
 \begin{ph}
@@ -187,9 +187,10 @@ The attribute parameter $p_a$ effectively controls global assortativity.
 \end{ph}
 % Individuals cannot link to high degree nodes \textit{directly} under constraints of limited information
 % and partial network access.
-\texttt{ARW} does not rely on global degree distribution. In absence of this global information, \texttt{ARW} can control the degree of preferential attachment by adding structural bias to the random walk traversals by varying the outlink probability $p_o$. Random walks that traverse outgoing edges only (i.e. $p_o =1$) eventually visit old nodes that tend to have high in-degree. Similarly, random walks that traverse incoming edges only (i.e. $p_o=0$) visit recently joined nodes that tend to have low indegree. We use parameter $p_o$, to adjust the effect of preferential attachment on edge formation.
+\texttt{ARW} does not rely on global degree distribution. In absence of this global information, \texttt{ARW} can control the degree of preferential attachment by adding structural bias to the random walk traversals by varying the outlink probability $p_o$. Random walks that traverse outgoing edges only (i.e., $p_o =1$) eventually visit old nodes that tend to have high in-degree. Similarly, random walks that traverse incoming edges only (i.e., $p_o=0$) visit recently joined nodes that tend to have low indegree. We use outlink parameter $p_o$, to adjust the effect of preferential attachment on edge formation.
 
-To summarize: \texttt{ARW} incorporates five well-known sociological phenomena---bounded rationality; structural constraints; triadic closure; attribute homophily; preferential attachment---into a single edge
+To summarize: \texttt{ARW} incorporates five well-known sociological phenomena---
+bounded rationality; structural constraints; triadic closure; attribute homophily; preferential attachment---into a single edge
 formation mechanism based on random walks.
 
 % Random walks inherently account for
@@ -240,7 +241,7 @@ induced from the set of visited nodes.
 % We incorporate this phenomenon in \texttt{ARW}
 % to coarsely reflect the rate of growth in the observed network $G$.
 Each incoming node $u$ that joins $\hat{G}$ at time $t$ corresponds to some
-node that joins the observed network $G$ in year $y(t)$; The number of edges $m(t)$
+node that joins the observed network $G$ in year $y(t)$; the number of edges $m(t)$
 that $u$ forms is equal to the average out-degree of nodes that join $G$ in year $y(t)$.
 
 \textit{Sampling Attribute Values}.
@@ -278,7 +279,6 @@ To summarize, the \texttt{ARW} model
 intuitively describes how individuals form edges under resource constraints.
 \texttt{ARW} uses four parameters --- $\alpha$, $p_a$, $p_j$, $p_o$ --- to incorporate
 individuals' biases towards similar, proximate and high degree nodes.
-Next, our experiments in
-\cref{sec:Experiments} show that $\texttt{ARW}$ accurately preserves
-\textit{multiple} structural and attribute properties of real networks
+Next, our experiments in~\Cref{sec:Experiments} show that $\texttt{ARW}$ accurately preserves
+{multiple} structural and attribute properties of real networks
 
