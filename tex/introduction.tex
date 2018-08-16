@@ -32,85 +32,75 @@
 
 % what is the problem?
 
-In this paper, we present a network growth model that explains how distinct
-structural properties of attributed networks can emerge from local edge
-formation processes. In real-world networks, individuals tend to form edges
-under resource constraints such as limited information and partial network
-access. Additionally, sociological phenomena such as triadic closure and
-homophily \textit{simultaneously} impact individuals’ decisions to form edges.
-Over time, these decisions cumulatively shape real-world networks as they
-exhibit rich structural characteristics: heavy-tailed indegree distribution,
-skewed local clustering and homophilic mixing patterns. However, we lack
-mechanisms that incorporate the effect of resource constraints and
-\textit{multiple} sociological factors on edge formation as well as preserve
-global network structure.
+In this paper, we present a network growth model that explains how distinct structural properties of attributed networks can emerge from local edge formation processes. The problem is important for several reasons. In real-world networks, individuals tend to form edges under resource constraints (limited information and partial network access). Additionally, phenomena such as triadic closure and homophily \textit{simultaneously} influence individuals’ decisions to form connections. Over time, these decisions cumulatively shape real-world networks to exhibit rich structural characteristics: heavy-tailed in-degree distribution, skewed local clustering and homophilic mixing patterns. However, we lack an understanding of local, resource constrained mechanisms that incorporate sociological factors to explain the emergence of these rich structural characteristics. 
+
+% The problem of developing a model of network growth, where individuals act under
+% resource constraints, including access to only local information is hard. The
+% problem lies in identifying simple mechanisms with few parameters that unifies
+% multiple sociological phenomena to \textit{jointly} preserve structural
+% properties and attribute mixing patterns of attributed networks.
+
+% on edge formation as well as preserve global network structure.
 
 % why is it important?
 
-Existing models of network growth tend to make unrealistic assumptions about how
+Classic models of network growth tend to make unrealistic assumptions about how
 individuals form edges. Consider a simple stylized example: the process of
 finding a set of papers to cite when writing an article. In preferential
 attachment \cite{barabasi1999emergence} or fitness \cite{X} based models, a node
 making $m$ citations would pick papers from the \textit{entire} network in
-proportion to their indegree or fitness respectively. This process assumes that
-individuals possess complete knowledge of indegree or fitness of every node in
-the network. An equivalent formulation — vertex copying \cite{X} — induces
+proportion to their in-degree or fitness respectively. This process assumes that
+individuals possess \textit{complete} knowledge of in-degree or fitness of every node in
+the network. An equivalent formulation---vertex copying \cite{X}---induces
 preferential attachment: for every citation, a node would pick a paper uniformly
 at random from \textit{all} papers, and either cite it or copy its citations.
 Notice that the copying mechanism assumes individuals have complete access to
-the network and form each edge independently. Although these models explain the
-emergence of power law degree distributions, they are unrealistic
-representations of how individuals make decisions about edge formation. A
-realistic representation of how individuals form edges necessitates modeling the
-effect of multiple sociological phenomena on edge formation under resource
-constraints.
+the network and forms each edge independently. Although these models explain the
+emergence of power law degree distributions, they are unrealistic: they require global knowledge (e.g. preferential attachment requires knowledge of the global in-degree distribution) or global access (e.g. vertex copying requires random access to all nodes). Surprisingly, these classic models do not account for the fact that many networks are attributed (e.g. a paper is published at a venue; a Facebook user may use gender, political interests to describe them) and that assortative mixing is an important network characteristic~\cite{newman2002assortative}.
+
+Recent papers tackle resource constraints \hs{cite} as well as nodal attributes \hs{cite}. However the former don't explain ... and the latter do not capture the local clustering properties of a network. Developing a parsimonious, accurate, model of attributed network growth that accounts for observed sociological phenomena is non-trivial.
+
+% representations of how individuals make decisions about edge formation. A
+% realistic representation of how individuals form edges necessitates modeling the
+% effect of multiple sociological phenomena on edge formation under resource
+% constraints.
 
 %why is it hard?
-The problem of developing a model of network growth, where individuals act under
-resource constraints, including access to only local information is hard. The
-problem lies in identifying simple mechanisms with few parameters that unifies
-multiple sociological phenomena to \textit{jointly} preserve structural
-properties and attribute mixing patterns of attributed networks.
+
 
 % what did we do?
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\columnwidth]{experiments_final4}
+	\caption{The figure shows how our proposed model of an Attributed Random Walk (\texttt{ARW}) accurately preserves local clustering and assortativity; we contrast with a non-attributed growth model~\cite{holme2002growing} to underscore the importance of using attributes for network growth.}
+	\label{fig:intro_plot}
+\end{figure}
 
 
 We propose an Attributed Random Walk \texttt{ARW} model that jointly explains
 the emergence of in-degree distributions, local clustering, clustering-degree
-relationship and attribute mixing patterns through a resource constrained mechanism
-based on random walks.
-In \texttt{ARW}, incoming nodes select a seed node based on attribute similarity
-and initiate a biased random walk: At each step of the walk, the incoming node either
-jumps back to its seed or chooses an outgoing link or incoming link to visit another
-node. It links to each visited node with some probability and halts after forming a
-few connections. We have three primary contributions:
-\begin{itemize}
-\item model effect of multiple sociological phenomena on edge formation simulatenously
-\item provide a realistic representation of how individuals form edges under constraints of limited information and partial network access.
-\item jointly preserve key structural properties and attribute mixing patterns of real-world attributed networks.
-\end{itemize}
+relationship and attribute mixing patterns through a resource constrained mechanism based on random walks (see~\Cref{fig:intro_plot}). In particular, \texttt{ARW} relies entirely on local information, without access to information about all nodes, to grow the network. In \texttt{ARW}, incoming nodes select a seed node based on attribute similarity and initiate a biased random walk: At each step of the walk, the incoming node either jumps back to its seed or chooses an outgoing link or incoming link to visit another node. It links to each visited node with some probability and halts after it has exhausted its budget to form connections. We have three primary contributions:
+\begin{enumerate}
+\item \textbf{Attributed:} We propose a parsimonious, accurate model of attributed network growth.
+\item \textbf{Local information:} Our model is based on a random walk and uses local processes to form edges, without recourse to global information of the network.
+\item \textbf{Unified account:} To the best of our knowledge, \texttt{ARW} is the first model that accounts for multiple sociological phenomena---bounded rationality; structural constraints; triadic closure; attribute homophily; preferential attachment---through an entirely local process to model network structure and attribute mixing patterns.
+\end{enumerate}
 
-\begin{figure}[t]
- \centering
- \includegraphics[width=\columnwidth]{experiments_final4}
- \caption{
- }
- \label{fig:intro_plot}
-\end{figure}
+
 
 We conducted extensive experimental results, against state of the art
-baselines, on large citation network datasets. We show that our growth model
-outperforms that best competing model in jointly and accurately preserving
+baselines, on large and diverse citation network datasets. We focus on directed citation networks in this paper, as these networks---where all node edges form at the time of node joining---offer a clean foundation to explain growth in social networks (e.g. via a ``pause \& restart'' parameter), where edges can form after a node joins.
+
+We show that our growth model outperforms eight state-of-the-art network growth models, including attributed growth models by a overall factor of 2.5--$10\times$. We show that \texttt{ARW} jointly and accurately preserves
 multiple structural properties---degree distribution, clustering and
-degree-clustering relationship---by a significant margin.
+degree-clustering relationship---and where the differences with the baseline state-of-the-art models are statistically significant.
 
 The rest of the paper is organized as follows.
 We begin by defining the problem statement in~\Cref{sec:Problem Statement}.
 In~\Cref{sec:Analysis}, we outline six network datasets, describe key structural
 properties of real-world networks and discuss insights from sociological studies.
-Then, in~\Cref{sec:Proposed Model}, we describe the network growth model. This
-is followed by experiments in~\Cref{sec:Experiments} \&~\Cref{subsec:LocalMixing}
-and discussion in~\Cref{sec:Discussion}.
+Then, in~\Cref{sec:Proposed Model}, we describe the network growth model. We follow by presenting experiments~\Cref{sec:Experiments}, analysis of assortative mixing~\Cref{subsec:LocalMixing}
+and discussion in~\Cref{sec:Discussion}. We conclude in~\Cref{sec:Conclusion}.
 
 % In~\Cref{sec:Related Work}, we
 % describe the related work. Then, in~\Cref{sec:Preliminaries}, we define key
