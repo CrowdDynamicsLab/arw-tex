@@ -105,7 +105,7 @@ degree distributions are rare.
  \vspace{-10pt}
 \end{figure}
 
-\textbf{High Local Clustering:} Real-world networks tend to exhibit high average local clustering, as shown in~\Cref{table:netstats}. We can explain local clustering due to the phenomena of triadic closure~\cite{simmel1950sociology,
+\textbf{High Local Clustering:} Real-world networks tend to exhibit high average local clustering (\texttt{LCC}), as shown in~\Cref{table:netstats}. We can explain local clustering due to the phenomena of triadic closure~\cite{simmel1950sociology,
 newman2001clustering}, where nodes with common neighbor(s) have an increased
 likelihood of forming a connection.
 % Empirical studies
@@ -164,7 +164,7 @@ signifies the extent to which attribute similarity influences edge formation.
 The out-degree of nodes that join real-world networks tends to increase
 as functions of network size and time. This phenomenon densifies networks and shrinks their
 diameter over time. Densification tends to exhibit a power law relationship
-~\cite{leskovec2005graphs} between the number of edges $e(t)$ and nodes $n(t)$ at time $t$: $e(t) \propto n(t)^{\alpha}$.~\Cref{table:netstats} lists the densification power law exponent $\alpha$ of the network datasets.
+~\cite{leskovec2005graphs} between the number of edges $e(t)$ and nodes $n(t)$ at time $t$: $e(t) \propto n(t)^{\alpha}$.~\Cref{table:netstats} lists the densification power law (\texttt{DPL}) exponent $\alpha$ of the network datasets.
 
 To summarize, citation networks tend to be homophilic networks that undergo
 accelerated network growth and exhibit regularities in structural properties:

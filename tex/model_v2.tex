@@ -22,7 +22,8 @@ of key structural properties of real-world networks through {entirely local}
 edge formation mechanisms.
 
 Consider a stylized example of how a researcher might go about finding relevant papers to cite. First, the researcher broadly identifies one or more {relevant} papers,
-possibly with the help of external information sources (e.g. Google Scholar). These initial set of papers act as seed nodes.  Then, acting under time and information constraints, she will examine papers that cite a seed paper, as well as those papers cited by the seed. Thus she navigates a chain of references to identify {similar} papers relevant to addressing that research question in which she is interested. Next, through careful analysis, she will cite a subset of these papers.
+possibly with the help of external information sources (e.g. Google Scholar). These initial set of papers act as seed nodes.  Then, acting under time and information constraints, she will examine papers that cite a seed paper, as well as those papers cited by the seed. Thus she navigates a chain of backward and forward
+references to identify {similar} papers relevant to addressing that research question in which she is interested. Next, through careful analysis, she will cite a subset of these papers.
 
 \texttt{ARW} grows a directed network as new nodes join the network. The
 mechanism is motivated by the stylized example: an incoming node selects a seed node and initiates a random walk to explore the network by navigating through neighborhoods of existing nodes. It halts the random walk after connecting to a few visited nodes.
@@ -54,7 +55,7 @@ reflect the nonlinear growth and densification of real-world networks.
 % densification in \Cref{sub:Model Fitting}.
 
 The edge formation mechanism consists of two components: \textsc{Select-Seed} and
-\textsc{Random-Walk}. An incoming node $u$ with attribute value $B(u)$ that joins the
+\textsc{Random-Walk}. As shown in~\Cref{fig:randomwalk}, an incoming node $u$ with attribute value $B(u)$ that joins the
 network at time $t$ first selects a seed node $S(u)$ using \textsc{Select-Seed}:
 \\\\
 \tikzstyle{background rectangle}=[thin,draw=black]
