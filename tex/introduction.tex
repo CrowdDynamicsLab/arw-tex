@@ -69,20 +69,20 @@ citation, a node would pick a paper uniformly at random from \textit{all}
 papers, and either cite it or copy its citations. Notice that the copying
 mechanism assumes individuals have complete access to the network and forms each
 edge independently. Although these models explain the emergence of power law
-degree distributions, they are unrealistic: they require global knowledge (e.g.
+degree distributions, they are unrealistic: they require global knowledge (e.g.,
 preferential attachment requires knowledge of the global in-degree distribution)
-or global access (e.g. vertex copying requires random access to all nodes).
+or global access (e.g., vertex copying requires random access to all nodes).
 Moreover, these models do not account for the fact that many
-networks are attributed (e.g. a paper is published at a venue; a Facebook user
+networks are attributed (e.g., a paper is published at a venue; a Facebook user
 may use gender, political interests to describe them) and that assortative
 mixing is an important network characteristic~\cite{newman2002assortative}.
 
 Recent papers tackle resource constraints \cite{mossa2002truncation,zeng2005construction,wang2009local} as well as nodal attributes
 \cite{de2013scale,gong2012evolution}. However, the former disregard attributes and the latter do not provide a realistic representation
-of edge formation under resource constraints. Furthermore, both sets of models do not \textit{jointly} preserve multiple structural properties. Developing a parsimonious,
-accurate, model of attributed network growth that accounts for observed
+of edge formation under resource constraints. Furthermore, both sets of models do not preserve multiple structural properties jointly and accurately.
+Developing a parsimonious and accurate model of attributed network growth that accounts for observed
 sociological phenomena is non-trivial. Accurate network growth models are useful
-for synthesizing networks as well as to extrapolate existing networks.
+for synthesizing networks as well as to extrapolate existing real-world networks.
 
 % representations of how individuals make decisions about edge formation. A
 % realistic representation of how individuals form edges necessitates modeling the
@@ -101,13 +101,13 @@ for synthesizing networks as well as to extrapolate existing networks.
 \end{figure}
 
 
-We propose an Attributed Random Walk \texttt{ARW} model that jointly explains
+We propose an Attributed Random Walk (\texttt{ARW}) model that jointly explains
 the emergence of in-degree distributions, local clustering, clustering-degree
-relationship and attribute mixing patterns through a resource constrained mechanism based on random walks (see~\Cref{fig:intro_plot}). In particular, \texttt{ARW} relies entirely on local information, without access to information about all nodes, to grow the network. In \texttt{ARW}, incoming nodes select a seed node based on attribute similarity and initiate a biased random walk: At each step of the walk, the incoming node either jumps back to its seed or chooses an outgoing link or incoming link to visit another node. It links to each visited node with some probability and halts after it has exhausted its budget to form connections. We have three primary contributions:
+relationship and attribute mixing patterns through a resource constrained mechanism based on random walks (see~\Cref{fig:intro_plot}). In particular, \texttt{ARW} relies entirely on local information to grow the network, without access to information of all nodes. In \texttt{ARW}, incoming nodes select a seed node based on attribute similarity and initiate a biased random walk: at each step of the walk, the incoming node either jumps back to its seed or chooses an outgoing link or incoming link to visit another node; it links to each visited node with some probability and halts after it has exhausted its budget to form connections. We have three primary contributions:
 \begin{enumerate}
-\item \textbf{Attributed:} We propose a parsimonious, accurate model of attributed network growth.
+\item \textbf{Attributed:} We propose a parsimonious and accurate model of attributed network growth.
 \item \textbf{Local information:} Our model is based on a random walk and uses local processes to form edges, without recourse to global information of the network.
-\item \textbf{Unified account:} To the best of our knowledge, \texttt{ARW} is the first model that accounts for multiple sociological phenomena---bounded rationality; structural constraints; triadic closure; attribute homophily; preferential attachment---through an entirely local process to model network structure and attribute mixing patterns.
+\item \textbf{Unified account:} To the best of our knowledge, \texttt{ARW} is the first model that accounts for multiple sociological phenomena---bounded rationality; structural constraints; triadic closure; attribute homophily; preferential attachment---through an entirely local process to model global network structure and attribute mixing patterns.
 \end{enumerate}
 
 
@@ -116,10 +116,10 @@ relationship and attribute mixing patterns through a resource constrained mechan
 % baselines on large and diverse citation network datasets.
 % We focus on directed citation networks
 %  in this paper, as these networks---where all node edges form at the time of node joining---offer a clean foundation to explain growth in social networks (e.g. via a ``pause \& restart'' parameter), where edges can form after a node joins.
-\texttt{ARW} jointly and accurately preserves
-multiple structural properties: degree distribution, clustering and
-degree-clustering relationship.
-Our extensive set of experiments indicate that the proposed growth model outperforms
+\texttt{ARW} preserves
+multiple structural properties---in-degree distribution, clustering and
+in-degree \&clustering relationship---with high accuracy.
+Our experiments on six large-scale network datasets indicate that the proposed growth model outperforms
 eight state-of-the-art network growth models, including attributed growth models, by a
 statistcally significant margin of 2.5--$10\times$.
 
