@@ -96,7 +96,8 @@ for synthesizing networks as well as to extrapolate existing real-world networks
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=\columnwidth]{experiments_final4}
-	\caption{The figure shows how our proposed model of an Attributed Random Walk (\texttt{ARW}) accurately preserves local clustering and assortativity; we contrast with a non-attributed growth model~\cite{holme2002growing} to underscore the importance of using attributes for network growth.}
+    \vspace{1pt}
+    \caption{The figure shows how our proposed model of an Attributed Random Walk (\texttt{ARW}) accurately preserves local clustering and assortativity; we contrast with a non-attributed growth model~\cite{holme2002growing} to underscore the importance of using attributes for network growth.}
 	\label{fig:intro_plot}
 \end{figure}
 
@@ -116,9 +117,8 @@ relationship and attribute mixing patterns through a resource constrained mechan
 % baselines on large and diverse citation network datasets.
 % We focus on directed citation networks
 %  in this paper, as these networks---where all node edges form at the time of node joining---offer a clean foundation to explain growth in social networks (e.g. via a ``pause \& restart'' parameter), where edges can form after a node joins.
-\texttt{ARW} preserves
-multiple structural properties---in-degree distribution, clustering and
-in-degree \&clustering relationship---with high accuracy.
+\texttt{ARW} preserves multiple structural properties---in-degree distribution, clustering and
+indegree-clustering relationship---with high accuracy.
 Our experiments on six large-scale network datasets indicate that the proposed growth model outperforms
 eight state-of-the-art network growth models, including attributed growth models, by a
 statistically significant margin of 2.5--$10\times$.
