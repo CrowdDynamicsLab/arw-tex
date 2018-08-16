@@ -92,6 +92,19 @@ distribution of all network datasets, well consistent with~\citet{broido2018scal
 degree distributions are rare.
 % Our model explains the emergence of heavy tailed in-degree distributions through a \textit{local} process that adjusts bias towards linking to well-connected nodes
 
+\begin{figure}[H]
+ \vspace{-10pt}
+ \centering
+ \includegraphics[width=.9\columnwidth]{cc_analysis2}
+ \caption{
+    Local clustering in real-world networks have common characteristics:
+    skewed local clustering distribution (left subplot) and a negatively correlated
+    relationship between in-degree and average local clustering (right subplot).
+ }
+ \label{fig:cc_dc}
+ \vspace{-10pt}
+\end{figure}
+
 \textbf{High Local Clustering:} Real-world networks tend to exhibit high average local clustering, as shown in~\Cref{table:netstats}. We can explain local clustering due to the phenomena of triadic closure~\cite{simmel1950sociology,
 newman2001clustering}, where nodes with common neighbor(s) have an increased
 likelihood of forming a connection.
@@ -111,18 +124,6 @@ in-degree nodes tend have large, star-shaped neighborhoods.
 % We propose a model
 % that explains how clustering in real-world networks can arise from local processes
 % of exploration \& link formation.
-
-\begin{figure}
- \centering
- \includegraphics[width=.9\columnwidth]{cc_analysis2}
- \caption{
-    Local clustering in real-world networks have common characteristics:
-    skewed local clustering distribution (left subplot) and a negatively correlated
-    relationship between in-degree and average local clustering (right subplot).
- }
- \label{fig:cc_dc}
- \vspace{-15pt}
-\end{figure}
 
 
 % Homophily and Assortativity
@@ -155,7 +156,7 @@ signifies the extent to which attribute similarity influences edge formation.
     \texttt{Category} ($r=0.72$) respectively.
  }
  \label{fig:mixing}
- \vspace{-15pt}
+ \vspace{-25pt}
 \end{figure}
 
 \textbf{Increasing Out-degree over Time:}

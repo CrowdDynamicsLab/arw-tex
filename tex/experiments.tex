@@ -37,15 +37,14 @@
 	\label{fig:exp_table}
 \end{figure*}
 
-\vspace{-9pt}
+\vspace{-10pt}
 \section{Experiments}
 \label{sec:Experiments}
-In this section, we evaluate the effectiveness of our model in preserving
-structural properties of six real-world networks described in~\Cref{sec:Datasets}.
-Our experiments compare \texttt{ARW} to eight state-of-the-art growth models.
-In~\Cref{sub:Experimental Setup}, we describe existing growth models and the evaluation metrics
-used in the experiments. In~\Cref{sub:Experimental Results}, we discuss our
-experimental results.
+In this section, we evaluate the effectiveness of \texttt{ARW} in preserving
+structural properties of network datasets described in~\Cref{sec:Datasets}.
+relative to eight state-of-the-art growth models.
+In~\Cref{sub:Experimental Setup}, we begin by describing existing growth models and the evaluation metrics
+used in the experiments. Then, we discuss our results.
 
 \vspace{-10pt}
 \subsection{Setup}
@@ -62,8 +61,7 @@ Two of the eight models account for attribute homophily and preserve attribute m
 as listed in~\cref{table:models}.
 %  We consider two preferential attachment models, two attributed
 % network growth models and two random walk models:
-
-\begin{table}
+\begin{table}[t]
  \center
  {
   \begin{tabular}[c]{llcc} \toprule
@@ -78,9 +76,9 @@ as listed in~\cref{table:models}.
   Forest Fire~\cite{leskovec2005graphs} 					  & \texttt{FF} & \texttt{RW} & No  \\
    \bottomrule
   \end{tabular}
-  % \vspace{1mm}
+  \vspace{1mm}
   \caption{
-  	  Existing Well-known Models: We evaluate the performance of our model \texttt{ARW} relative to 3 preferential attachment
+  	  We evaluate the performance of our model \texttt{ARW} relative to 3 preferential attachment
 	  (\texttt{PA}) models, 2 pref. attachment \& triangle closing (\texttt{PA+TC}) models and 3 random walk (\texttt{RW}) models.
   }
   \label{table:models}
@@ -190,7 +188,10 @@ are shaded gray ( \lightgraybg{ }) or dark gray (~\darkgraybg{ }) respectively.
 % triangle closing (orange) and random walk (green) mechanisms.
 
 % A common characteristic of
-~\Cref{fig:exp_table} shows that baseline models fail to accurately preserve \textit{multiple} structural properties. This is because existing models either disregard important mechanisms such as triadic closure and homophily or are not flexible enough to generate networks with varying structural properties.
+~\Cref{fig:exp_table} shows that existing models fail to accurately preserve
+\textit{multiple} structural properties. This is because existing models either
+disregard important mechanisms such as triadic closure and homophily or are not
+flexible enough to generate networks with varying structural properties.
 
 % For instance, the preferential attachment model \texttt{DMS}
 % can accurately fit the heavy-tailed degree distributions but does not
@@ -198,7 +199,7 @@ are shaded gray ( \lightgraybg{ }) or dark gray (~\darkgraybg{ }) respectively.
 % On the other hand, the attributed network model \texttt{SAN} tries to preserve
 % all four properties but cannot do so accurately.
 
-Preferential attachment models \texttt{DMS}, \texttt{RL}
+\textbf{Preferential attachment models}: \texttt{DMS}, \texttt{RL}
 and \texttt{KA} preserve in-degree distributions but disregard
 clustering. \texttt{DMS} outperforms other models in accurately modeling
 degree distribution (\Cref{fig:exp_table}A) because its ``initial attractiveness''
@@ -209,7 +210,7 @@ parameter can be tuned to adjust preference towards low degree nodes. Unlike \te
 By assuming that successive edge formations are independent, both models disregard
 triadic closure and local clustering. (\Cref{fig:exp_table}B \&~\Cref{fig:exp_table}C).
 
-\texttt{HK} and \texttt{SAN} are preferential attachment models
+\textbf{Triangle Closing}: \texttt{HK} and \texttt{SAN} are preferential attachment models
 that use triangle closing mechanisms to generate scale-free networks with high average
 local clustering.
 % Note that \texttt{HK} and \texttt{KA} fit degree distributions with the same \texttt{KS} statistic
@@ -222,7 +223,7 @@ to preserve local clustering in \textit{all} datasets (see~\Cref{fig:exp_table}B
 % these models cannot accurately preserve the local clustering distribution and in-degree-clustering
 % relationship observed in real networks.
 
-Existing random walk models \texttt{FF}, \texttt{SK} and \texttt{HZ}
+\textbf{Existing random walk models}: \texttt{FF}, \texttt{SK} and \texttt{HZ}
 do not accurately preserve structural properties of real-world network datasets,
 disregard attribute homophily and do not account for attribute mixing patterns.
 The recursive approach in \texttt{FF} considerably overestimates local clustering.
@@ -237,7 +238,7 @@ better ($\alpha < 0.001$) than existing random walk models.
 % However, the improvements are not substantial when compared to the performance
 % of our model \texttt{ARW}.
 
-The experiment results in~\Cref{fig:exp_table} clearly indicate the effectiveness
+\textbf{Attributed Random Walk model}: The results in~\Cref{fig:exp_table} clearly indicate the effectiveness
 of the proposed model \texttt{ARW} in \textit{jointly} preserving multiple
 global network properties. \texttt{ARW} can generate networks with varying
 degree distribution by adjusting nodes' preference towards high degree nodes
@@ -256,7 +257,7 @@ From~\Cref{fig:barplot}, it is straightforward to show that
 
 \begin{figure}
 	\centering
-	\vspace{-16pt}
+	\vspace{-6pt}
 	\includegraphics[width=.65\linewidth]{barplots_final3}
 	\caption{Jointly modeling multiple network properties: \texttt{ARW} outperforms
 		existing network models in jointly preserving key structural properties---in-degree

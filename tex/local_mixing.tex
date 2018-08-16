@@ -40,25 +40,25 @@ to define $w_i$, and we define $w_i(j) = \sfrac{1}{|N(i)|}$ for all $j \in N(i)$
 % in the local neighborhood of node $i$ (\texttt{obs}) to the expected fraction
 % if the edges are randomly rewired (\texttt{rnd}).
 
-As shown in~\Cref{fig:local_atty}, the local assortativity distributions
+As shown in~\Cref{fig:local_atty}, local assortativity distributions
 of \texttt{ACL}, \texttt{APS} and \texttt{Patents} reveal anomalous, skewed
-and heterophilic local mixing patterns that are not easily inferred via the global assortativity.
+and heterophilic local mixing patterns that are not inferred via global assortativity.
 
 \begin{figure}[h]
 	\centering
 	\vspace{-9pt}
 	\includegraphics[width=\linewidth]{local_atty_dist}
-	\caption{Local attribute mixing patterns of homophilic networks \texttt{ACL}, \texttt{APS}
+	\caption{Local assortativity distributions of attributed networks \texttt{ACL}, \texttt{APS}
 		and \texttt{Patents} reveal anomalous, skewed and even heterophilic local mixing patterns.
-		\texttt{ARW} preserves the observed local assortativity distributions with high accuracy,
-	but does not account for nodes with extreme heterophilic or homophilic preferences.}
+		\texttt{ARW} accurately preserves local assortativity, but does not account for anomalous mixing patterns.}
 	\label{fig:local_atty}
 	\vspace{-8pt}
 \end{figure}
 
 \texttt{ARW} can preserve
 diverse local assortativity distributions with high accuracy even though nodes
-share the same attribute preference parameter $p_a$ because  \texttt{ARW}
+share the same attribute preference parameter $p_a$. This is because, in addition
+to sample attributes conditioned on time, \texttt{ARW}
 incorporates multiple sources of stochasticity through its edge formation
 mechanism. As a result, incoming nodes with fixed homophilic preferences can end
 up having variable local assortativity by (a) selecting a seed node in a region
