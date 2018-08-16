@@ -32,53 +32,63 @@
 
 % what is the problem?
 
-We develop a resource constrained model of network growth that explains the
-emergence of key structural properties. The problem is important for several
-reasons. Individuals form real-world networks acting under resource constraints
-and while using local information. These networks that individuals form exhibit
-rich structural properties. However, we lack an understanding of mechanisms that
-are resource constrained and which use local information explain the emergence
-of these structural related properties.
+In this paper, we present a network growth model that explains how distinct
+structural properties of attributed networks can emerge from local edge
+formation processes. In real-world networks, individuals tend to form edges
+under resource constraints such as limited information and partial network
+access. Additionally, sociological phenomena such as triadic closure and
+homophily \textit{simultaneously} impact individuals’ decisions to form edges.
+Over time, these decisions cumulatively shape real-world networks as they
+exhibit rich structural characteristics: heavy-tailed indegree distribution,
+skewed local clustering and homophilic mixing patterns. However, we lack
+mechanisms that incorporate the effect of resource constraints and
+\textit{multiple} sociological factors on edge formation as well as preserve
+global network structure.
 
 % why is it important?
 
-Classic models of network growth, make unrealistic assumptions about what agents
-who form edges do. Consider as a simple stylized example, the process of finding
-the a set of papers to cite when writing an article. In the preferential
-attachment model \cite{barabasi1999emergence} of network growth, a node making
-$m$ citations would pick a paper uniformly at random from \textit{all} papers in
-the domain, and either cite it or copy one of its references. We would repeat
-this process, till we've exhausted our budget of $m$ references. Notice that the
-process assumes access to the entire dataset, and that one would pick papers
-uniformly at random. An equivalent formulation of this copying model
-is to cite papers from the entire dataset in proportion to their in degree. The
-latter formulation assumes that agent making citations know the entire in-degree
-distribution. While preferential attachment models explains the emergence of
-the power-law degree distribution, the attachment model is an unrealistic
-representation of how agents make decisions on edge formation.
+Existing models of network growth tend to make unrealistic assumptions about how
+individuals form edges. Consider a simple stylized example: the process of
+finding a set of papers to cite when writing an article. In preferential
+attachment \cite{barabasi1999emergence} or fitness \cite{X} based models, a node
+making $m$ citations would pick papers from the \textit{entire} network in
+proportion to their indegree or fitness respectively. This process assumes that
+individuals possess complete knowledge of indegree or fitness of every node in
+the network. An equivalent formulation — vertex copying \cite{X} — induces
+preferential attachment: for every citation, a node would pick a paper uniformly
+at random from \textit{all} papers, and either cite it or copy its citations.
+Notice that the copying mechanism assumes individuals have complete access to
+the network and form each edge independently. Although these models explain the
+emergence of power law degree distributions, they are unrealistic
+representations of how individuals make decisions about edge formation. A
+realistic representation of how individuals form edges necessitates modeling the
+effect of multiple sociological phenomena on edge formation under resource
+constraints.
 
 %why is it hard?
-
-The problem of developing a model of network growth, where agents act under
+The problem of developing a model of network growth, where individuals act under
 resource constraints, including access to only local information is hard. The
-problem lies in identifying simple mechanisms, with few parameters, where the
-agents only use local information and \textit{jointly} preserve the properties
-related structure.
+problem lies in identifying simple mechanisms with few parameters that unifies
+multiple sociological phenomena to \textit{jointly} preserve structural
+properties and attribute mixing patterns of attributed networks.
 
 % what did we do?
 
-We propose a random walk based model of network growth that jointly explains the
-emergence of the following properties: heavy-tailed in-degree distributions,
-local clustering and clustering-degree relationships. In the growth model, an
-incoming node picks a recent node as the seed. It will link to this node with
-some constant linking probability. Then, it follows the outgoing link or the
-incoming link of this seed node and arrives at a new node. At each new node, it
-decides to link with the same constant linking probability. Then it has to
-decide whether to jump back to the seed node, or following incoming or outgoing
-links. The process repeats until the agent has exhausted its budget for linking.
-To summarize, new nodes concurrently acquire information and form edges
-by exploring the local neighborhoods of existing nodes, without access to the
-entire network.
+
+We propose an Attributed Random Walk \texttt{ARW} model that jointly explains
+the emergence of in-degree distributions, local clustering, clustering-degree
+relationship and attribute mixing patterns through a resource constrained mechanism
+based on random walks.
+In \texttt{ARW}, incoming nodes select a seed node based on attribute similarity
+and initiate a biased random walk: At each step of the walk, the incoming node either
+jumps back to its seed or chooses an outgoing link or incoming link to visit another
+node. It links to each visited node with some probability and halts after forming a
+few connections. We have three primary contributions:
+\begin{itemize}
+\item model effect of multiple sociological phenomena on edge formation simulatenously
+\item provide a realistic representation of how individuals form edges under constraints of limited information and partial network access.
+\item jointly preserve key structural properties and attribute mixing patterns of real-world attributed networks.
+\end{itemize}
 
 \begin{figure}[t]
  \centering
@@ -88,30 +98,25 @@ entire network.
  \label{fig:intro_plot}
 \end{figure}
 
-
-Our main contributions are as follows:
-\begin{itemize}
-    \item We propose a model
-    of network growth using a local edge formation mechanism that incorporates the
-    resource constraints that influence individuals' edge formation mechanisms in
-    real-world networks.
-    \item We propose a model that jointly explains multiple
-    structural properties, including in-degree distribution, clustering, degree
-    clustering relationship and edge densification.
-\end{itemize}
-
-
 We conducted extensive experimental results, against state of the art
 baselines, on large citation network datasets. We show that our growth model
 outperforms that best competing model in jointly and accurately preserving
 multiple structural properties---degree distribution, clustering and
 degree-clustering relationship---by a significant margin.
 
-The rest of the paper is organized as follows. In~\Cref{sec:Related Work}, we
-describe the related work. Then, in~\Cref{sec:Preliminaries}, we define key
-structural properties and introduce the datasets. We formally state the goal of
-the paper in~\Cref{sec:Problem Statement}. In~\Cref{sec:Empirical Analysis}
-and~\Cref{sec:Proposed Model}, we report prominent structural characteristics
-of citation networks and propose a network growth model respectively. This is
-followed by~\Cref{sec:Experiments}, where we validate our model against
-multiple baselines.
+The rest of the paper is organized as follows.
+We begin by defining the problem statement in~\Cref{sec:Problem Statement}.
+In~\Cref{sec:Analysis}, we outline six network datasets, describe key structural
+properties of real-world networks and discuss insights from sociological studies.
+Then, in~\Cref{sec:Proposed Model}, we describe the network growth model. This
+is followed by experiments in~\Cref{sec:Experiments} \&~\Cref{subsec:LocalMixing}
+and discussion in~\Cref{sec:Discussion}.
+
+% In~\Cref{sec:Related Work}, we
+% describe the related work. Then, in~\Cref{sec:Preliminaries}, we define key
+% structural properties and introduce the datasets. We formally state the goal of
+% the paper in~\Cref{sec:Problem Statement}. In~\Cref{sec:Empirical Analysis}
+% and~\Cref{sec:Proposed Model}, we report prominent structural characteristics
+% of citation networks and propose a network growth model respectively. This is
+% followed by~\Cref{sec:Experiments}, where we validate our model against
+% multiple baselines.
