@@ -32,7 +32,18 @@
 
 % what is the problem?
 
-In this paper, we present a network growth model that explains how distinct structural properties of attributed networks can emerge from local edge formation processes. In real-world networks, individuals tend to form edges under resource constraints (limited information and partial network access). Additionally, phenomena such as triadic closure and homophily \textit{simultaneously} influence individuals’ decisions to form connections. Over time, these decisions cumulatively shape real-world networks to exhibit rich structural characteristics: heavy-tailed in-degree distribution, skewed local clustering and homophilic mixing patterns. However, we lack an understanding of local, resource constrained mechanisms that incorporate sociological factors to explain the emergence of these rich structural characteristics. 
+We present a network growth model that explains how distinct
+structural properties of attributed networks can emerge from local edge
+formation processes. In real-world networks, individuals tend to form edges
+under resource constraints such as limited information and partial network access.
+Additionally, phenomena such as triadic closure and homophily
+\textit{simultaneously} influence individuals' decisions to form connections.
+Over time, these decisions cumulatively shape real-world networks to exhibit
+rich structural characteristics: heavy-tailed in-degree distribution, skewed
+local clustering and homophilic mixing patterns. However, we lack an
+understanding of local, resource constrained mechanisms that incorporate
+sociological factors to explain the emergence of these rich structural
+characteristics over time.
 
 % The problem of developing a model of network growth, where individuals act under
 % resource constraints, including access to only local information is hard. The
@@ -47,18 +58,32 @@ In this paper, we present a network growth model that explains how distinct stru
 Classic models of network growth tend to make unrealistic assumptions about how
 individuals form edges. Consider a simple stylized example: the process of
 finding a set of papers to cite when writing an article. In preferential
-attachment \cite{barabasi1999emergence} or fitness \cite{X} based models, a node
-making $m$ citations would pick papers from the \textit{entire} network in
+attachment \cite{barabasi1999emergence} or fitness
+\cite{bianconi2001bose,caldarelli2002scale,wang2013quantifying} based models, a
+node making $m$ citations would pick papers from the \textit{entire} network in
 proportion to their in-degree or fitness respectively. This process assumes that
-individuals possess \textit{complete} knowledge of in-degree or fitness of every node in
-the network. An equivalent formulation---vertex copying \cite{X}---induces
-preferential attachment: for every citation, a node would pick a paper uniformly
-at random from \textit{all} papers, and either cite it or copy its citations.
-Notice that the copying mechanism assumes individuals have complete access to
-the network and forms each edge independently. Although these models explain the
-emergence of power law degree distributions, they are unrealistic: they require global knowledge (e.g. preferential attachment requires knowledge of the global in-degree distribution) or global access (e.g. vertex copying requires random access to all nodes). Surprisingly, these classic models do not account for the fact that many networks are attributed (e.g. a paper is published at a venue; a Facebook user may use gender, political interests to describe them) and that assortative mixing is an important network characteristic~\cite{newman2002assortative}.
+individuals possess {complete} knowledge of in-degree or fitness of every node
+in the network. An equivalent formulation---vertex copying
+\cite{kumar2000stochastic}---induces preferential attachment: for every
+citation, a node would pick a paper uniformly at random from \textit{all}
+papers, and either cite it or copy its citations. Notice that the copying
+mechanism assumes individuals have complete access to the network and forms each
+edge independently. Although these models explain the emergence of power law
+degree distributions, they are unrealistic: they require global knowledge (e.g.
+preferential attachment requires knowledge of the global in-degree distribution)
+or global access (e.g. vertex copying requires random access to all nodes).
+Moreover, these models do not account for the fact that many
+networks are attributed (e.g. a paper is published at a venue; a Facebook user
+may use gender, political interests to describe them) and that assortative
+mixing is an important network characteristic~\cite{newman2002assortative}.
 
-Recent papers tackle resource constraints \hs{cite} as well as nodal attributes \hs{cite}. However the former don't explain ... and the latter do not capture the local clustering properties of a network. Developing a parsimonious, accurate, model of attributed network growth that accounts for observed sociological phenomena is non-trivial. Accurate network growth model are useful for synthesizing networks as well as to extrapolate existing networks.
+Recent papers tackle resource constraints \cite{mossa2002truncation,zeng2005construction,wang2009local} as well as nodal attributes
+\cite{de2013scale,gong2012evolution}. However, the former disregard attributes and the latter do not provide a realistic representation
+of edge formation under resource constraints. Furthermore, both sets of models cannot preserve multiple structural properties
+simultaneously \textit{and} accurately. Developing a parsimonious,
+accurate, model of attributed network growth that accounts for observed
+sociological phenomena is non-trivial. Accurate network growth model are useful
+for synthesizing networks as well as to extrapolate existing networks.
 
 % representations of how individuals make decisions about edge formation. A
 % realistic representation of how individuals form edges necessitates modeling the
@@ -88,12 +113,16 @@ relationship and attribute mixing patterns through a resource constrained mechan
 
 
 
-We conducted extensive experimental results, against state of the art
-baselines, on large and diverse citation network datasets. We focus on directed citation networks in this paper, as these networks---where all node edges form at the time of node joining---offer a clean foundation to explain growth in social networks (e.g. via a ``pause \& restart'' parameter), where edges can form after a node joins.
-
-We show that our growth model outperforms eight state-of-the-art network growth models, including attributed growth models by a overall factor of 2.5--$10\times$. We show that \texttt{ARW} jointly and accurately preserves
-multiple structural properties---degree distribution, clustering and
-degree-clustering relationship---and where the differences with the baseline state-of-the-art models are statistically significant.
+% We conducted extensive experimental results against state-of-the-art
+% baselines on large and diverse citation network datasets.
+% We focus on directed citation networks
+%  in this paper, as these networks---where all node edges form at the time of node joining---offer a clean foundation to explain growth in social networks (e.g. via a ``pause \& restart'' parameter), where edges can form after a node joins.
+\texttt{ARW} jointly and accurately preserves
+multiple structural properties: degree distribution, clustering and
+degree-clustering relationship.
+Our extensive set of experiments indicate that the proposed growth model outperforms
+eight state-of-the-art network growth models, including attributed growth models, by a
+statistcally significant margin of 2.5--$10\times$.
 
 The rest of the paper is organized as follows.
 We begin by defining the problem statement in~\Cref{sec:Problem Statement}.
