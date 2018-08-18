@@ -45,9 +45,9 @@ More formally, at every discrete time step $t$, a
 new node $u$, with attribute value $B(u)$, joins the network $\hat{G}_t$.
 After joining the network, node $u$ forms $m(t)$ edges to
 existing nodes.
-% At time $t$, $G_t$ consists of ${|V_t|=|V_0|+t}$ nodes,
-% ${|E_t|=|E_{t-1}|+m(t)}$ edges and the set of attribute values ${A_t = A_{t-1}
-% \cup \{A(u)\}}$.
+At time $t$, $G_t$ consists of ${|V_t|=|V_0|+t}$ nodes,
+${|E_t|=|E_{t-1}|+m(t)}$ edges and the set of attribute values ${A_t = A_{t-1}
+\cup \{A(u)\}}$.
 The out-degree of incoming nodes increases over time to
 reflect the nonlinear growth and densification of real-world networks.
 % We discuss the
@@ -158,7 +158,7 @@ nodes probabilistically and halts the walk after forming $m(t)$ edges, as shown 
 We incorporate structural constraints into \texttt{ARW} using the jump parameter $p_j$.
 The jump parameter $p_j$ is the probability with which a new node jumps back to its seed node
 after each step of the random walk. This implies that the probability with which the new node
-is at most $k$ steps from its seed node is $(1-p_j)^k$; as a result, the jump parameter $p_j$
+takes $k$ steps without returning to its seed node is $(1-p_j)^k$; as a result, the jump parameter $p_j$
 controls the extent to which new nodes' random walks explore the network to form edges.
 
 \begin{ph}
@@ -215,8 +215,8 @@ The parameter estimation task consists of finding the set of
 parameters values for $(\alpha, p_a, p_j, p_o)$ that best explain the structural properties
 of an observed network $G$. We use a straightforward grid search method to estimate
 the four parameters.
-% Other derivative-free optimization methods such as the Nelder-Mead~\cite{nelder1965simplex}
-% method can be used to speed-up parameter estimation.
+Other derivative-free optimization methods such as the Nelder-Mead~\cite{nelder1965simplex}
+method can be used to speed-up parameter estimation.
 % We describe the evaluation metrics and selection
 % criteria in \Cref{sub:Experimental Setup}.
 

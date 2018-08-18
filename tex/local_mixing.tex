@@ -21,24 +21,24 @@ $i$ by using a locality biased weight distribution $w_i$. The distribution
 $w_i$ reweighs edges between similar nodes based on how local they are to
 node $i$. As~\citet{peel2018multiscale} indicate, there are multiple ways
 to define $w_i$, and we define $w_i(j) = \sfrac{1}{|N(i)|}$ for all $j \in N(i)$, as this allows for a highly efficient local assortativity calculation.
-
-% The distribution $w_i$ reweighs edges between similar nodes
-% based on how local they are to node $i$. Peel et al. \cite{peel2018multiscale} prescribe a
+The distribution $w_i$ reweighs edges between similar nodes
+based on how local they are to node $i$.
+% Peel et al. \cite{peel2018multiscale} prescribe a
 % personalized pagerank weight distribution, which is prohibitively expensive to compute for
 % all nodes in large graphs; Large network datasets necessitate efficient weighting schemes.
 % Therefore, we define $w_i$ as a uniform distribution
 % over $N(i)$, the set of nodes that are at most 1 hop away from node $i$.
 
 % reintroduce only if there is room.
-% More formally, the local assortativity coefficient $r_l(i)$ of node $i$, with outdegree $m(i)$ and
-% attribute value $b(i)$ is defined as follows:
-% \vspace{-1mm}
-% \begin{align*}
-% 	\scriptsize r_l(i) = \frac{\overbrace{\frac{1}{|N(i)|}\sum\limits_{j \in N(i)}^{m(j) > 0} \sum_{k \in V} \frac{\mathcal{I}\{(j,k) \in E \wedge b(j)=b(k)\}}{m(i)} }^{\texttt{obs}}-\overbrace{\sum_{b \in B} e_{b}\cdot e_{b}}^{\texttt{rnd}}}{\underbrace{1}_{\max(\texttt{obs})}-\underbrace{\sum_{b \in B} e_{b} \cdot e_{b}}_\texttt{rnd}}
-% \end{align*}
-% Intuitively, $r_l(i)$ compares the observed fraction of edges between similar nodes
-% in the local neighborhood of node $i$ (\texttt{obs}) to the expected fraction
-% if the edges are randomly rewired (\texttt{rnd}).
+More formally, the local assortativity coefficient $r_l(i)$ of node $i$, with outdegree $m(i)$ and
+attribute value $b(i)$ is defined as follows:
+\vspace{-1mm}
+\begin{align*}
+	\scriptsize r_l(i) = \frac{\overbrace{\frac{1}{|N(i)|}\sum\limits_{j \in N(i)}^{m(j) > 0} \sum_{k \in V} \frac{\mathcal{I}\{(j,k) \in E \wedge b(j)=b(k)\}}{m(i)} }^{\texttt{obs}}-\overbrace{\sum_{b \in B} e_{b}\cdot e_{b}}^{\texttt{rnd}}}{\underbrace{1}_{\max(\texttt{obs})}-\underbrace{\sum_{b \in B} e_{b} \cdot e_{b}}_\texttt{rnd}}
+\end{align*}
+Intuitively, $r_l(i)$ compares the observed fraction of edges between similar nodes
+in the local neighborhood of node $i$ (\texttt{obs}) to the expected fraction
+if the edges are randomly rewired (\texttt{rnd}).
 
 As shown in~\Cref{fig:local_atty}, local assortativity distributions
 of \texttt{ACL}, \texttt{APS} and \texttt{Patents} reveal anomalous, skewed
