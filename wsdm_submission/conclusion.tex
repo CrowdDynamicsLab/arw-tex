@@ -1,0 +1,54 @@
+%!TEX root = draft.tex
+% \vspace{-4pt}
+\section{Conclusion}
+\label{sec:Conclusion}
+
+In this paper, we proposed a novel, parsimonious model of attributed network
+growth. \texttt{ARW} grows a directed network in the following manner: an
+incoming node selects a seed node based on attribute similarity, initiates a
+biased random walk to explore the network by navigating through neighborhoods of
+existing nodes, and halts the random walk after connecting to a few visited
+nodes. To the best of our knowledge, \texttt{ARW} is the first model that
+unifies multiple sociological phenomena---bounded rationality; structural
+constraints; triadic closure; attribute homophily; preferential
+attachment---into a single local process to model global network structure
+\textit{and} attribute mixing patterns. Our experiments on six
+large-scale citation networks show that \texttt{ARW} outperforms
+relevant and recent existing models by a statistically significant
+factor of 2.5--$10\times$.
+
+We plan to extend the \texttt{ARW} model in several ways: understanding the
+emergence of higher-order clustering \cite{yin2018higher} through local processes, modeling the
+effect of homophily on the formation of temporal motifs \cite{paranjape2017motifs} and learning
+individual preferences in evolving multi-attributed networks.
+
+% In this paper, we propose a network growth model that explains the
+% structure of attributed networks through a local edge formation mechanism. Our
+% model \texttt{ARW} is normative, accurate and simple. We incorporate multiple
+% sociological phenomena into our model to intuitively prototype how individuals
+% form edges under constraints of limited information and partial network access.
+% Through our experiments, we validate the efficacy of our model in jointly preserving
+% multiple structural properties and attribute mixing patterns of real-world networks.
+% Our work signifies the need to understand how local processes of link formation
+% give rise to structural characteristics of real-world networks.
+
+% We also show that our
+% model can preserve local assortativity distributions of attributed networks.
+% Furthermore, we discussed the weaknesses of global processes such as
+% preferential attachment \& triangle closing and addressed the limitations of our
+% model.
+
+% We identify three future directions:
+
+% In this paper, we model resource-constrained network growth model in which nodes
+% use a random walk process to form edges under constraints of limited information
+% and network access constraints. The problem is important because edge formation
+% in real networks is usually a local process. In typical network growth
+% scenarios, nodes in the network either have limited information about the other
+% nodes in the network or the system allows access to only restricted portion of
+% the existing network. It therefore becomes imperative to model how the local
+% processes of link formation gives rise to network characteristics. In this work,
+% we show that multiple structural properties of real networks can arise from the
+% local process of exploration and link formation. Our results indicate significant
+% improvement over the next best competing model \textsc{HZ}
+% \cite{herrera2011generating} by a significant margin.
