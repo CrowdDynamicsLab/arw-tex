@@ -1,9 +1,8 @@
 %!TEX root = ../draft.tex
-% \vspace{-6pt}
 \begin{figure*}
 	\vspace{-20pt}
     \centering
-    \includegraphics[width=.9\linewidth]{arw}
+    \includegraphics[width=.95\linewidth]{arw}
     \caption{Edge formation in \texttt{ARW}: consider
     an incoming node $u$ with outdegree ${m=3}$ and attribute value {$B(u)=\textsc{red} \in \{\textsc{red},\textsc{green}\}$}.
     In fig. 3a, $u$ joins the network and selects seed $v_a$ via \textsc{Select-Seed}.
@@ -271,7 +270,6 @@ Consequently, we sample the attribute value $B(u)$ of node $u$, that joins $\hat
 $t$, from $P_{\textsc{g}}(B{\mbox{ | year}=y(t)})$, the observed attribute
 distribution conditioned on the year of arrival of node $u$.
 
-% TODO: theory justification improve
 To summarize, the \texttt{ARW} model
 intuitively describes how individuals form edges under resource constraints.
 \texttt{ARW} uses four parameters --- $\alpha$, $p_a$, $p_j$, $p_o$ --- to incorporate
@@ -281,7 +279,7 @@ theoretical questions about random walks on directed graphs.
 Unfortunately, unlike the case of undirected graphs, there is no
 analytical closed form expression for stationary distributions of random walks
 on general directed graphs, thereby making the analysis of random walk models
-like \texttt{ARW} quite complex.
+like \texttt{ARW} quite complex. \harshay{Improve theory justification}
 
 Next, our experiments in~\Cref{sec:Experiments} show that $\texttt{ARW}$ accurately preserves
 {multiple} structural and attribute properties of real networks

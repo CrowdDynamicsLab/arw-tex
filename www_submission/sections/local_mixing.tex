@@ -1,5 +1,4 @@
 %!TEX root = ../draft.tex
-% \vspace{-10pt}
 \section{Modeling Local Mixing Patterns}
 \label{subsec:LocalMixing}
 
@@ -25,7 +24,6 @@ are at most 1 hop away from node $i$ to allow for a highly efficient
 local assortativity calculation.
 More formally, the local assortativity coefficient $r_l(i)$ of node $i$, with outdegree $m(i)$ and
 attribute value $b(i)$ is defined as follows:
-\vspace{-1mm}
 \begin{align*}
 	\scriptsize r_l(i) = \frac{\overbrace{\frac{1}{|N(i)|}\sum\limits_{j \in N(i)}^{m(j) > 0} \sum_{k \in V} \frac{\mathcal{I}\{(j,k) \in E \wedge b(j)=b(k)\}}{m(i)} }^{\texttt{observed}}-\overbrace{\sum_{b \in B} e_{b}\cdot e_{b}}^{\texttt{random}}}{\underbrace{1}_{\max(\texttt{observed})}-\underbrace{\sum_{b \in B} e_{b} \cdot e_{b}}_\texttt{random}}
 \end{align*}

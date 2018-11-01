@@ -1,7 +1,7 @@
 %!TEX root = ../draft.tex
 
 \begin{figure*}[t]
-	\vspace{-25pt}
+	\vspace{-15pt}
 	\centering
 	\makebox[\textwidth][c]{\includegraphics[width=\textwidth]{experiments}}
 	\vspace{-16pt}
@@ -41,8 +41,8 @@
 In this section, we evaluate the effectiveness of \texttt{ARW} in preserving
 structural properties of network datasets described in~\Cref{sec:Datasets}.
 relative to eight state-of-the-art growth models.
-In~\Cref{sub:Experimental Setup}, we begin by describing existing growth models and the evaluation metrics
-used in the experiments. Then, we discuss our results.
+% In~\Cref{sub:Experimental Setup}, we begin by describing existing growth models and the evaluation metrics
+% used in the experiments. Then, we discuss our results.
 
 \subsection{Setup}
 \label{sub:Experimental Setup}
@@ -55,43 +55,74 @@ which the following growth models preserve global structural properties of real-
 growth models representative of the key edge formation
 mechanisms: preferential attachment, fitness, triangle closing and random walks.
 Two of the eight models account for attribute homophily and preserve attribute mixing patterns,
-as listed in~\Cref{table:models}.
+as listed below:
+\begin{enumerate}
+	\item{\textbf{Dorogovtsev-Mendes-Samukhin model}} \cite{dorogovtsev2000structure}  (\texttt{DMS})
+	is a preferential attachment model in which the probability of linking to a node is proportional
+	to the sum of its in-degree and ``initial attractiveness.''
 
-\begin{table}[t]
- \center
- {
-  \begin{tabular}[c]{llcc} \toprule
-  Model &  Abbreviation & Type & Attributed \\ \midrule
-  Dorogovtsev et al.~\cite{dorogovtsev2000structure} & \texttt{DMS} & \texttt{PA} & No  \\
-  Relay Linking~\cite{singh2017relay} 						  & \texttt{RL} & \texttt{PA} & No  \\
-  Kim-Altmann~\cite{kim2017effect} 							  & \texttt{KA} & \texttt{PA} & Yes  \\ \midrule
-  Social Attribute Network~\cite{gong2012evolution} 	  & \texttt{SAN} & \texttt{PA+TC} & Yes  \\
-  Holme-Kim~\cite{holme2002growing} 						  & \texttt{HK} & \texttt{PA+TC} & No  \\ \midrule
-  Herera-Zufiria~\cite{herrera2011generating} 				  & \texttt{HZ} & \texttt{RW} & No  \\
-  Saramaki-Kaski~\cite{saramaki2004scale} 					  & \texttt{SK} & \texttt{RW} & No  \\
-  Forest Fire~\cite{leskovec2005graphs} 					  & \texttt{FF} & \texttt{RW} & No  \\
-   \bottomrule
-  \end{tabular}
-  \vspace{1mm}
-  \caption{
-  	  We evaluate the performance of our model \texttt{ARW} relative to 3 preferential attachment
-	  (\texttt{PA}) models, 2 pref. attachment \& triangle closing (\texttt{PA+TC}) models and 3 random walk (\texttt{RW}) models.
-  }
-  \label{table:models}
- }
- \vspace{-10pt}
-\end{table}
+	\item{\textbf{Kim-Altmann model}} \cite{kim2017effect} (\texttt{KA}) is a fitness-based model that defines
+	fitness as the product of degree and attribute similarity. It can generate \textit{attributed} networks
+	with assortative mixing and heavy tailed degree distribution.
 
-% TODO: parameter fitting of baselines; undirected to directed
-\textit{Ensuring Fair Comparison}. To ensure fair comparison, we modify models outlined in~\Cref{table:models}.
+	\item{\textbf{Relay Linking model}} \cite{singh2017relay} (\texttt{RL}) propose a set of
+	preferential attachment models that use relay linking to explain the change in node popularity over time.
+	We use the iterated preferential relay-cite (IPRC) variant, which best fits real-world network properties.
+
+	\item{\textbf{Holme-Kim model}} \cite{holme2002growing} (\texttt{HK}) is a preferential attachment model
+	which uses a triangle-closing mechanism to generate scale-free, clustered networks.
+
+	\item{\textbf{Social Attribute Network model}} \cite{gong2012evolution} (\texttt{SAN}) generates
+	scale-free, attributed networks with high clustering using attribute-augmented
+	preferential attachment and triangle closing mechanisms.
+	% We modify the model to create directed edges and thereby generate directed networks.
+
+	\item{\textbf{Herera-Zufiria model}} \cite{saramaki2004scale} (\texttt{SK})  is a random walk model
+	that tunes the length of random walks to generate clustered networks with power law degree distributions.
+
+	\item{\textbf{Saramaki-Kaski}} \cite{herrera2011generating} (\texttt{HZ}) is a random walk model
+	that generates scale-free networks with tunable average local clustering.
+
+	\item{\textbf{Forest Fire model}} \cite{leskovec2005graphs} (\texttt{FF}) is a recursive random walk model
+	that preserves decreasing diameter over time, heavy-tailed degree distribution
+	and high clustering.
+\end{enumerate}
+
+% in~\Cref{table:models}.
+% \begin{table}[t]
+%  \center
+%  {
+%   \begin{tabular}[c]{llcc} \toprule
+%   Model &  Abbreviation & Type & Attributed \\ \midrule
+%   Dorogovtsev et al.~\cite{dorogovtsev2000structure} & \texttt{DMS} & \texttt{PA} & No  \\
+%   Relay Linking~\cite{singh2017relay} 						  & \texttt{RL} & \texttt{PA} & No  \\
+%   Kim-Altmann~\cite{kim2017effect} 							  & \texttt{KA} & \texttt{PA} & Yes  \\ \midrule
+%   Social Attribute Network~\cite{gong2012evolution} 	  & \texttt{SAN} & \texttt{PA+TC} & Yes  \\
+%   Holme-Kim~\cite{holme2002growing} 						  & \texttt{HK} & \texttt{PA+TC} & No  \\ \midrule
+%   Herera-Zufiria~\cite{herrera2011generating} 				  & \texttt{HZ} & \texttt{RW} & No  \\
+%   Saramaki-Kaski~\cite{saramaki2004scale} 					  & \texttt{SK} & \texttt{RW} & No  \\
+%   Forest Fire~\cite{leskovec2005graphs} 					  & \texttt{FF} & \texttt{RW} & No  \\
+%    \bottomrule
+%   \end{tabular}
+%   \vspace{1mm}
+%   \caption{
+%   	  We evaluate the performance of our model \texttt{ARW} relative to 3 preferential attachment
+% 	  (\texttt{PA}) models, 2 pref. attachment \& triangle closing (\texttt{PA+TC}) models and 3 random walk (\texttt{RW}) models.
+%   }
+%   \label{table:models}
+%  }
+%  \vspace{-10pt}
+% \end{table}
+
+\textit{Ensuring Fair Comparison}. To ensure fair comparison, we modify existing models in three ways.
 First, for models that do not have an explicitly defined initial graph ---\texttt{DMS}, \texttt{SAN}, \texttt{KA}--- we use the
 initialization method used for \texttt{ARW}, described in~\Cref{sub:Model Fitting}. Second, we extend
 models that use constant node outdegree $m$, by increasing outdegree over time $m(t)$,
 using the method described in~\Cref{sub:Model Fitting}. Third, we adjust models that generate undirected networks to
-create directed edges and generate directed networks (TODO). Fitting (TODO)
+create directed edges and generate directed networks \harshay{TODO: parameter fitting of baselines, undirected to directed
+explain better}
 
 \textit{Evaluation}.
-% TODO: weighted relative error explain
 We evaluate the network model fit by comparing four key global network properties of ${G}$ and $\hat{G}$:
 degree distribution, local clustering distribution, degree-clustering relationship
 and attribute assortativity. We use the Kolmogorov-Smirnov (\texttt{KS}) statistic to compare the univariate degree
@@ -99,7 +130,7 @@ and attribute assortativity. We use the Kolmogorov-Smirnov (\texttt{KS}) statist
 Weighted Relative Error (\texttt{WRE}). The evaluation metric \texttt{WRE} aggregates the relative error
 between the average local clustering $c(k)$ and $\hat{c}(k)$ of nodes  with in-degree $k$
 in $G$ and $\hat{G}$ respectively; The weight of each relative error term equals the fraction
-of nodes with in-degree $k$ in $G$.
+of nodes with in-degree $k$ in $G$. \harshay{explain WRE?}
 
 Jointly preserving multiple structural properties is a multi-objective optimization
 problem; Model parameters that accurately preserve the degree distribution
@@ -187,8 +218,6 @@ In \texttt{SK} and \texttt{HZ}, nodes perform a single random walk and link to
 each visited node with some probability $\mu$, which indirectly
 controls the effect on triadic closure. This leads to some improvement over \texttt{FF} in preserving local
 clustering distribution (\Cref{fig:exp_table}B) and in-degree-clustering relationship (\Cref{fig:exp_table}).
-% However, the improvements are not substantial when compared to the performance
-% of our model \texttt{ARW}.
 
 \textbf{Attributed Random Walk model}: The results in~\Cref{fig:exp_table} clearly indicate the effectiveness
 of the proposed model \texttt{ARW} in {jointly} preserving multiple
@@ -204,8 +233,8 @@ The attribute parameter $p_a$ can be tuned to match the attribute assortativity
 coefficient of attributed network datasets up to arbitrary precision.
 Barring one to two datasets, \texttt{ARW} preserves all three properties significantly
 better ($\alpha < 0.001$) than existing random walk models.
-% ~\Cref{fig:barplot} shows that \texttt{ARW} improves upon the average $\ell^2$-norm
-% of the second best performing model \texttt{SAN} by a margin of approximately 2.5x.
+~\Cref{fig:barplot} shows that \texttt{ARW} improves upon the average $\ell^2$-norm
+of the second best performing model \texttt{SAN} by a margin of approximately 2.5x.
 \begin{figure}
 	\centering
 	\vspace{-6pt}
@@ -218,17 +247,17 @@ better ($\alpha < 0.001$) than existing random walk models.
 	\vspace{-8pt}
 	\label{fig:barplot}
 \end{figure}
-\Cref{fig:barplot} illustrates the performance of network models in jointly
-modeling degree distribution, local clustering distribution and in-degree-clustering
-relationship. Preferential attachment models \texttt{KA}, \texttt{DMS} and
-\texttt{RL} perform poorly because they do not preserve clustering. \texttt{HK}
-and \texttt{SAN} perform better than \texttt{KA}, \texttt{DMS} and
-\texttt{RL} because of edge formation mechanisms that close triangles
-to preserve clustering and its relationship with degree to some extent. The proposed
-model \texttt{ARW} outperforms existing random walk models \texttt{HZ}, \texttt{SK}
-and \texttt{FF} by a considerable margin. Also,
-\texttt{ARW} significantly improves upon the average $\ell^2$-norm of the second best performing model,
-\texttt{SAN} by a margin of 2.5x
+% \Cref{fig:barplot} illustrates the performance of network models in jointly
+% modeling degree distribution, local clustering distribution and in-degree-clustering
+% relationship. Preferential attachment models \texttt{KA}, \texttt{DMS} and
+% \texttt{RL} perform poorly because they do not preserve clustering. \texttt{HK}
+% and \texttt{SAN} perform better than \texttt{KA}, \texttt{DMS} and
+% \texttt{RL} because of edge formation mechanisms that close triangles
+% to preserve clustering and its relationship with degree to some extent. The proposed
+% model \texttt{ARW} outperforms existing random walk models \texttt{HZ}, \texttt{SK}
+% and \texttt{FF} by a considerable margin. Also,
+% \texttt{ARW} significantly improves upon the average $\ell^2$-norm of the second best performing model,
+% \texttt{SAN} by a margin of 2.5x
 
 To summarize, \texttt{ARW} unifies multiple sociological phenomena
 into a single mechanism. As a result, it can jointly preserve key structural
@@ -236,82 +265,6 @@ properties of real-world networks.
 
 
 
-
-
-
-% \clearpage
-% \section{Modeling Local Mixing Patterns}
-% \label{subsec:LocalMixing}
-%
-
-
-%
-% % The distribution $w_i$ reweighs edges between similar nodes
-% % based on how local they are to node $i$. Peel et al. \cite{peel2018multiscale} prescribe a
-% % personalized pagerank weight distribution, which is prohibitively expensive to compute for
-% % all nodes in large graphs; Large network datasets necessitate efficient weighting schemes.
-% % Therefore, we define $w_i$ as a uniform distribution
-% % over $N(i)$, the set of nodes that are at most 1 hop away from node $i$.
-%
-% % reintroduce only if there is room.
-% % More formally, the local assortativity coefficient $r_l(i)$ of node $i$, with outdegree $m(i)$ and
-% % attribute value $b(i)$ is defined as follows:
-% % \vspace{-1mm}
-% % \begin{align*}
-% % 	\scriptsize r_l(i) = \frac{\overbrace{\frac{1}{|N(i)|}\sum\limits_{j \in N(i)}^{m(j) > 0} \sum_{k \in V} \frac{\mathcal{I}\{(j,k) \in E \wedge b(j)=b(k)\}}{m(i)} }^{\texttt{obs}}-\overbrace{\sum_{b \in B} e_{b}\cdot e_{b}}^{\texttt{rnd}}}{\underbrace{1}_{\max(\texttt{obs})}-\underbrace{\sum_{b \in B} e_{b} \cdot e_{b}}_\texttt{rnd}}
-% % \end{align*}
-% % Intuitively, $r_l(i)$ compares the observed fraction of edges between similar nodes
-% % in the local neighborhood of node $i$ (\texttt{obs}) to the expected fraction
-% % if the edges are randomly rewired (\texttt{rnd}).
-%
-% The local assortativity distributions
-% of \texttt{ACL}, \texttt{APS} and \texttt{Patents} reveal anomalous, skewed
-% and heterophilic local mixing patterns that are not easily inferred via the global assortativity,
-% as shown in \cref{fig:local_atty}.
-% \begin{figure}
-% 	\centering
-% 	\includegraphics[width=\linewidth]{local_atty_dist}
-% 	\caption{Local attribute mixing patterns of homophilic networks \texttt{ACL}, \texttt{APS}
-% 		and \texttt{Patents} reveal anomalous, skewed and even heterophilic local mixing patterns.
-% 		\texttt{ARW} preserves the observed local assortativity distributions with high accuracy,
-% 	but does not account for nodes with extreme heterophilic or homophilic preferences.}
-% 	\label{fig:local_atty}
-% \end{figure}
-% \texttt{ARW} can preserve
-% diverse local assortativity distributions with high accuracy even though nodes
-% share the same attribute preference parameter $p_a$. This is because  \texttt{ARW}
-% incorporates multiple sources of stochasticity through its edge formation
-% mechanism. As a result, incoming nodes with fixed homophilic preferences can end
-% up having variable local assortativity by (a) selecting a seed node in a region
-% with too few (or too many) similar nodes or (b) exhausting all its links before
-% visiting similar (or dissimilar) nodes.
-% \texttt{ARW} is not expressive enough to accurately model anomalous
-% mixing patterns. Mechanisms such as sampling $p_a$ from a mixture of
-% Bernoulli distributions are necessary to account for anomalous mixing patterns.
-
-% The local assortativity coefficient $r_l(i)$ of node $i$,
-% with outdegree $k(i)$ and attribute value $b(i)$, uses a distribution $w_i$ to
-% reweigh edges based on how local they are to node $i$:
-% \begin{equation*}
-%     r_l(i) = \frac{\sum\limits_{b \in B} e_{bb}(i) - \sum\limits_{b \in B} e_{b.}e_{.b}}{1 - \sum\limits_{b \in B} e_{b.}e_{.b}}
-% \end{equation*}
-
-
-%
-% Unlike global assortativity, local assortativity coefficient of node $i$,
-% $r_l(i)$, compares the mixing patterns in node $i$'s locality to the expected
-% mixing pattern if the edges were randomly rewired.
-% Given a directed network $G=(V,E)$ with adjacency matrix $A$ and attribute
-% values $B=\{b_1...b_m\}$, the local assortativity coefficient $r_l$ of node $i$
-% with outdegree $k_i$ is defined as follows:
-%
-
-% can generate network
-% with tunable local clustering distribution and in-degree-clustering relationship
-% controls the effect of triadic closure using the jump parameter $p_j$ and link parameter
-% $\alpha$. $p_j$ effectively incorporates structural constraints that limit the extent to
-% which nodes explore the network whereas $\alpha$ indirectly controls the effect of
-% triadic closure on edge formation.
 
 % \subsection{Parameter space of \textsc{RW} model}
 %
