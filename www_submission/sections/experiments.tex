@@ -36,7 +36,7 @@
 	\label{fig:exp_table}
 \end{figure*}
 
-\section{Experiments}
+\section{Modeling Network Structure}
 \label{sec:Experiments}
 In this section, we evaluate the effectiveness of \texttt{ARW} in preserving
 structural properties of network datasets described in~\Cref{sec:Datasets}.
@@ -48,8 +48,8 @@ relative to eight state-of-the-art growth models.
 \label{sub:Experimental Setup}
 
 % We first briefly summarize the existing models used in the experiments.
-In this subsection, we describe the evaluation metrics used to quantify the extent to
-which the following growth models preserve global structural properties of real-world networks.
+In this subsection, we describe the state-of-the-art, representative growth models
+and evaluation metrics used to fit these growth models to network datasets.
 
 \textit{State-of-the-art Growth Models}. We compare \texttt{ARW} to eight state-of-the-art
 growth models representative of the key edge formation
@@ -58,34 +58,44 @@ Two of the eight models account for attribute homophily and preserve attribute m
 as listed below:
 \begin{enumerate}
 	\item{\textbf{Dorogovtsev-Mendes-Samukhin model}} \cite{dorogovtsev2000structure}  (\texttt{DMS})
-	is a preferential attachment model in which the probability of linking to a node is proportional
-	to the sum of its in-degree and ``initial attractiveness.''
+	is a preferential attachment model that generates directed scale-free graphs. In this model,
+	the probability of linking to a node is proportional to the sum of its in-degree and ``initial attractiveness.''
+
+	\item{\textbf{Relay Linking model}} \cite{singh2017relay} (\texttt{RL}) propose a set of
+	preferential attachment models for directed networks, which use relay linking to explain the change in
+	node popularity over time. We use the iterated preferential relay-cite (IPRC) variant, which best fits
+	real-world network properties.
 
 	\item{\textbf{Kim-Altmann model}} \cite{kim2017effect} (\texttt{KA}) is a fitness-based model that defines
 	fitness as the product of degree and attribute similarity. It can generate \textit{attributed} networks
 	with assortative mixing and heavy tailed degree distribution.
-
-	\item{\textbf{Relay Linking model}} \cite{singh2017relay} (\texttt{RL}) propose a set of
-	preferential attachment models that use relay linking to explain the change in node popularity over time.
-	We use the iterated preferential relay-cite (IPRC) variant, which best fits real-world network properties.
+	To generate directed networks, we modify \texttt{KA} to form directed edges to nodes in proportion to their in-degree.
 
 	\item{\textbf{Holme-Kim model}} \cite{holme2002growing} (\texttt{HK}) is a preferential attachment model
-	which uses a triangle-closing mechanism to generate scale-free, clustered networks.
+	that generates scale-free, clustered, undirected networks using an additional triangle-closing mechanism.
+	We modify the model to create directed edges and thereby generate directed networks.
+	To generate directed networks, we modify \texttt{HK} to form directed edges to nodes in proportion to their in-degree
+	and close triangles in their undirected 1-hop neighborhood.
+
 
 	\item{\textbf{Social Attribute Network model}} \cite{gong2012evolution} (\texttt{SAN}) generates
 	scale-free, attributed networks with high clustering using attribute-augmented
 	preferential attachment and triangle closing mechanisms.
-	% We modify the model to create directed edges and thereby generate directed networks.
+	We modify the model to create directed edges and thereby generate directed networks. We also note that
+	the edge formation mechanism in \texttt{SAN} considerably simplifies for bibliographic network datasets,
+	wherein all edges are formed at once.
 
-	\item{\textbf{Herera-Zufiria model}} \cite{saramaki2004scale} (\texttt{SK})  is a random walk model
-	that tunes the length of random walks to generate clustered networks with power law degree distributions.
+	\item{\textbf{Herera-Zufiria model}} \cite{saramaki2004scale} (\texttt{SK})
+	is a random walk model that generates scale-free, undirected networks with tunable average clustering.
+	In order to generate directed networks, we allow the random walk mechanism in \texttt{SK} to traverse edges in any direction.
 
 	\item{\textbf{Saramaki-Kaski}} \cite{herrera2011generating} (\texttt{HZ}) is a random walk model
-	that generates scale-free networks with tunable average local clustering.
+	that generates scale-free networks with tunable average local clustering. To generate directed networks,
+	we modify \texttt{HZ} to allow its random walk mechanism to traverse edges in any direction.
 
 	\item{\textbf{Forest Fire model}} \cite{leskovec2005graphs} (\texttt{FF}) is a recursive random walk model
-	that preserves decreasing diameter over time, heavy-tailed degree distribution
-	and high clustering.
+	that can generate directed networks with properties such ash shrinking diameter over time,
+	heavy-tailed degree distributions and high clustering.
 \end{enumerate}
 
 % in~\Cref{table:models}.
@@ -115,31 +125,32 @@ as listed below:
 % \end{table}
 
 \textit{Ensuring Fair Comparison}. To ensure fair comparison, we modify existing models in three ways.
-First, for models that do not have an explicitly defined initial graph ---\texttt{DMS}, \texttt{SAN}, \texttt{KA}--- we use the
-initialization method used for \texttt{ARW}, described in~\Cref{sub:Model Fitting}. Second, we extend
-models that use constant node outdegree $m$, by increasing outdegree over time $m(t)$,
-using the method described in~\Cref{sub:Model Fitting}. Third, we adjust models that generate undirected networks to
-create directed edges and generate directed networks \harshay{TODO: parameter fitting of baselines, undirected to directed
-explain better}
+First, for \texttt{DMS}, \texttt{SAN}, \texttt{KA}, which do not have an explicitly defined initial graph,
+we use the initialization method used for \texttt{ARW}, described in~\Cref{sub:Model Fitting}. Second, we extend
+models that use constant node outdegree $m$ by increasing outdegree over time $m(t)$
+using the method described in~\Cref{sub:Model Fitting}. In the absence of model-specific parameter estimation methods,
+we use a grid search method to estimate the parameters of every network model, including \texttt{ARW},
+using evaluation metrics and selection criterion described below.
 
-\textit{Evaluation}.
+\textit{Evaluation Metrics}.
 We evaluate the network model fit by comparing four key global network properties of ${G}$ and $\hat{G}$:
 degree distribution, local clustering distribution, degree-clustering relationship
 and attribute assortativity. We use the Kolmogorov-Smirnov (\texttt{KS}) statistic to compare the univariate degree
 \& local clustering distributions. We compare the bivariate degree-clustering relationship in $G$ and $\hat{G}$ using
-Weighted Relative Error (\texttt{WRE}). The evaluation metric \texttt{WRE} aggregates the relative error
-between the average local clustering $c(k)$ and $\hat{c}(k)$ of nodes  with in-degree $k$
-in $G$ and $\hat{G}$ respectively; The weight of each relative error term equals the fraction
-of nodes with in-degree $k$ in $G$.
+Weighted Relative Error (\texttt{WRE}), which aggregates the relative error
+between the average local clustering $c(k)$ and $\hat{c}(k)$ of nodes with in-degree $k$
+in $G$ and $\hat{G}$ respectively; The relative error between $c(k)$ and $\hat{c}(k)$
+is weighted in proportion to the number of nodes with in-degree $k$ in $G$.
 
 Jointly preserving multiple structural properties is a multi-objective optimization
-problem; Model parameters that accurately preserve the degree distribution
+problem; model parameters that accurately preserve the degree distribution
 (i.e. low \texttt{KS} statistic) may not preserve the clustering distribution.
-Therefore, for each model, we use grid search to select the model parameters
-that minimizes the $\ell^2$-norm of the evaluation metrics.
-We note that the sensitivity of the Forest Fire model requires a manually guided grid search method.
+Therefore, for each model, the selection criterion for the grid search parameter estimation method
+chooses the model parameters that minimizes the $\ell^2$-norm of the aforementioned evaluation metrics.
 Since the metrics have different scales, we normalize the metrics before computing the $\ell^2$-norm
 to prevent unwanted bias towards any particular metric.
+We note that the parameter sensitivity of the Forest Fire (\texttt{FF}) model necessitates
+a manually guided grid search method.
 
 \subsection{Results}
 \label{sub:Experimental Results}
