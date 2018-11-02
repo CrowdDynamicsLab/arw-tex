@@ -22,6 +22,7 @@ for all nodes in large graphs.
 We define $w_i$ as a uniform distribution over $N_1(i)$, the set of nodes that
 are at most 1 hop away from node $i$ to allow for a highly efficient
 local assortativity calculation.
+% EQUATION START
 More formally, the local assortativity coefficient $r_l(i)$ of node $i$, with outdegree $m(i)$ and
 attribute value $b(i)$ is defined as follows:
 \begin{align*}
@@ -30,6 +31,7 @@ attribute value $b(i)$ is defined as follows:
 Intuitively, $r_l(i)$ compares the observed fraction of edges between similar nodes
 in the local neighborhood of node $i$ (\texttt{observed}) to the expected fraction
 if the edges are randomly rewired (\texttt{random}).
+% EQUATION END
 
 As shown in~\Cref{fig:local_atty}, local assortativity distributions
 of \texttt{ACL}, \texttt{APS} and \texttt{Patents} reveal anomalous, skewed
@@ -46,7 +48,7 @@ and heterophilic local mixing patterns that are not inferred via global assortat
 \end{figure}
 Our model \texttt{ARW} can preserve
 diverse local assortativity distributions with high accuracy even though nodes
-share the same attribute preference parameter $p_a$. This is because, in addition
+share the same attribute parameters $\psame$ and $\pdiff$. This is because, in addition
 to sampling attributes conditioned on time, \texttt{ARW}
 incorporates multiple sources of stochasticity through its edge formation
 mechanism. As a result, incoming nodes with fixed homophilic preferences can position
@@ -54,5 +56,5 @@ themselves in neighborhoods with variable local assortativity by (a) selecting a
 with too few (or too many) similar nodes or (b) exhausting all its links before
 visiting similar (or dissimilar) nodes.
 We note that \texttt{ARW} is not expressive enough to model anomalous
-mixing patterns; mechanisms such as sampling $p_a$ from a mixture of
-Bernoullis are necessary to account for anomalous mixing patterns.
+mixing patterns; richer mechanisms such as sampling $\psame$ or $\pdiff$
+from a mixture of Bernoullis are necessary to account for anomalous mixing patterns.

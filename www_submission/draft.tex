@@ -10,6 +10,7 @@
 \graphicspath{{data/}}
 \frenchspacing % controls the space after the period
 \usepackage{pdfpages}
+\usepackage{nicefrac}
 \usepackage{blindtext}
 \usepackage{tabularx}
 \usepackage{caption}
@@ -48,6 +49,12 @@
   \raisebox{2pt}{\colorbox{darkgray}{#1}}
   \endgroup
 }
+
+\newcommand{\psame}{p_{\scriptsize\mbox{same}}}
+\newcommand{\pdiff}{p_{\scriptsize\mbox{diff}}}
+\newcommand{\pjump}{p_{\scriptsize\mbox{jump}}}
+\newcommand{\pout}{p_{\scriptsize\mbox{out}}}
+\newcommand{\plink}{p_{\scriptsize\mbox{link}}}
 
 \crefname{subsection}{subsection}{subsections}
 
