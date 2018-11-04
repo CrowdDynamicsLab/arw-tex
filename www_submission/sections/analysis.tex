@@ -83,20 +83,23 @@ structure.
 Real-world networks tend to exhibit heavy tailed degree distributions.
 These distributions can emerge from the well-known preferential attachment
 process~\cite{simon1955class,barabasi1999emergence}, where incoming nodes
-connect with nodes in proportion to their degree. Over time, preferential
-attachment amplifies initial differences in node degree, giving rise to heavy tailed
-distributions.
+connect with nodes in proportion to their degree.
+% Over time, preferential
+% attachment amplifies initial differences in node degree, giving rise to heavy tailed
+% distributions.
 % (also known as the ``rich get richer'' effect) in citation networks; It also implies that most papers receive zero or a few
 % citations, but a small but significant percent of the nodes turn into popular
 % hubs that receive many citations.
 Log-normal fits, with parameters listed in~\Cref{table:netstats}, well describe
 the in-degree distribution of all network datasets, consistent Broido and
-Clauset's~\cite{broido2018scale} observation that real-world networks with truly
-power law degree distributions are rare.
+Clauset's~\cite{broido2018scale} observation that scale-free, real-world networks
+are rare
+% with truly
+% power law degree distributions are rare.
 % Our model explains the emergence of heavy tailed in-degree distributions through a
 % \textit{local} process that adjusts bias towards linking to well-connected nodes
 
-\begin{figure}[H]
+\begin{figure}[b]
  \vspace{-10pt}
  \centering
  \includegraphics[width=\columnwidth]{clustering}
@@ -143,8 +146,10 @@ and high in-degree nodes tend have large, star-shaped neighborhoods.
 Attributed networks tend to exhibit homophily~\cite{mcpherson2001birds}, the
 phenomenon where similar nodes are more likely to be connected than dissimilar
 nodes. The assortativity coefficient ~\cite{newman2002assortative} $r \in [-1,
-1]$, quantifies the level of homophily in an attributed network and indicates
-the extent to which attribute similarity influences edge formation. Intuitively,
+1]$, quantifies the level of homophily in an attributed network.
+%  and indicates
+% the extent to which attribute similarity influences edge formation.
+Intuitively,
 assortativity compares the observed fraction of edges between nodes with the same attribute
 value to the expected fraction of edges between nodes with same attribute value
 if the edges were rewired randomly. In~\Cref{fig:mixing}, we show that
@@ -200,17 +205,19 @@ how individuals form edges in real-world networks.
 
 \textbf{Interplay of Triadic Closure and Homophily:}
 Empirical studies~\cite{35626,block2014multidimensional} that investigate the
-interplay between triadic closure and homophily in evolving networks indicate
+interplay between triadic closure and homophily
+ % in evolving networks
+  indicate
 that \textit{both} structural proximity and homophily are statistically
-significant factors that simultaneously influence edge formation. While
-homophilic preferences~\cite{mcpherson2001birds} induce edges between similar
-nodes, structural factors (e.g., network distance) act as constraints that
-restrict edge formation to structurally proximate nodes (e.g. friend of a
+significant factors that simultaneously influence edge formation.
+Homophilic preferences~\cite{mcpherson2001birds} induce edges between similar
+nodes, whereas structural factors such as network distance limit
+edge formation to structurally proximate nodes (e.g. friend of a
 friend).
 
 \textbf{Bounded Rationality:}
 Extensive work~\cite{simon1972theories,gigerenzer1996reasoning,lipman1995information} on
-individual decision making indicates that individuals are boundedly rational
+decision making shows that individuals are boundedly rational
 actors; constraints such as limited information, cognitive capacity and time impact decision making.
 This suggests that resource-constrained individuals that join networks are likely to employ simple rules
 to form edges using limited information and partial network access.
@@ -218,41 +225,68 @@ to form edges using limited information and partial network access.
 % papers without knowledge of, or access to, the entire literature in her field.
 
 Current preferential attachment and fitness-based models
-\cite{dorogovtsev2000structure,kim2017effect,singh2017relay,barabasi1999emergence}
-make two assumptions that are at variance with these findings in the Social
-Sciences. First, by assuming that successive edge formations are independent,
+\cite{dorogovtsev2000structure,singh2017relay,barabasi1999emergence}
+make two assumptions that are at variance with these findings.
+First, by assuming that successive edge formations are independent,
 these models disregard the effect of triadic closure and structural proximity.
 Second, these models implicitly require incoming nodes to have complete network
 access (e.g., be able to connect to any node) or explicit knowledge of one or
-more properties (e.g., fitness, degree) of every node in the network. For
+more properties (e.g., fitness, degree) of every node. For
 example, a preferential attachment model, by making connections in proportion to
 degree, requires non-local information: the degree distribution of the entire
 network.
 
-\subsection{Locality-biased Edge Formation}
+To summarize, insights from sociological studies indicate that edge formation in real-world
+networks comprises biases towards nodes that are similar, well-connected or
+structurally proximate. Next, we analyze the role of structural proximity in edge
+formation.
 
-\begin{figure}[H]
- \vspace{-15pt}
+\subsection{Proximity-biased Edge Formation}
+
+We investigate the effect of structural proximity on edge formation in real-world networks.
+Although sociological studies \cite{35626} show that the probability of edge formation tends to decrease as a function of network distance,
+little is known about the structural proximity among an incoming node's connections before the incoming node forms edges.
+As shown in~\Cref{fig:locality}, high structural proximity between an incoming (blue) node's (red) connections in the \texttt{Hep-PH} dataset
+hints at edge formation processes biased towards nodes in the same local neighborhood.
+\begin{figure}[b]
+ \vspace{-4pt}
  \centering
- \includegraphics[width=\columnwidth]{locality_v2}
+ \includegraphics[width=\columnwidth]{locality_v3}
  \caption{
-    Locality-biased edge formation in real-world networks.
+    Proximity-biased edge formation. The diagram and proximity distributions collectively
+    indicate how edge formation in real-world networks are biased towards
+    structurally proximate nodes in the same locality.
  }
  \label{fig:locality}
- % \vspace{-10pt}
+ \vspace{-10pt}
 \end{figure}
 
+Due to the unavailability of navigational data such as the sequence in which
+individuals form edges, we rely on coarser temporal data---network snapshots and
+node arrival sequence---to estimate structural proximity between nodes'
+connections. Consider an incoming node $u$ that forms edges to nodes in $N(u)$.
+To measure the proximity between node $u$'s connections, we compute the average
+pairwise shortest path distance between the connections in the network snapshot
+immediately preceding node $u$'s arrival.
 
-To summarize, empirical analyses and insights from the Social Sciences suggest that individuals form
-edges under constraints of limited information and global network access.
-Moreover, resource-constrained edge formation, which tend to be biased towards
-nodes that are similar, proximate or well-connected, cumulatively modulates global
-properties of real-world networks.
+The second subplot in~\Cref{fig:locality} compares the proximity statistic
+distribution of the \texttt{Hep-PH} dataset to uniform and configuration null
+models, which randomly rewire all edges in \texttt{Hep-PH} while preserving the
+out-degree distribution and both degree distributions respectively. Although the
+presence of hubs in the configuration null model significantly decreases
+pairwise distance between nodes' connections, it does not explain why a large
+fraction of \texttt{Hep-PH} connections are either connected directly or via an
+intermediate node. The disparity between the observed and null distributions
+suggests that structural proximity between connections is intrinsic to edge
+formation in real-world networks.
 
 
-Next, we propose a growth model that explains how local processes of
-edge formation can lead to the emergence of global structural and
-attribute properties observed in real-world networks.
+To summarize, empirical analyses and insights from the Social Sciences motivate
+the need to model how resource-constrained edge formation processes collectively
+shape well-defined global network properties of large-scale networks over time.
+% Next, we propose a growth model that explains how local processes of
+% edge formation can lead to the emergence of key global structural and
+% attribute properties observed in real-world networks.
 
 
 

@@ -61,16 +61,16 @@ existing nodes.
 
 The edge formation mechanism consists of two components: \textsc{Select-Seed} and
 \textsc{Random-Walk}. As shown in~\Cref{fig:randomwalk}, an incoming node $u$ with attribute value $B(u)$ that joins the
-network at time $t$ first selects a seed node $S(u)$ using \textsc{Select-Seed}:
+network at time $t$ first selects a seed node using \textsc{Select-Seed}:
 \\\\
 \tikzstyle{background rectangle}=[thin,draw=black]
 \begin{tikzpicture}[show background rectangle]
 	\node[align=left, text width=.93\linewidth, inner sep=.5em]{
-		(1) With probability $\nicefrac{\psame}{\psame+\pdiff}$, randomly select $S(u)$
-		from the set of existing nodes that have the same attribute value, $B(u)$.
+		(1) With probability $\nicefrac{\psame}{\psame+\pdiff}$, randomly select a seed node
+		from existing nodes that have the same attribute value, $B(u)$.
 
 		\vspace{1mm}
-		(2) Otherwise, with probability $\nicefrac{\pdiff}{\psame+\pdiff}$, randomly select $S(u)$ from the set of existing nodes that
+		(2) Otherwise, with probability $\nicefrac{\pdiff}{\psame+\pdiff}$, randomly select a seed node from existing nodes that
 		do \textit{not} have the same attribute value, $B(u)$.
 	};
 	\node[xshift=3ex, yshift=-.7ex, overlay, fill=white, draw=white, above
@@ -85,7 +85,7 @@ network at time $t$ first selects a seed node $S(u)$ using \textsc{Select-Seed}:
 \textsc{Select-Seed} accounts for homophilic preferences of incoming nodes using
 parameters $\psame$ and $\pdiff$, which incorporates attribute preferences of incoming nodes.
 As shown in~\Cref{fig:randomwalk}, after selecting
-the seed $S(u)$, node $u$ initiates a
+the seed node, $u$ initiates a
 random walk using \textsc{Random-Walk} to form $m(t)$ links.
 The \textsc{Random-Walk} mechanism consists of four parameters: attribute-based parameters
 $\psame$ \& $\pdiff$ model edge formation decisions and the jump parameter $\pjump$ \&
@@ -118,28 +118,33 @@ out-link parameter $\pout$ characterize random walk traversals:
 \end{tikzpicture}
 
 When attribute data is absent, \texttt{ARW} simplifies further, as
-a single link parameter $\plink$ replaces both attribute-informed parameters $\psame$ \& $\pdiff$.
-\textsc{Select-Seed} reduces to uniform seed node selection, whereas in
-\textsc{Random-Walk}, the probability of linking to visited nodes simply equals $\plink$.
+a single link parameter $\plink$ replaces both attribute parameters $\psame$ \& $\pdiff$.
+\textsc{Select-Seed} reduces to uniform seed selection and in
+\textsc{Random-Walk}, the probability of linking to visited nodes equals $\plink$.
 %  \textsc{Select-Seed} simplifies to selecting an existing
 % node uniformly at random and \textsc{Random-walk} simplifies to selecting an existing
 % node uniformly at random.\texttt{ARW} only requires a single link
 % parameter $\plink$, instead of both $\psame$ \& $\pdiff$. Additionally,
 
 
-Notice that \texttt{ARW} has two exogenous parameters: the average out-degree
-$m(t)$ and attribute $B(u)$ of the node joining the network. The parameter
-$m(t)$ is similar to the parameter $m$ in the classic Preferential-Attachment
-model~\cite{barabasi1999emergence}, except that $m(t)$ is the mean-field value
-of out-degree $m$ at time $t$ in the observed network. While it is straightforward to model $m(t)$
-endogenously by incorporating a densification power-law \texttt{DPL} exponent
-to \texttt{ARW}, we decided against it, since exogenous factors may
-also explain changes to $m(t)$. For example, conference venue and paper topic can
-influence the number of citations in a paper. Moreover, our analysis indicates
-that papers that join networks earlier tend to have fewer citations on average,
-perhaps explained by availability of {fewer} papers to cite. The attribute distribution
-$B(u)$ varies with time as new journals or venues crop up, necessitating an exogenous
-parameter.
+Note that \texttt{ARW} has two exogenous parameters: the out-degree
+$m(t)$ and attribute $B(u)$ of incoming nodes.
+The attribute distribution varies with time as new attribute values (e.g., journals) crop up, necessitating an exogenous
+parameter. The parameter $m(t)$ is the mean-field value
+of out-degree $m$ at time $t$ in the observed network.
+While it is straightforward to model $m(t)$
+endogenously by incorporating a densification power-law \texttt{DPL} exponent,
+exogenous factors (e.g., venue, topic) may influence node out-degree.
+%  similar to the parameter $m$ in the classic Preferential-Attachment
+% model~\cite{barabasi1999emergence}, except that $m(t)$ is the mean-field value
+% of out-degree $m$ at time $t$ in the observed network.
+% While it is straightforward to model $m(t)$
+% endogenously by incorporating a densification power-law \texttt{DPL} exponent
+% to \texttt{ARW}, we decided against it, since exogenous factors may
+% also explain changes to $m(t)$. For example, conference venue and paper topic can
+% influence the number of citations in a paper. Moreover, our analysis indicates
+% that papers that join networks earlier tend to have fewer citations on average,
+% perhaps explained by availability of {fewer} papers to cite.
 
 Next, we explain how each parameter is necessary to conform to normative
 behavior of individuals in evolving networks.
@@ -166,11 +171,11 @@ into its edge formation mechanisms.
 	(Limited Resources) Individuals are boundedly rational~\cite{simon1972theories,gigerenzer1996reasoning,lipman1995information}
 	actors that form edges under constraints of limited information, partial network access and finite cognitive capacity.
 \end{ph}
-\texttt{ARW} uses a random walk to incorporate constraints of limited information
+\texttt{ARW} uses random walk traversals to incorporate constraints of limited information
 and partial network access. A new node $u$ selects a seed node from which it
 initiates a biased random walk. Then, $u$ uses simple rules to connect to each visited
 nodes probabilistically and halts the walk after forming $m(t)$ edges, as shown in~\Cref{fig:randomwalk}. Random walks require information only about the
-1-hop neighborhood of visited nodes, thus accounting for  the constraints of limited information and partial network access.
+1-hop neighborhood of visited nodes, thereby accounting for  the constraints of limited information and partial network access.
 
 \begin{ph}
 	(Structural Constraints) Structural factors such as network distance
@@ -180,28 +185,27 @@ nodes probabilistically and halts the walk after forming $m(t)$ edges, as shown 
 We incorporate structural constraints into \texttt{ARW} using $\pjump$, the probability with
 which a new node jumps back to its seed node after each step of the random walk. This implies
 that the probability with which the new node is at most $k$ steps from its seed node is $(1-\pjump)^k$;
-as a result, the jump parameter $\pjump$ controls the extent to which new nodes' random walks
-explore the network to form edges.
+as a result, $\pjump$ controls the extent to which nodes' random walks explore the network to form edges.
 
 \begin{ph}
 	(Triadic Closure) Nodes with common neighbors have an
 	increased likelihood of forming a connection. \cite{simmel1950sociology}
 \end{ph}
 
-When attribute data is absent, \texttt{ARW} controls the
-the effect of triadic closure on link formation using $\plink$.
-A new node $u$ closes a triad through its random walk traversal by linking to a visited node
-and its neighbor with probability proportional to $\plink^2$.
+When attribute data is absent, \texttt{ARW} controls
+the effect of triadic closure on link formation using $\plink$ since
+a new node $u$ closes a triad through its random walk by linking to both, a visited node
+and its neighbor, with probability proportional to $\plink^2$.
 Similarly, in attributed networks, the probability of triad completion equals $pq$,
-where $p$ and $q$ can equal $\psame$ or $\pdiff$, depending on the attribute values of the
-incoming node and the visited nodes.
+where $p$ and $q$ can equal $\psame$ or $\pdiff$, depending on the attribute values of
+$u$ and the visited nodes.
 
 \begin{ph}
 	(Attribute Homophily) Nodes that have similar attributes are more likely
 	to form a connection. \cite{mcpherson2001birds}
 \end{ph}
-The attribute-biased link formation parameters $\psame$ and $\pdiff$ effectively control
-global attribute assortativity. When $\psame > \pdiff$, nodes are more likely to connect if they share
+The attribute-biased link formation parameters $\psame$ and $\pdiff$ modulate
+attribute assortativity. When $\psame > \pdiff$, nodes are more likely to connect if they share
 the same attribute value, thereby resulting in a homophilic network over time. Similarly,
 $\psame < \pdiff$ and $\psame=\pdiff$ make edge formation heterophilic and attribute agnostic respectively.
 
@@ -209,13 +213,12 @@ $\psame < \pdiff$ and $\psame=\pdiff$ make edge formation heterophilic and attri
 	(Preferential Attachment) Nodes tend to link to high degree nodes that have more
 	visibility. \cite{barabasi1999emergence}
 \end{ph}
-\texttt{ARW} does not rely on global degree distribution. In absence of this
-global information, \texttt{ARW} can control the degree of preferential
-attachment by adding structural bias to the random walk traversals by varying
-the outlink probability $\pout$. Random walks that traverse outgoing edges only
+\texttt{ARW} controls preferential attachment by adding structural bias to the
+random walk traversal using outlink parameter $\pout$, instead of relying on the
+global degree distribution. Random walks that traverse outgoing edges only
 (i.e., $\pout =1$) eventually visit old nodes that tend to have high in-degree.
 Similarly, random walks that traverse incoming edges only (i.e., $\pout=0$) visit
-recently joined nodes that tend to have low indegree. We use
+recently joined nodes that tend to have low indegree. As a result, we use
 $\pout$ to adjust the effect of preferential attachment on edge formation.
 
 To summarize: \texttt{ARW} incorporates five well-known sociological
@@ -227,6 +230,33 @@ mechanism based on random walks.
 % limited information and partial network access. Furthermore, the jump parameter $p_j$, attribute parameter $p_a$,
 % rate parameter $\alpha$ and out parameter $p_o$ incorporate the effect of structural constraints,
 % homophily, triadic closure and preferential attachment respectively.
+
+\subsection{Model Interpretability}
+
+\begin{figure}
+ % \vspace{-10pt}
+ \centering
+ \includegraphics[width=\columnwidth]{inter1}
+ \caption{
+ 	The effect of $\pout$ and $\plink$ on in-degree distribution
+	and local clustering respectively.
+ }
+ \label{fig:inter1}
+ % \vspace{-10pt}
+\end{figure}
+
+
+\begin{figure}
+ % \vspace{-10pt}
+ \centering
+ \includegraphics[width=\columnwidth]{inter2}
+ \caption{
+ 	The effect of $(\psame, \pdiff)$ and $(\pjump, \pout)$ on
+	attribute assortativity and average path length respectively.
+ }
+ \label{fig:inter2}
+ % \vspace{-10pt}
+\end{figure}
 
 
 
