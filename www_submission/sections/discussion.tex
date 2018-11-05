@@ -95,21 +95,33 @@ diameter shrinkage.
 % \subsection{Connections to Vertex Copying}
 
 \subsection{\texttt{ARW} Limitations}
-We discuss three limitations of our model \texttt{ARW}. First, we  consider only citation network datasets, as nodes (i.e., papers) form
-all edges at the time of joining. This allows us to analyze edge formation in
-the absence of confounding edge processes such as edge deletion and edge
-creation between existing nodes. We plan to extend \texttt{ARW} to handle social
-networks, where individuals can form edges at any time. One potential way is to
-incorporate random walks that pause and resume intermittently, thus allowing for
-older nodes to connect with more recent arrivals.  
+We discuss three limitations of \texttt{ARW}. First, we  consider only
+bibliographic  network datasets, as nodes form all edges at the time of joining.
+This allows us to analyze edge formation in the absence of confounding edge
+processes such as edge deletion and edge creation between existing nodes. We
+plan to extend \texttt{ARW} to handle social networks, where individuals can
+form edges at any time. One potential way is to incorporate random walks that
+pause and resume intermittently, thus allowing for older nodes to connect with
+more recent arrivals.
 % Similarly, meta-path based random walks could potentially model interactions between nodes of different types in heterogeneous information networks.
 Second, the out-degree $m(t)$ of incoming nodes in \texttt{ARW} rely on the
-observed, temporal out-degree sequence that might be unavailable in network
-datasets without fine-grained temporal information. In this case, \texttt{ARW}
-can be adapted to rely on the prescribed range of densification power law
-exponent $\alpha$~\cite{leskovec2005graphs} and observed, average outdegree. We know from~\citet{leskovec2005graphs} that $e(t) \propto n(t)^\alpha$, where $e(t)$ is the number of edges at time $t$; $n(t)$ the number of nodes. Thus it follows that $m(t) \propto n(t)^{\alpha-1}; \mathrm{where}\, m(t) = \dot{e}(t)$.
-Third, \texttt{ARW} focuses on a single attribute, and does not account for multiple attributes. The difficulty of accounting for multiple attributes rests on how we define similarity. If we deem two nodes to be similar only if \textit{all} attribute values are identical across the two nodes, then \texttt{ARW} applies, by creating an attribute with cardinality equal to the product of cardinality of all attributes. If two nodes are similar in proportion to the number of shared attribute values, then we need more subtle analysis. 
+observed out-degree sequence, which might be unavailable in network
+datasets without fine-grained temporal data. In this case, \texttt{ARW}
+can be adapted to rely on the prescribed range of densification exponent $\alpha_{\tiny \mbox{DPL}}$~\cite{leskovec2005graphs}
+in real-world networks;
+since $e(t)=m(t)n(t)$, the power law relationship $e(t) \propto n(t)^{\alpha_{\tiny \mbox{DPL}}}$ between
+number of edges $e(t)$ and nodes $n(t)$ at time $t$ implies that out-degree $m(t)$ must be proportional
+to $n(t)^{\alpha_{\tiny \mbox{DPL}}-1}$.
+Third, \texttt{ARW} focuses on modeling networks in which nodes have a single attribute.
+The difficulty in incorporating multiple attributes into the edge formation mechanism rests
+on how we measure attribute similarity. If two nodes are similar only when all their
+attribute values are identical, we can simply create a new categorical attribute that encodes all
+multiple attribute combinations and then apply \texttt{ARW} directly.
+Additional analysis is necessary to identify definitions of attribute similarity that best
+describe how multiple attributes influence individuals' edge formation proceses.
 
+% if attribute similarity two nodes are similar in proportion
+% to the number of shared attribute values, then we need more subtle analysis.
 
 % does not account for mixing patterns of numerical nodal attributessuch as publication year and age; we plan to conduct additional analysis on mixing
 % patterns of numerical attributes in real-world networks to extend \texttt{ARW} in

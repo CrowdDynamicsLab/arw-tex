@@ -243,14 +243,34 @@ formation.
 
 \subsection{Proximity-biased Edge Formation}
 
-We investigate the effect of structural proximity on edge formation in real-world networks. While prior work~\cite{35626} shows that the probability of edge formation in social networks decreases as a function of network distance, explained through processes like triadic closure, there are is a key difference with directed citation networks that we study. In social networks, edge formation can take place after the nodes join, whereas in citation networks, a node forms all edges at the time of joining. This means that probability of triadic closure changes over time. If nodes do not drop out, this probability increases with time. Thus in a citation network, it is unclear if one should expect if the set of nodes $\{k \}$ that a incoming node $i$ cites should be proximate. 
+We investigate the effect of structural proximity on edge formation in
+real-world networks. While prior work~\cite{35626} shows that the probability of
+edge formation in social networks decreases as a function of network distance,
+explained through processes like triadic closure, there are is a key difference
+with directed citation networks that we study. In social networks, edge
+formation can take place after the nodes join, whereas in citation networks, a
+node forms all edges at the time of joining. This means that probability of
+triadic closure changes over time. If nodes do not drop out, this probability
+increases with time. Thus in a citation network, it is unclear if one should
+expect if the set of nodes $\{k \}$ that a incoming node $i$ cites should be
+proximate.
 
+% We investigate the effect of structural proximity on edge formation in
+% real-world networks. Although sociological studies \cite{35626} show that the
+% probability of edge formation tends to decrease as a function of network
+% distance, little is known about the structural proximity among an incoming
+% node's connections before the incoming node forms edges. As shown
+% in~\Cref{fig:locality}, high structural proximity between an incoming (blue)
+% node's (red) connections in the \texttt{Hep-PH} dataset hints at edge formation
+% processes biased towards nodes in the same local neighborhood.
 
 % little is known about the structural proximity among an incoming node's connections before the incoming node forms edges.
 % As shown in~
 
-\Cref{fig:locality} shows high structural proximity between an incoming (shown in blue) node's  connections (shown in red) in the \texttt{Hep-PH} dataset. This hints at edge formation processes biased towards nodes in the same local neighborhood.
-
+The left subplot in \Cref{fig:locality} shows high structural proximity between
+an incoming (shown in blue) node's  connections (shown in red) in the
+\texttt{Hep-PH} dataset. This hints at edge formation processes biased towards
+nodes in the same local neighborhood.
 
 \begin{figure}[!htbp]
 %  \vspace{-4pt}
@@ -263,7 +283,7 @@ We investigate the effect of structural proximity on edge formation in real-worl
 %  \vspace{-10pt}
 \end{figure}
 
-% Due to the unavailability of navigational data such as the sequence in which individuals form edges, 
+% Due to the unavailability of navigational data such as the sequence in which individuals form edges,
 
 We rely on coarser temporal data---network snapshots and
 node arrival sequence---to estimate structural proximity between nodes'
