@@ -182,7 +182,7 @@ to prevent unwanted bias towards any particular metric.
 We note that the parameter sensitivity of the Forest Fire (\texttt{FF}) model necessitates
 a manually guided grid search method.
 
-\begin{figure*}[b]
+\begin{figure*}
 	\centering
 	\makebox[\textwidth][c]{\includegraphics[width=\textwidth]{aps_fits}}
 	\caption{
@@ -266,8 +266,17 @@ to preserve local clustering in {all} datasets (see~\Cref{fig:exp_table}B \&~\Cr
 % these models cannot accurately preserve the local clustering distribution and in-degree-clustering
 % relationship observed in real networks.
 
+\textbf{Existing random walk models}: \texttt{FF}, \texttt{SK}, and \texttt{HZ}
+cannot accurately preserve structural properties of real-world network datasets.
+The recursive approach in \texttt{FF} considerably overestimates local clustering.
+because nodes perform a probabilistic breadth-first search and link to \textit{all} visited/burned
+nodes.
+\texttt{SK} and \texttt{HZ} can control local clustering to some extent, as
+nodes perform a single random walk and link to each visited node with tunable probability $\mu$.
+However, both models lack control over the in-degree distribution. Furthermore, existing random walk models
+disregard attribute homophily and do not account for attribute mixing patterns.
 
-\begin{figure}[b]
+\begin{figure}[H]
 	\caption{\texttt{ARW} outperforms
 		existing network models in jointly preserving key structural properties---in-degree
 		distribution, local clustering distribution and degree-clustering relationship---
@@ -279,16 +288,6 @@ to preserve local clustering in {all} datasets (see~\Cref{fig:exp_table}B \&~\Cr
 	% \vspace{-10pt}
 	\label{fig:barplot}
 \end{figure}
-
-\textbf{Existing random walk models}: \texttt{FF}, \texttt{SK}, and \texttt{HZ}
-cannot accurately preserve structural properties of real-world network datasets.
-The recursive approach in \texttt{FF} considerably overestimates local clustering.
-because nodes perform a probabilistic breadth-first search and link to \textit{all} visited/burned
-nodes.
-\texttt{SK} and \texttt{HZ} can control local clustering to some extent, as
-nodes perform a single random walk and link to each visited node with tunable probability $\mu$.
-However, both models lack control over the in-degree distribution. Furthermore, existing random walk models
-disregard attribute homophily and do not account for attribute mixing patterns.
 
 
 \textbf{Attributed Random Walk model}:~\Cref{fig:exp_table} clearly indicates the effectiveness
