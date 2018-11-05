@@ -22,13 +22,14 @@ edge formation mechanisms.
 
 Consider a stylized example of how a researcher might go about finding relevant
 papers to cite. First, the researcher broadly identifies one or more {relevant}
-papers, possibly with the help of external information sources (e.g. Google
+papers, possibly with the help of external information (e.g. Google
 Scholar). These initial set of papers act as seed nodes.  Then, acting under
-time and information constraints, she will examine papers that cite a seed
-paper, as well as those papers cited by the seed. Thus she navigates a chain of
-backward and forward references to identify {similar} papers relevant to
-addressing that research question in which she is interested. Next, through
-careful analysis, she will cite a subset of these papers.
+time and information constraints, she will examine papers cited by the seed and
+papers that cite the seed. Thus, she navigates a chain of
+backward and forward references to identify {similar}, relevant papers.
+Next, through careful analysis, she will cite a subset of these papers. Similarly, users in
+online social networks might form new friendships by navigating their social
+circle (e.g., friends of friends) to find similar others.
 
 \texttt{ARW} grows a directed network as new nodes join the network. The
 mechanism is motivated by the stylized example: an incoming node selects a seed
@@ -37,12 +38,14 @@ neighborhoods of existing nodes. It halts the random walk after connecting to a
 few visited nodes.
 
 In this section, we describe the edge formation mechanisms underlying
-\texttt{ARW} and explain how \texttt{ARW} provides a unified treatment of
-the observations from empirical data as well as Social Science studies. Then,
-we discuss the methods required to fit \texttt{ARW} to data.
+\texttt{ARW}, explain how \texttt{ARW} unifies multiple sociological phenomena,
+discuss model interpretability and summarize methods required to fit \texttt{ARW}
+to network data.
+% the observations from empirical data as well as Social Science studies. Then,
+% we discuss the methods required to fit \texttt{ARW} to data.
 
 
-\subsection{Model Details}
+\subsection{Model Description}
 \label{sub:Model Description}
 The Attributed Random Walk (\texttt{ARW}) model grows a directed network $\{\hat{G}_t\}^T_{t=1}$
 in $T$ time steps.
@@ -151,7 +154,6 @@ behavior of individuals in evolving networks.
 
 \subsection{\texttt{ARW} and Normative Behavior}
 \label{sub:Model Interpretation}
-
 The Attributed Random Walk model unifies multiple sociological phenomena
 into its edge formation mechanisms.
 
@@ -232,14 +234,28 @@ mechanism based on random walks.
 % homophily, triadic closure and preferential attachment respectively.
 
 \subsection{Model Interpretability}
+In addition to unifying multiple sociological phenomena, \texttt{ARW} parameters
+intuitively modulate global structural properties:
+in-degree distribution, local clustering, path length and attribute assortativity.
+
+In order to understand how global network properties vary as functions of
+\texttt{ARW} parameters, we explore the parameter space of the model.
+\texttt{ARW} uses $(\plink, \pjump, \pout)$
+and $(\psame, \pdiff, \pjump, \pout)$ to generate networks with and without attribute data. respectively.
+We use both parameterizations of the model to examine properties of structure
+and attributes.
+We analyze structural properties using the former and
+attribute assortativity using the latter.
 
 \begin{figure}
  % \vspace{-10pt}
  \centering
  \includegraphics[width=\columnwidth]{inter1}
  \caption{
- 	The effect of $\pout$ and $\plink$ on in-degree distribution
-	and local clustering respectively.
+ 	Increasing $\pout$ and $\plink$
+	raises incoming nodes' biases towards high-degree and proximate nodes
+	and subsequently leads to in-degree distributions with heavier tails
+	and neighborhoods with higher clustering.
  }
  \label{fig:inter1}
  % \vspace{-10pt}
@@ -251,8 +267,10 @@ mechanism based on random walks.
  \centering
  \includegraphics[width=\columnwidth]{inter2}
  \caption{
- 	The effect of $(\psame, \pdiff)$ and $(\pjump, \pout)$ on
-	attribute assortativity and average path length respectively.
+ 	Increasing $\psame-\pdiff$ makes edge formation more homophilic
+	and leads to higher assortativity. Decreasing $\pjump$ while increasing
+	$\pout$ leads to longer random walks towards older, higher degree nodes,
+	and subsequently shortens average path length.
  }
  \label{fig:inter2}
  % \vspace{-10pt}
