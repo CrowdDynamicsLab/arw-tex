@@ -206,7 +206,7 @@ $u$ and the visited nodes.
 	(Attribute Homophily) Nodes that have similar attributes are more likely
 	to form a connection. \cite{mcpherson2001birds}
 \end{ph}
-The attribute-biased link formation parameters $\psame$ and $\pdiff$ modulate
+The attribute parameters $\psame$ and $\pdiff$ modulate
 attribute assortativity. When $\psame > \pdiff$, nodes are more likely to connect if they share
 the same attribute value, thereby resulting in a homophilic network over time. Similarly,
 $\psame < \pdiff$ and $\psame=\pdiff$ make edge formation heterophilic and attribute agnostic respectively.
@@ -239,15 +239,13 @@ intuitively modulate global structural properties:
 in-degree distribution, local clustering, path length and attribute assortativity.
 
 In order to understand how global network properties vary as functions of
-\texttt{ARW} parameters, we explore the parameter space of the model.
-\texttt{ARW} uses $(\plink, \pjump, \pout)$
-and $(\psame, \pdiff, \pjump, \pout)$ to generate networks with and without attribute data. respectively.
-We use both parameterizations of the model to examine properties of structure
-and attributes.
-We analyze structural properties using the former and
-attribute assortativity using the latter.
+\texttt{ARW} parameters, we explore the parameter space of the model. As
+described in~\Cref{sub:Model Description}, \texttt{ARW} uses two
+parameterizations to model networks with or without attribute data. We analyze
+network structure and attribute assortativity using $(\plink, \pjump, \pout)$
+and $(\psame, \pdiff, \pjump, \pout)$ respectively.
 
-\begin{figure}
+\begin{figure}[t]
  % \vspace{-10pt}
  \centering
  \includegraphics[width=\columnwidth]{inter1}
@@ -258,11 +256,18 @@ attribute assortativity using the latter.
 	and neighborhoods with higher clustering.
  }
  \label{fig:inter1}
- % \vspace{-10pt}
+ \vspace{-10pt}
 \end{figure}
 
+\Cref{fig:inter1} illustrates how in-degree distribution and local clustering depend on $\pout$ and $\plink$ respectively.
+Increasing $\pout$ steers random walks towards older nodes that tend to have higher in-degree
+Over time, as more nodes join the network, initial differences in degree amplify, resulting in heavy-tailed distributions.
+Consequently, as shown in ~\Cref{fig:inter1}, increasing $\pout$ from $0.2$ to $0.8$ shifts the probability
+mass from average degree nodes (\texttt{B}) to hubs (\texttt{C}) and nodes with low indegree (\texttt{A}).
+Similarly, local clustering increases as a function of $\plink$, which implicitly
+controls the rate at which new nodes close triads via random walks by linking to adjacent nodes.
 
-\begin{figure}
+\begin{figure}[H]
  % \vspace{-10pt}
  \centering
  \includegraphics[width=\columnwidth]{inter2}
@@ -276,6 +281,7 @@ attribute assortativity using the latter.
  % \vspace{-10pt}
 \end{figure}
 
+\harshay{TODO: explain \Cref{fig:inter2} and conclude (2 paras)}
 
 
 \subsection{Model Fitting}
