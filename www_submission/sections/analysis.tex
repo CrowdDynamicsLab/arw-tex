@@ -243,58 +243,68 @@ formation.
 
 \subsection{Proximity-biased Edge Formation}
 
-We investigate the effect of structural proximity on edge formation in
-real-world networks. While prior work~\cite{35626} shows that the probability of
-edge formation in social networks decreases as a function of network distance,
-explained through processes like triadic closure, there are is a key difference
-with directed citation networks that we study. In social networks, edge
-formation can take place after the nodes join, whereas in citation networks, a
-node forms all edges at the time of joining. This means that probability of
-triadic closure changes over time. If nodes do not drop out, this probability
-increases with time. Thus in a citation network, it is unclear if one should
-expect if the set of nodes $\{k \}$ that a incoming node $i$ cites should be
-proximate.
+We investigate the effect of structural proximity on edge formation in real-world networks.
+Prior work~\cite{35626} shows that the probability of edge formation in social networks
+decreases as a function of network distance.
+Indeed, triadic closure explains how individuals form additional
+edges to proximate nodes (e.g. friend of friend) over time.
+However, we lack a concrete understanding of the extent to which structural
+proximity influences edge formation in bibliographic networks, wherein incoming nodes form all edges at
+the time of joining the network. In~\Cref{fig:locality}, we show high structural proximity
+among incoming (shown in blue) node's (shown in red) connections in the \texttt{Hep-PH} dataset
+hints at edge formation processes biased towards proximate nodes in the same local neighborhood.
 
-% We investigate the effect of structural proximity on edge formation in
-% real-world networks. Although sociological studies \cite{35626} show that the
-% probability of edge formation tends to decrease as a function of network
-% distance, little is known about the structural proximity among an incoming
-% node's connections before the incoming node forms edges. As shown
-% in~\Cref{fig:locality}, high structural proximity between an incoming (blue)
-% node's (red) connections in the \texttt{Hep-PH} dataset hints at edge formation
-% processes biased towards nodes in the same local neighborhood.
+% While prior work~\cite{35626} shows that the probability of
+% edge formation in social networks decreases as a function of network distance,
+% explained through processes like triadic closure, there are is a key difference
+% with directed citation networks that we study. In social networks, edge
+% formation can take place after the nodes join, whereas in citation networks, a
+% node forms all edges at the time of joining. This means that probability of
+% triadic closure changes over time. If nodes do not drop out, this probability
+% increases with time. Thus in a citation network, it is unclear if one should
+% expect if the set of nodes $\{k \}$ that a incoming node $i$ cites should be
 
-% little is known about the structural proximity among an incoming node's connections before the incoming node forms edges.
-% As shown in~
-
-The left subplot in \Cref{fig:locality} shows high structural proximity between
-an incoming (shown in blue) node's  connections (shown in red) in the
-\texttt{Hep-PH} dataset. This hints at edge formation processes biased towards
-nodes in the same local neighborhood.
+% The left subplot in \Cref{fig:locality} shows high structural proximity between
+% an incoming (shown in blue) node's  connections (shown in red) in the
+% \texttt{Hep-PH} dataset. This hints at edge formation processes biased towards
+% nodes in the same local neighborhood.
 
 \begin{figure}[!htbp]
 %  \vspace{-4pt}
  \centering
  \includegraphics[width=\columnwidth]{locality_v3}
  \caption{
-    Proximity-biased edge formation. The diagram and proximity distributions collectively indicate how edge formation in real-world networks are biased towards structurally proximate nodes in the same locality.
- }
+    Proximity-biased edge formation. The diagram and proximity distributions
+    collectively indicate how edge formation in real-world networks are biased
+    towards structurally proximate nodes in the same locality.  }
  \label{fig:locality}
-%  \vspace{-10pt}
+ \vspace{-10pt}
 \end{figure}
 
 % Due to the unavailability of navigational data such as the sequence in which individuals form edges,
 
-We rely on coarser temporal data---network snapshots and
-node arrival sequence---to estimate structural proximity between nodes'
-connections. Consider an incoming node $u$ that forms edges to nodes in $N(u)$.
+We rely on network snapshots and
+node arrival sequence to estimate a statistic based on path length that measures
+structural proximity between nodes' connections. Consider an incoming node $u$ that forms edges to nodes in $N(u)$.
 To measure the proximity between node $u$'s connections, we compute the average
 pairwise shortest path distance between the connections in the network snapshot
 immediately preceding node $u$'s arrival.
 
-The right subplot in~\Cref{fig:locality} compares the proximity statistic distribution of the \texttt{Hep-PH} dataset to two null models: uniform and configuration. In the uniform model nodes an incoming node selects nodes uniformly at random in the graph; in the configuration model,  we randomly rewire all edges in \texttt{Hep-PH} while preserving the out-degree distribution. Although the presence of hubs in the configuration null model significantly decreases pairwise distance between nodes' connections, it does not explain why a large fraction of \texttt{Hep-PH} connections are either connected directly or via an intermediate node. The disparity between the observed and null distributions suggests that structural proximity between connections is intrinsic to edge formation in real-world networks.
+The right subplot in~\Cref{fig:locality} compares the proximity statistic
+distribution of the \texttt{Hep-PH} dataset to two null models: uniform and
+configuration. In the uniform model, incoming nodes form connections to existing
+nodes uniformly at random, whereas the configuration model  randomly
+rewire all edges in \texttt{Hep-PH} while preserving the out-degree and in-degree
+distributions. We first observe that the connections of incoming nodes in the uniform
+null model are structurally distant from each other on average.
+Although the presence of hubs in the configuration model
+considerably decreases the distance between nodes' connections, it does
+not explain why the majority of connections in \texttt{Hep-PH} are either
+connected directly or via an intermediate node. The disparity between the
+observed and null distributions suggests that structural proximity between
+connections is intrinsic to edge formation in real-world networks.
 
-\hs{Summarize the main points of section 3; use one (or two maximum) lines to summarize each subsection}
+
 
 
 To summarize, empirical analyses and insights from the Social Sciences motivate
