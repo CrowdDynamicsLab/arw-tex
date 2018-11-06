@@ -100,7 +100,7 @@ are rare
 % \textit{local} process that adjusts bias towards linking to well-connected nodes
 
 \begin{figure}[b]
- \vspace{-10pt}
+ % \vspace{-10pt}
  \centering
  \includegraphics[width=\columnwidth]{clustering}
  \caption{
@@ -109,7 +109,7 @@ are rare
     relationship between in-degree and average local clustering (right subplot).
  }
  \label{fig:cc_dc}
- \vspace{-10pt}
+ % \vspace{-10pt}
 \end{figure}
 
 \textbf{High Local Clustering:}
@@ -269,7 +269,16 @@ hints at edge formation processes biased towards proximate nodes in the same loc
 % \texttt{Hep-PH} dataset. This hints at edge formation processes biased towards
 % nodes in the same local neighborhood.
 
-\begin{figure}[!htbp]
+% Due to the unavailability of navigational data such as the sequence in which individuals form edges,
+
+We rely on network snapshots and
+node arrival sequence to estimate a statistic based on path length that measures
+structural proximity between nodes' connections. Consider an incoming node $u$ that forms edges to nodes in $N(u)$.
+To measure the proximity between node $u$'s connections, we compute the average
+pairwise shortest path distance between the connections in the network snapshot
+immediately preceding node $u$'s arrival.
+
+\begin{figure}
 %  \vspace{-4pt}
  \centering
  \includegraphics[width=\columnwidth]{locality_v4}
@@ -281,14 +290,6 @@ hints at edge formation processes biased towards proximate nodes in the same loc
  \vspace{-10pt}
 \end{figure}
 
-% Due to the unavailability of navigational data such as the sequence in which individuals form edges,
-
-We rely on network snapshots and
-node arrival sequence to estimate a statistic based on path length that measures
-structural proximity between nodes' connections. Consider an incoming node $u$ that forms edges to nodes in $N(u)$.
-To measure the proximity between node $u$'s connections, we compute the average
-pairwise shortest path distance between the connections in the network snapshot
-immediately preceding node $u$'s arrival.
 
 The right subplot in~\Cref{fig:locality} compares the proximity statistic
 distribution of the \texttt{Hep-PH} dataset to two null models: uniform and

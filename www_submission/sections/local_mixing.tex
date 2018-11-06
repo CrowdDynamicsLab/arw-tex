@@ -22,15 +22,15 @@ We define $w_i$ as a uniform distribution over $N_2(i)$, the set of nodes that
 are at most two hops away from $i$, to allow for a highly efficient
 local assortativity calculation.
 Intuitively, $\rlocal(i)$ compares the observed fraction of edges between similar nodes
-in the local neighborhood of node $i$ (\texttt{observed}) to the expected fraction
-if the edges are randomly rewired (\texttt{random}).
-% EQUATION START
-More formally, the local assortativity coefficient $\rlocal(i)$ of node $i$, with outdegree $m(i)$ and
-attribute value $b(i)$ is defined as follows:
-\begin{align*}
-	\scriptsize \rlocal(i) = \frac{\overbrace{\frac{1}{|N(i)|}\sum\limits_{j \in N(i)}^{m(j) > 0} \sum_{k \in V} \frac{\mathcal{I}\{(j,k) \in E \wedge b(j)=b(k)\}}{m(i)} }^{\texttt{observed}}-\overbrace{\sum_{b \in B} e_{b}\cdot e_{b}}^{\texttt{random}}}{\underbrace{1}_{\max(\texttt{observed})}-\underbrace{\sum_{b \in B} e_{b} \cdot e_{b}}_\texttt{random}}
-\end{align*}
-% EQUATION END
+in the local neighborhood of node $i$ to the expected fraction
+if the edges are randomly rewired.
+% % EQUATION START
+% More formally, the local assortativity coefficient $\rlocal(i)$ of node $i$, with outdegree $m(i)$ and
+% attribute value $b(i)$ is defined as follows:
+% \begin{align*}
+% 	\scriptsize \rlocal(i) = \frac{\overbrace{\frac{1}{|N(i)|}\sum\limits_{j \in N(i)}^{m(j) > 0} \sum_{k \in V} \frac{\mathcal{I}\{(j,k) \in E \wedge b(j)=b(k)\}}{m(i)} }^{\texttt{observed}}-\overbrace{\sum_{b \in B} e_{b}\cdot e_{b}}^{\texttt{random}}}{\underbrace{1}_{\max(\texttt{observed})}-\underbrace{\sum_{b \in B} e_{b} \cdot e_{b}}_\texttt{random}}
+% \end{align*}
+% % EQUATION END
 
 As shown in~\Cref{fig:local_atty}, local assortativity distributions
 of \texttt{ACL}, \texttt{APS} and \texttt{Patents} reveal anomalous, skewed
