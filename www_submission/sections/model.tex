@@ -1,9 +1,9 @@
 %!TEX root = ../draft.tex
 
 \begin{figure*}
-	\vspace{-20pt}
+	% \vspace{-20pt}
     \centering
-    \includegraphics[width=.95\linewidth]{arw}
+    \includegraphics[width=\linewidth]{arw}
     \caption{Edge formation in \texttt{ARW}: consider
     an incoming node $u$ with outdegree ${m=3}$ and attribute value {$B(u)=\textsc{red} \in \{\textsc{red},\textsc{green}\}$}.
     In fig. 3a, $u$ joins the network and selects seed $v_a$ via \textsc{Select-Seed}.
@@ -12,7 +12,7 @@
     Node $u$ halts the random walk after linking to $v_a$, $v_c$ \& $v_d$.
     }
     \label{fig:randomwalk}
-	\vspace{-8pt}
+	% \vspace{-8pt}
 \end{figure*}
 
 \section{Attributed Random Walk Model}
@@ -235,7 +235,7 @@ mechanism based on random walks.
 % homophily, triadic closure and preferential attachment respectively.
 
 \subsection{Model Interpretability}
-\texttt{ARW} parameters intuitively modulate global structural properties:
+\texttt{ARW} parameters intuitively shape key structural properties:
 in-degree distribution, local clustering, path length and attribute assortativity.
 
 In order to understand how global network properties vary as functions of
@@ -299,8 +299,8 @@ nodes. Additionally, increasing $\pout$ results in greater number of hubs,
 which in turn act as intermediate nodes to connect nodes via short path
 lengths.
 
-To summarize,
-\texttt{ARW} incorporates multiple sociological phenomena at the local level
+Thus,
+\texttt{ARW} unifies multiple sociological phenomena at the local level
 as well as intuitively controls key global network properties.
 
 \subsection{Model Fitting}
@@ -314,15 +314,15 @@ The parameter estimation task consists of finding the set of parameters values
 for $(\psame, \pdiff, \pjump, \pout)$ that best preserve the structural properties of an
 observed network $G$. We use a straightforward grid search method to estimate
 the four parameters using evaluation metrics and selection criterion described in~\Cref{sub:Experimental Setup}.
-Note that other derivative-free optimization methods such as the Nelder-Mead~\cite{nelder1965simplex} method
-can be used to speed-up parameter estimation.
+% Note that other derivative-free optimization methods such as the Nelder-Mead~\cite{nelder1965simplex} method
+% can be used to speed-up parameter estimation.
 
-\textit{Initialization}. The edge formation mechanism in \texttt{ARW} is
-sensitive to a large number of weakly connected components (\texttt{WCC}s) in the
-initial network $\hat{G}_0$ because incoming nodes can only form edges to nodes
+\textit{Initialization}. \texttt{ARW} is
+sensitive to a large number of weakly connected components (\texttt{WCC}s) in
+initial network $\hat{G}_0$ because incoming nodes only form edges to nodes
 in the same \texttt{WCC}. To ensure that $\hat{G}_0$ is weakly
 connected, we perform an undirected breadth-first search on the observed,
-to-be-fitted network $G$ that starts from the oldest node and terminates after
+to-be-fitted network $G$ that starts from the oldest node and halts after
 visiting $0.1\%$ of the nodes. The initial network $\hat{G}_0$ is the small \texttt{WCC}
 induced from the set of visited nodes.
 % Simpler initialization methods
@@ -331,8 +331,8 @@ induced from the set of visited nodes.
 
 
 \textit{Node Out-degree}.
-The out-degree of incoming nodes increases  nonlinearly over time in real-world networks.
-We coarsely reflect the rate of growth in the observed network $G$ as follows.
+Node out-degree increases non-linearly over time in real-world networks.
+We coarsely mirror the growth rate of observed network $G$ as follows.
 Each incoming node $u$ that joins $\hat{G}$ at time $t$ corresponds to some
 node that joins the observed network $G$ in year $y(t)$; the number of edges $m(t)$
 that $u$ forms is equal to the average out-degree of nodes that join $G$ in year $y(t)$.

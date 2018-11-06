@@ -3,7 +3,7 @@
 \begin{figure*}[t]
 	\vspace{-15pt}
 	\centering
-	\makebox[\textwidth][c]{\includegraphics[width=\textwidth]{experiments}}
+	\makebox[\textwidth][c]{\includegraphics[width=.97\textwidth]{experiments}}
 	\vspace{-16pt}
 	\caption{
 		Modeling network structure. We assess the extent to which network models
@@ -26,9 +26,8 @@
 
 \section{Modeling Network Structure}
 \label{sec:Experiments}
-In this section, we evaluate the effectiveness of \texttt{ARW} in preserving
-structural properties of network datasets described in~\Cref{sec:Datasets}.
-relative to eight state-of-the-art growth models.
+In this section, we evaluate \texttt{ARW}'s performance in preserving
+real-world network structure relative to well-known growth models.
 % In~\Cref{sub:Experimental Setup}, we begin by describing existing growth models and the evaluation metrics
 % used in the experiments. Then, we discuss our results.
 
@@ -36,8 +35,8 @@ relative to eight state-of-the-art growth models.
 \label{sub:Experimental Setup}
 
 % We first briefly summarize the existing models used in the experiments.
-In this subsection, we describe the state-of-the-art, representative growth models
-and evaluation metrics used to fit these growth models to network datasets.
+In this subsection, we introduce eight representative growth models
+and describe evaluation metrics used to fit models to the datasets.
 
 \textit{State-of-the-art Growth Models}. We compare \texttt{ARW} to eight state-of-the-art
 growth models representative of the key edge formation
@@ -60,8 +59,7 @@ as listed below:
 		To generate directed networks, we modify \texttt{KA} to form directed edges to nodes in proportion to their in-degree.
 
 		\noindent{\textbf{(4) Holme-Kim model}} \cite{holme2002growing} (\texttt{HK}) is a preferential attachment model
-		that generates scale-free, clustered, undirected networks using an additional triangle-closing mechanism.
-		We modify the model to create directed edges and thereby generate directed networks.
+		that generates scale-free, clustered, undirected networks using a triangle-closing mechanism.
 		To generate directed networks, we modify \texttt{HK} to form directed edges to nodes in proportion to their in-degree
 		and close triangles in their undirected 1-hop neighborhood.
 
@@ -155,18 +153,18 @@ as listed below:
 % \end{table}
 
 \textit{Ensuring Fair Comparison}. To ensure fair comparison, we modify existing models in three ways.
-First, for \texttt{DMS}, \texttt{SAN}, \texttt{KA}, which do not have an explicitly defined initial graph,
-we use the initialization method used for \texttt{ARW}, described in~\Cref{sub:Model Fitting}. Second, we extend
+First, for \texttt{DMS}, \texttt{SAN}, \texttt{KA} do not have an explicitly defined initial graph,
+so we use initialization method used for \texttt{ARW}, described in~\cref{sub:Model Fitting}. Second, we extend
 models that use constant node outdegree $m$ by increasing outdegree over time $m(t)$
-using the method described in~\Cref{sub:Model Fitting}. In the absence of model-specific parameter estimation methods,
-we use a grid search method to estimate the parameters of every network model, including \texttt{ARW},
+using the method described in~\cref{sub:Model Fitting}. In the absence of model-specific parameter estimation methods,
+we use grid search to estimate the parameters of every network model, including \texttt{ARW},
 using evaluation metrics and selection criterion described below.
 
 \textit{Evaluation Metrics}.
-We evaluate the network model fit by comparing four key global network properties of ${G}$ and $\hat{G}$:
+We evaluate the network model fit by comparing four structural properties of ${G}$ \& $\hat{G}$:
 degree distribution, local clustering distribution, degree-clustering relationship
-and attribute assortativity. We use the Kolmogorov-Smirnov (\texttt{KS}) statistic to compare the univariate degree
-\& local clustering distributions. We compare the bivariate degree-clustering relationship in $G$ and $\hat{G}$ using
+and attribute assortativity. We use Kolmogorov-Smirnov (\texttt{KS}) statistic to compare in-degree
+\& local clustering distributions. We compare the degree-clustering relationship in $G$ and $\hat{G}$ using
 Weighted Relative Error (\texttt{WRE}), which aggregates the relative error
 between the average local clustering $c(k)$ and $\hat{c}(k)$ of nodes with in-degree $k$
 in $G$ and $\hat{G}$ respectively; The relative error between $c(k)$ and $\hat{c}(k)$
@@ -198,7 +196,7 @@ a manually guided grid search method.
 	\label{fig:aps_fits}
 \end{figure*}
 
-\vspace{-11pt}
+% \vspace{-11pt}
 \subsection{Results}
 \label{sub:Experimental Results}
 
@@ -276,17 +274,17 @@ nodes perform a single random walk and link to each visited node with tunable pr
 However, both models lack control over the in-degree distribution. Furthermore, existing random walk models
 disregard attribute homophily and do not account for attribute mixing patterns.
 
-\begin{figure}[H]
-	\caption{\texttt{ARW} outperforms
-		existing network models in jointly preserving key structural properties---in-degree
-		distribution, local clustering distribution and degree-clustering relationship---
-		by a significant margin of 2.5x-10x.
-	}
+\begin{figure}
 	\centering
 	% \vspace{-3pt}
-	\includegraphics[width=\linewidth]{experiments_barplot}
+	\includegraphics[width=.95\linewidth]{experiments_barplot}
 	% \vspace{-10pt}
 	\label{fig:barplot}
+		\caption{\texttt{ARW} outperforms
+			existing network models in jointly preserving key structural properties---in-degree
+			distribution, local clustering distribution and degree-clustering relationship---
+			by a significant margin of 2.5x-10x.
+		}
 \end{figure}
 
 
@@ -333,9 +331,10 @@ an accurate manner.
 % \texttt{SAN} by a margin of 2.5x
 
 
-To summarize, \texttt{ARW} unifies multiple sociological phenomena
-into a single mechanism to jointly preserve key structural
-properties of real-world networks.
+To summarize, \texttt{ARW} unifies five sociological phenomena
+into a single mechanism to jointly preserve real-world network structure.
+% key structural
+% properties of real-world networks.
 
 
 

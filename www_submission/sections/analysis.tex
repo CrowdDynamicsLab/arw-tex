@@ -100,7 +100,7 @@ are rare
 % \textit{local} process that adjusts bias towards linking to well-connected nodes
 
 \begin{figure}[b]
- % \vspace{-10pt}
+ \vspace{-10pt}
  \centering
  \includegraphics[width=\columnwidth]{clustering}
  \caption{
@@ -109,11 +109,11 @@ are rare
     relationship between in-degree and average local clustering (right subplot).
  }
  \label{fig:cc_dc}
- % \vspace{-10pt}
+ \vspace{-10pt}
 \end{figure}
 
 \textbf{High Local Clustering:}
-Real-world networks tend to exhibit high average local clustering
+Real-world networks exhibit high local clustering
 (\texttt{LCC}), as shown in~\Cref{table:netstats}. Local
 clustering can arise from triadic closure~\cite{simmel1950sociology,
 newman2001clustering}, where nodes with common neighbor(s) have an increased
@@ -124,7 +124,7 @@ of a node $i$ can refer to the nodes that link to $i$, nodes that
 $i$ links to or both. We define the neighborhood to be the set
 of all nodes that link to node $i$. In ~\Cref{fig:cc_dc}, we show that (a) average local clustering is not a
 representative statistic of the skewed local clustering distributions and (b) real-world networks
-exhibit a negative correlation between node in-degree and local clustering.
+exhibit a negative correlation between in-degree and clustering.
 That is, low in-degree nodes have small, tightly knit neighborhoods
 and high in-degree nodes tend have large, star-shaped neighborhoods.
 % Empirical studies
@@ -170,7 +170,7 @@ $0.72$.
     \texttt{Category} ($r=0.72$) respectively.
  }
  \label{fig:mixing}
- \vspace{-15pt}
+ \vspace{-20pt}
 \end{figure}
 
 \textbf{Increasing Out-degree over Time:}
@@ -204,7 +204,7 @@ Sociological studies on network formation seek to explain
 how individuals form edges in real-world networks.
 
 \textbf{Interplay of Triadic Closure and Homophily:}
-Empirical studies~\cite{35626,block2014multidimensional} that investigate the
+Empirical studies~\cite{35626,block2014multidimensional} that analyze the
 interplay between triadic closure and homophily
  % in evolving networks
   indicate
@@ -212,7 +212,7 @@ that \textit{both} structural proximity and homophily are statistically
 significant factors that simultaneously influence edge formation.
 Homophilic preferences~\cite{mcpherson2001birds} induce edges between similar
 nodes, whereas structural factors such as network distance limit
-edge formation to structurally proximate nodes (e.g. friend of a
+edge formation to proximate nodes (e.g. friend of a
 friend).
 
 \textbf{Bounded Rationality:}
@@ -271,14 +271,7 @@ hints at edge formation processes biased towards proximate nodes in the same loc
 
 % Due to the unavailability of navigational data such as the sequence in which individuals form edges,
 
-We rely on network snapshots and
-node arrival sequence to estimate a statistic based on path length that measures
-structural proximity between nodes' connections. Consider an incoming node $u$ that forms edges to nodes in $N(u)$.
-To measure the proximity between node $u$'s connections, we compute the average
-pairwise shortest path distance between the connections in the network snapshot
-immediately preceding node $u$'s arrival.
-
-\begin{figure}
+\begin{figure}[H]
 %  \vspace{-4pt}
  \centering
  \includegraphics[width=\columnwidth]{locality_v4}
@@ -287,8 +280,14 @@ immediately preceding node $u$'s arrival.
     collectively indicate how edge formation in real-world networks are biased
     towards structurally proximate nodes in the same locality.  }
  \label{fig:locality}
- \vspace{-10pt}
+ % \vspace{-10pt}
 \end{figure}
+We rely on network snapshots and
+node arrival sequence to estimate a statistic based on path length that measures
+structural proximity between nodes' connections. Consider an incoming node $u$ that forms edges to nodes in $N(u)$.
+To measure the proximity between node $u$'s connections, we compute the average
+pairwise shortest path distance between the connections in the network snapshot
+immediately preceding node $u$'s arrival.
 
 
 The right subplot in~\Cref{fig:locality} compares the proximity statistic
