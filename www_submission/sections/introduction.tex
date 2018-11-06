@@ -71,7 +71,7 @@ edge independently. Although these models explain the emergence of power law
 degree distributions, they are unrealistic: they require global knowledge (e.g.,
 preferential attachment requires knowledge of the global in-degree distribution)
 or global access (e.g., vertex copying requires random access to all nodes).
-Moreover, these models do not account for the fact that many
+Additionally, these models do not account for the fact that many
 networks are attributed (e.g., a paper is published at a venue; a Facebook user
 may use gender, political interests to describe them) and that assortative
 mixing is an important network characteristic~\cite{newman2002assortative}.
@@ -81,7 +81,7 @@ Recent papers tackle resource constraints
 attributes \cite{de2013scale,gong2012evolution}. However, the former disregard
 attributes and the latter do not provide a realistic representation of edge
 formation under resource constraints. Furthermore, both sets of models do not
-jointly preserve multiple structural properties. Developing a parsimonious and
+jointly preserve multiple structural properties. Developing an interpretable and
 accurate model of attributed network growth that accounts for observed
 sociological phenomena is non-trivial. Accurate network growth models are useful
 for synthesizing networks as well as to extrapolate existing real-world
@@ -117,7 +117,7 @@ chooses an outgoing link or incoming link to visit another node; it links to
 each visited node with some probability and halts after it has exhausted its
 budget to form connections. We have three primary contributions:
 \begin{enumerate}
-\item \textbf{Attributed:} We propose a parsimonious and accurate model of attributed network growth.
+\item \textbf{Attributed:} We propose an interpretable and accurate model of attributed network growth.
 \item \textbf{Local information:} Our model is based on a random walk and uses local processes to form edges, without recourse to global information of the network.
 \item \textbf{Unified account:} To the best of our knowledge, \texttt{ARW} is the first model that accounts for multiple sociological phenomena---bounded rationality; structural constraints; triadic closure; attribute homophily; preferential attachment---through an entirely local process to model global network structure and attribute mixing patterns.
 \end{enumerate}
@@ -130,6 +130,8 @@ budget to form connections. We have three primary contributions:
 %  in this paper, as these networks---where all node edges form at the time of node joining---offer a clean foundation to explain growth in social networks (e.g. via a ``pause \& restart'' parameter), where edges can form after a node joins.
 \texttt{ARW} preserves key structural properties---in-degree distribution, clustering and
 indegree-clustering relationship---with high accuracy.
+We analyze the parameter space of the model to show how each parameter intuitively controls
+one or more key structural properties.
 Our experiments on six large-scale network datasets indicate that the proposed growth model outperforms
 eight state-of-the-art network growth models, including attributed growth models, by a
 statistically significant margin of 2.5--$10\times$.
