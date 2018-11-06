@@ -87,7 +87,7 @@ network at time $t$ first selects a seed node using \textsc{Select-Seed}:
 % into the model.
 
 \textsc{Select-Seed} accounts for homophilic preferences of incoming nodes using
-parameters $\psame$ and $\pdiff$, which incorporates attribute preferences of incoming nodes.
+parameters $\psame$ and $\pdiff$, which incorporate attribute preferences of incoming nodes.
 As shown in~\Cref{fig:randomwalk}, after selecting
 the seed node, $u$ initiates a
 random walk using \textsc{Random-Walk} to form $m(t)$ links.
@@ -121,8 +121,7 @@ out-link parameter $\pout$ characterize random walk traversals:
 	};
 \end{tikzpicture}
 
-When attribute data is absent, \texttt{ARW} simplifies further, as
-a single link parameter $\plink$ replaces both attribute parameters $\psame$ \& $\pdiff$.
+When attribute data is absent, \texttt{ARW} simplifies further. A single link parameter $\plink$ replaces both attribute parameters $\psame$ \& $\pdiff$.
 \textsc{Select-Seed} reduces to uniform seed selection and in
 \textsc{Random-Walk}, the probability of linking to visited nodes equals $\plink$.
 %  \textsc{Select-Seed} simplifies to selecting an existing
@@ -178,7 +177,7 @@ into its edge formation mechanisms.
 and partial network access. A new node $u$ selects a seed node from which it
 initiates a biased random walk. Then, $u$ uses simple rules to connect to each visited
 nodes probabilistically and halts the walk after forming $m(t)$ edges, as shown in~\Cref{fig:randomwalk}. Random walks require information only about the
-1-hop neighborhood of visited nodes, thereby accounting for  the constraints of limited information and partial network access.
+1-hop neighborhood of a few visited nodes, thereby accounting for  the constraints of limited information and partial network access.
 
 \begin{ph}
 	(Structural Constraints) Structural factors such as network distance
@@ -196,7 +195,7 @@ as a result, $\pjump$ controls the extent to which nodes' random walks explore t
 \end{ph}
 
 When attribute data is absent, \texttt{ARW} controls
-the effect of triadic closure on link formation using $\plink$ since
+the effect of triadic closure on link formation using $\plink$. This is because
 a new node $u$ closes a triad through its random walk by linking to both, a visited node
 and its neighbor, with probability proportional to $\plink^2$.
 Similarly, in attributed networks, the probability of triad completion equals $pq$,
@@ -283,9 +282,9 @@ controls the rate at which new nodes close triads by linking to adjacent nodes i
  % \vspace{-17pt}
 \end{figure}
 
- In~\Cref{fig:inter2}, we use contour plots to visualize how $(\pdiff, \psame)$
+We use contour plots to visualize how $(\pdiff, \psame)$
 and $(\plink, \pjump)$ alter attribute assortativity and average path length.
-As shown in the left subplot, $\psame-\pdiff$ tunes the extent to which
+As shown in the left subplot of~\Cref{fig:inter2}, $\psame-\pdiff$ tunes the extent to which
 attributes influence edge formation. Increasing $\psame-\pdiff$ increases
 attribute assortativity by amplifying nodes' propensity to link to similar
 nodes, which subsequently increases the fraction of edges between similar
@@ -293,9 +292,10 @@ nodes. More importantly, when $\psame-\pdiff$ remains constant, increasing
 $(\psame, \pdiff)$ raises local clustering without altering attribute
 assortativity. In the right subplot, we observe that increasing $\pout$ while
 decreasing $\pjump$ shortens the average path length. This is because low
-values of $\pjump$ do not restrict incoming nodes to the local neighborhood,
-thereby allowing edge formation to nodes structurally distant from their seed
-nodes. Additionally, increasing $\pout$ results in greater number of hubs,
+values of $\pjump$ do not restrict incoming nodes to the local neighborhood
+of their seed nodes,
+thereby allowing incoming nodes to visit and form edges to nodes that are
+structurally distant. Additionally, increasing $\pout$ results in greater number of hubs,
 which in turn act as intermediate nodes to connect nodes via short path
 lengths.
 

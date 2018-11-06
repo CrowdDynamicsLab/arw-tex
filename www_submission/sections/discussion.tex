@@ -13,9 +13,9 @@ A set of network models (e.g., \texttt{SAN} \cite{gong2012evolution} \& \texttt{
 use triangle closing mechanisms to generate networks with
 varying average local clustering. However, our experimental results
 in~\Cref{sub:Experimental Results} show that models that rely on triangle closing
-cannot model local clustering distribution or bivariate degree-clustering
+cannot explain local clustering distribution or bivariate degree-clustering
 relationship accurately. To understand why, we examine the degree-clustering
-relationship in the \texttt{APS} network, in~\Cref{fig:triangle_closing}.
+relationship in the \texttt{APS} network in~\Cref{fig:triangle_closing}.
 \begin{figure}[b]
     \centering
     \includegraphics[width=.8\columnwidth]{triangle_closing}
@@ -62,8 +62,8 @@ network models has a significant impact on effective diameter over time.
 
 \Cref{fig:diameter} illustrates the effective diameter of network models fitted
 to \texttt{Hep-PH} as a function of node out-degree sequence and time.
-by increasing the
-out-degree $m(t)$ of incoming nodes over time using the method described
+By increasing the
+out-degree $m(t)$ over time using the method described
 in~\cref{sub:Model Fitting}, network models representative of key edge formation
 mechanisms---\texttt{ARW}, \texttt{FF}, \texttt{DMS} \&
 \texttt{SAN}---generate networks that exhibit diameter shrinkage. In particular,
@@ -71,13 +71,13 @@ mechanisms---\texttt{ARW}, \texttt{FF}, \texttt{DMS} \&
 because incoming nodes ``burn'' through the network for duration in proportion
 to the network size.} and \texttt{ARW} mirror the observed rate at which the
 effective diameter shrinks over time.
-When the out-degree $\bar{m}=n^{-1}\sum_i m(i)$ of incoming nodes is constant,
+However, when the out-degree $\bar{m}=n^{-1}\sum_i m(i)$ of incoming nodes is constant,
 fitted networks, including Forest Fire (\texttt{FF}), cannot preserve
 shrinking diameter; the effective diameter of the fitted models remain
 consistently lower than that of \texttt{Hep-PH}.
 
 Increasing out-degree over time can effectively incorporate diameter shrinkage
-in all representative network models. This phenomena is best understood through
+in all representative network models. This phenomenon is best understood through
 the simple \texttt{Uniform} null model, in which incoming nodes form edges to
 existing nodes chosen uniformly at random. In the \texttt{Uniform} model, nodes with higher out-degree
 have a greater probability of linking to existing
@@ -95,7 +95,7 @@ diameter shrinkage.
 
 \subsection{\texttt{ARW} Limitations}
 We discuss three limitations of \texttt{ARW}. First, we  consider only
-bibliographic  network datasets, as nodes form all edges at the time of joining.
+bibliographic  network datasets in which nodes form all edges at the time of joining.
 This allows us to analyze edge formation in the absence of confounding edge
 processes such as edge deletion and edge creation between existing nodes. We
 plan to extend \texttt{ARW} to handle social networks, where individuals can

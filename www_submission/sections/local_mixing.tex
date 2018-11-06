@@ -3,7 +3,7 @@
 \label{subsec:LocalMixing}
 
 The global assortativity coefficient quantifies
-the average propensity of links to occur between similar nodes.
+the average propensity of links between similar nodes.
 However, global assortativity is not a representative summary statistic of
 heterogeneous mixing patterns observed in large-scale networks~\cite{peel2018multiscale}.
 Furthermore, it does not quantify anomalous mixing patterns and fails to measure how mixing varies across a network.
@@ -18,8 +18,8 @@ node $i$. As~\citet{peel2018multiscale} indicate, there are multiple ways
 to define node $i$'s weight distribution $w_i$ other than the prescribed
 personalized pagerank weight distribution, which is prohibitively expensive to compute
 for all nodes in large graphs.
-We define $w_i$ as a uniform distribution over $N_2(i)$, the set of nodes that
-are at most two hops away from $i$, to allow for a highly efficient
+We define $w_i$ as a uniform distribution over $N_2(i)$, the two-hop local neighborhood
+of node $i$, to allow for a highly efficient
 local assortativity calculation.
 Intuitively, $\rlocal(i)$ compares the observed fraction of edges between similar nodes
 in the local neighborhood of node $i$ to the expected fraction
