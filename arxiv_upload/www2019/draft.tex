@@ -1,0 +1,130 @@
+\documentclass[sigconf]{acmart}
+
+\usepackage{booktabs} % For formal tables
+\usepackage{float}
+\usepackage{arydshln} % for dashed lines in tables (tabu is much more flexible)
+\usepackage{enumitem}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}} %array spacing
+\usepackage{natbib}
+\usepackage{graphicx}
+\graphicspath{{data/}}
+\frenchspacing % controls the space after the period
+\usepackage{pdfpages}
+\usepackage{nicefrac}
+\usepackage{blindtext}
+\usepackage{tabularx}
+\usepackage{caption}
+\captionsetup[table]{font=small,skip=4pt}
+\captionsetup[figure]{font=small,skip=-2pt}
+\usepackage{subcaption}
+\usepackage{bm} % produces better bold symbols than does \boldsymbol{x}; use \bm{x}
+\usepackage{amsmath, mathrsfs,amsfonts,amssymb}
+\usepackage{wasysym} % smiley face
+\usepackage{xfrac} % use command \sfrac{1}{2} to get a nice 1/2 symbol.
+\usepackage{savesym} % openbox symbol conflict between tx fonts and amsthm
+\savesymbol{openbox}
+\usepackage{amsthm} %theorem like environments
+\usepackage{thmtools}
+\usepackage{cleveref}
+\usepackage{commath}
+\usepackage[export]{adjustbox}
+\usepackage{dblfloatfix}
+\usepackage{tikz}
+\usepackage{blindtext}
+\usepackage{xcolor}
+\usepackage{url}
+\usetikzlibrary{backgrounds}
+
+\definecolor{lightgray}{HTML}{989898}
+\definecolor{darkgray}{HTML}{696969}
+
+\newcommand{\lightgraybg}[1]{%
+  \begingroup\setlength{\fboxsep}{3pt}% no padding
+  \raisebox{2pt}{\colorbox{lightgray}{#1}}
+  \endgroup
+}
+
+\newcommand{\darkgraybg}[1]{%
+  \begingroup\setlength{\fboxsep}{3pt}% no padding
+  \raisebox{2pt}{\colorbox{darkgray}{#1}}
+  \endgroup
+}
+
+\newcommand{\psame}{p_{\scriptsize\mbox{same}}}
+\newcommand{\pdiff}{p_{\scriptsize\mbox{diff}}}
+\newcommand{\pjump}{p_{\scriptsize\mbox{jump}}}
+\newcommand{\pout}{p_{\scriptsize\mbox{out}}}
+\newcommand{\plink}{p_{\scriptsize\mbox{link}}}
+\newcommand{\rlocal}{r_{\scriptsize\mbox{local}}}
+
+\crefname{subsection}{subsection}{subsections}
+
+\newcommand{\hs}[1]{\textcolor{red}{Hari: #1}}
+\newcommand{\harshay}[1]{\textcolor{blue}{Harshay: #1}}
+
+% Copyright
+\setcopyright{none}
+
+% DOI
+% \acmDOI{10.475/123_4}
+% \acmISBN{123-4567-24-567/08/06}
+% \acmConference[CIKM'17]{ACM CIKM}{Nov 2017}{Singapore }
+\acmYear{2018}
+\copyrightyear{2016}
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain}
+
+\begin{document}
+\title{Growing Attributed Networks through Local Processes}
+
+% \author{Harshay Shah, Suhansanu Kumar, Hari Sundaram}
+% \affiliation{
+%   \institution{
+%   Department of Computer Science \\
+%   University of Illinois at Urbana-Champaign}
+% }
+% \email{{hrshah4, skumar56, hs1}@illinois.edu}
+
+% \renewcommand{\shortauthors}{Anonymous et al.}
+
+\begin{abstract}
+\input{./sections/abstract}
+\end{abstract}
+
+% \keywords{Network growth models, Attributed networks, Homophily}
+
+\maketitle
+
+\input{./sections/introduction}
+\input{./sections/problem_statement}
+
+% \clearpage
+\input{./sections/analysis}
+
+% \clearpage
+\input{./sections/model}
+
+% \clearpage
+\input{./sections/experiments}
+
+% \clearpage
+\input{./sections/local_mixing}
+
+% \clearpage
+\input{./sections/discussion}
+
+% \clearpage
+\input{./sections/related_work}
+\input{./sections/conclusion}
+
+\clearpage
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{draft}
+
+% \section{TODO}
+% \begin{itemize}
+%     \item theory and dataset bias justification (discussion)
+% \end{itemize}
+
+\end{document}
