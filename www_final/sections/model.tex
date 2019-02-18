@@ -233,75 +233,75 @@ mechanism based on random walks.
 % rate parameter $\alpha$ and out parameter $p_o$ incorporate the effect of structural constraints,
 % homophily, triadic closure and preferential attachment respectively.
 
-\subsection{Model Interpretability}
-\texttt{ARW} parameters intuitively shape key structural properties:
-in-degree distribution, local clustering, path length and attribute assortativity.
-
-In order to understand how global network properties vary as functions of
-\texttt{ARW} parameters, we explore the parameter space of the model. As
-described in~\Cref{sub:Model Description}, \texttt{ARW} uses two
-parameterizations to model networks with or without attribute data. We analyze
-network structure and attribute assortativity using $(\plink, \pjump, \pout)$
-and $(\psame, \pdiff, \pjump, \pout)$ respectively.
-
-\begin{figure}[b]
- % \vspace{-10pt}
- \centering
- \includegraphics[width=\columnwidth]{inter12}
- \caption
- {Effect of $\pout$ and $\plink$ on in-degree and local clustering.
- The left and right subplots show how increasing $\pout$ and $\plink$ yield
- in-degree distributions with heavier tails and neighbors with higher clustering
- by adding structural bias towards well-connected and proximate nodes respectively.}
- \label{fig:inter1}
- % \vspace{-10pt}
-\end{figure}
-
-\Cref{fig:inter1} illustrates how in-degree and local clustering depend on $\pout$ and $\plink$.
-Increasing $\pout$ steers random walks towards older nodes that tend to have higher in-degree.
-Over time, as more nodes join the network, initial differences in degree amplify, resulting in heavy-tailed distributions.
-In ~\Cref{fig:inter1}, we observe that increasing $\pout$ from $0.2$ to $0.8$ shifts probability
-mass from average degree nodes (\texttt{B}) to hubs (\texttt{C}) and low degree nodes (\texttt{A}).
-As a result, $\pout$ controls the extent to which hubs skew the in-degree distribution.
-Similarly, local clustering increases as a function of $\plink$ because $\plink$ implicitly
-controls the rate at which new nodes close triads by linking to adjacent nodes in their random walks.
-
-\begin{figure}
- % \vspace{-10pt}
- \centering
- \includegraphics[width=1.05\columnwidth]{inter24}
- \caption{
- 	Effect of $(\psame, \pdiff)$ and $(\plink, \pjump)$ on attribute assortativity
-	and average path length.
-	In the left, we observe that
- 	increasing $\psame-\pdiff$ leads to higher assortativity by making edge formation more homophilic.
-	Similarly, decreasing $\pjump$ while increasing $\pout$ shortens average path length
- 	by enabling incoming nodes to form connections in disparate regions of the network.
- }
- \label{fig:inter2}
- % \vspace{-17pt}
-\end{figure}
-
-We use contour plots to visualize how $(\pdiff, \psame)$
-and $(\plink, \pjump)$ alter attribute assortativity and average path length.
-As shown in the left subplot of~\Cref{fig:inter2}, $\psame-\pdiff$ tunes the extent to which
-attributes influence edge formation. Increasing $\psame-\pdiff$ increases
-attribute assortativity by amplifying nodes' propensity to link to similar
-nodes, which subsequently increases the fraction of edges between similar
-nodes. More importantly, when $\psame-\pdiff$ remains constant, increasing
-$(\psame, \pdiff)$ raises local clustering without altering attribute
-assortativity. In the right subplot, we observe that increasing $\pout$ while
-decreasing $\pjump$ shortens the average path length. This is because low
-values of $\pjump$ do not restrict incoming nodes to the local neighborhood
-of their seed nodes,
-thereby allowing incoming nodes to visit and form edges to nodes that are
-structurally distant. Additionally, increasing $\pout$ results in greater number of hubs,
-which in turn act as intermediate nodes to connect nodes via short path
-lengths.
-
-Thus,
-\texttt{ARW} unifies multiple sociological phenomena at the local level
-as well as intuitively controls key global network properties.
+% \subsection{Model Interpretability}
+% \texttt{ARW} parameters intuitively shape key structural properties:
+% in-degree distribution, local clustering, path length and attribute assortativity.
+%
+% In order to understand how global network properties vary as functions of
+% \texttt{ARW} parameters, we explore the parameter space of the model. As
+% described in~\Cref{sub:Model Description}, \texttt{ARW} uses two
+% parameterizations to model networks with or without attribute data. We analyze
+% network structure and attribute assortativity using $(\plink, \pjump, \pout)$
+% and $(\psame, \pdiff, \pjump, \pout)$ respectively.
+%
+% \begin{figure}[b]
+%  % \vspace{-10pt}
+%  \centering
+%  \includegraphics[width=\columnwidth]{inter12}
+%  \caption
+%  {Effect of $\pout$ and $\plink$ on in-degree and local clustering.
+%  The left and right subplots show how increasing $\pout$ and $\plink$ yield
+%  in-degree distributions with heavier tails and neighbors with higher clustering
+%  by adding structural bias towards well-connected and proximate nodes respectively.}
+%  \label{fig:inter1}
+%  % \vspace{-10pt}
+% \end{figure}
+%
+% \Cref{fig:inter1} illustrates how in-degree and local clustering depend on $\pout$ and $\plink$.
+% Increasing $\pout$ steers random walks towards older nodes that tend to have higher in-degree.
+% Over time, as more nodes join the network, initial differences in degree amplify, resulting in heavy-tailed distributions.
+% In ~\Cref{fig:inter1}, we observe that increasing $\pout$ from $0.2$ to $0.8$ shifts probability
+% mass from average degree nodes (\texttt{B}) to hubs (\texttt{C}) and low degree nodes (\texttt{A}).
+% As a result, $\pout$ controls the extent to which hubs skew the in-degree distribution.
+% Similarly, local clustering increases as a function of $\plink$ because $\plink$ implicitly
+% controls the rate at which new nodes close triads by linking to adjacent nodes in their random walks.
+%
+% \begin{figure}
+%  % \vspace{-10pt}
+%  \centering
+%  \includegraphics[width=1.05\columnwidth]{inter24}
+%  \caption{
+%  	Effect of $(\psame, \pdiff)$ and $(\plink, \pjump)$ on attribute assortativity
+% 	and average path length.
+% 	In the left, we observe that
+%  	increasing $\psame-\pdiff$ leads to higher assortativity by making edge formation more homophilic.
+% 	Similarly, decreasing $\pjump$ while increasing $\pout$ shortens average path length
+%  	by enabling incoming nodes to form connections in disparate regions of the network.
+%  }
+%  \label{fig:inter2}
+%  % \vspace{-17pt}
+% \end{figure}
+%
+% We use contour plots to visualize how $(\pdiff, \psame)$
+% and $(\plink, \pjump)$ alter attribute assortativity and average path length.
+% As shown in the left subplot of~\Cref{fig:inter2}, $\psame-\pdiff$ tunes the extent to which
+% attributes influence edge formation. Increasing $\psame-\pdiff$ increases
+% attribute assortativity by amplifying nodes' propensity to link to similar
+% nodes, which subsequently increases the fraction of edges between similar
+% nodes. More importantly, when $\psame-\pdiff$ remains constant, increasing
+% $(\psame, \pdiff)$ raises local clustering without altering attribute
+% assortativity. In the right subplot, we observe that increasing $\pout$ while
+% decreasing $\pjump$ shortens the average path length. This is because low
+% values of $\pjump$ do not restrict incoming nodes to the local neighborhood
+% of their seed nodes,
+% thereby allowing incoming nodes to visit and form edges to nodes that are
+% structurally distant. Additionally, increasing $\pout$ results in greater number of hubs,
+% which in turn act as intermediate nodes to connect nodes via short path
+% lengths.
+%
+% Thus,
+% \texttt{ARW} unifies multiple sociological phenomena at the local level
+% as well as intuitively controls key global network properties.
 
 \subsection{Model Fitting}
 \label{sub:Model Fitting}
@@ -358,4 +358,3 @@ individuals' biases towards similar, proximate and high degree nodes.
 % like \texttt{ARW} quite complex. \harshay{Improve theory justification
 Next, we discuss our experiments on the performance of $\texttt{ARW}$
 in accurately preserving {multiple} structural and attribute properties of real networks.
-
