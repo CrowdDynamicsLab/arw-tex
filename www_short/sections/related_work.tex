@@ -1,0 +1,292 @@
+%!TEX root = ../draft.tex
+\section{Related Work}
+\label{sec:Related Work}
+Network growth models seek to explain a subset of structural properties observed in real
+networks. Below, we discuss relevant work on modeling network growth.
+% We point the reader to
+% extensive surveys \cite{newman2003structure,albert2002statistical} of network growth models
+% for more information.
+% Note that, unlike growth models, statistical models of network replication \cite{leskovec2010kronecker,pfeiffer2014attributed}
+% do not model how networks grow over time and are not relevant to our work.
+
+% PA
+% \textbf{Preferential Attachment \& Fitness}:
+Preferential attachment and fitness-based models \cite{bell2017network,medo2011temporal,bianconi2001bose,caldarelli2002scale}
+can preserve heavy-tailed degree distribution, small diameter \cite{bollobas2004diameter} and temporal dynamics \cite{wang2013quantifying}
+of real-world networks. Furthermore, while extensions of preferential attachment \cite{mossa2002truncation,zeng2005construction,wang2009local},
+they disregard network properties such as clustering and mixing patterns.
+
+% a new node $u$ links to an existing node $v$
+% with probability proportional to the attachment function $f(k_v)$, a function of
+% either degree $k_v$ or fitness $\phi_v$ of node $v$.
+% Node fitness is defined as a dimensionless
+% measure of node attractiveness.
+% For instance, linear preferential attachment functions
+% \cite{barabasi1999emergence,kumar2000stochastic,dorogovtsev2000structure} lead to
+% power law degree distributions and small diameter
+% and attachment functions of degree \& node age \cite{wang2013quantifying}
+% can preserve realistic temporal dynamics.
+% Extensions of preferential
+% attachment \cite{mossa2002truncation,zeng2005construction,wang2009local} that
+% incorporate resource constraints
+% disregard network properties other than power law degree distribution and small diameter.
+% Additional mechanisms are necessary to explain network properties
+% such as clustering and attribute mixing patterns.
+
+% The structural
+% properties these models preserve depends on the exact definition of
+% the attachment function $f$.
+% The attachment function $f$ that controls edge formation in preferential
+% attachment models directly impacts degree distribution
+% whereas
+% sublinear attachment functions \cite{krapivsky2000connectivity,dereich2013random} can generate
+% networks with stretched exponential degree distribution.
+% In~\Cref{sec:Experiments}, we observe that \texttt{DMS}, a preferential attachment model with
+% an affine attachment function, can accurately fit the degree
+% distribution of real-world networks.
+% Both mechanisms disregard triadic closure and
+% resource constraints.
+
+% fitness
+% In fitness growth models
+% \cite{bell2017network,medo2011temporal,bianconi2001bose,caldarelli2002scale},
+% the rate at which an existing node $u$ acquires links is proportional to its
+% fitness $\phi_u$, a dimensionless measure of node attractiveness based on
+% intrinsic nodal properties that influence edge formation. The structural
+% properties a fitness-based model preserves depends on the exact definition of
+% fitness.
+% For example, models that define fitness as a function of degree and
+% node recency \cite{wang2013quantifying} or attribute similarity
+% \cite{de2013scale} can preserve realistic temporal dynamics such as popularity
+% decay and assortative attribute mixing patterns.
+% Since new nodes form
+% each edge \textit{independently}, fitness-based models such as \texttt{HPA} do
+% not incorporate triadic closure and resource constraints.
+% %  Additional mechanisms %
+% are necessary to preserve the high local clustering or the degree-clustering %
+% correlation observed in real networks.
+
+
+A set of models
+\cite{holme2002growing,klemm2002highly,leskovec2008microscopic}
+incorporate triadic closure using triangle closing mechanisms.
+While this increases {average} local clustering by forming edges between nodes
+with one or more common neighbors, as shown in~\Cref{sec:Experiments}, it cannot
+accurately preserve distributional properties of local clustering.
+% model the distribution over the local clustering coefficient or the
+% relationship between in-degree and clustering.
+% models
+% based on preferential attachment and triangle closing do not preserve the local
+% clustering of low degree nodes.
+
+Models \cite{de2013scale,karimi2017visibility,gong2012evolution,zheleva2009co}
+that account for attribute mixing patterns can be broadly categorized as (a) fitness-based model that define fitness as a function of
+attribute similarity and (b) microscopic models of network evolution that require
+complete temporal information about edge arrivals \& deletion. Our experiment
+results in~\Cref{sub:Experimental Results} show that well-known attributed network models
+\texttt{SAN} and \texttt{KA} cannot jointly preserve mixing patterns and multiple structural
+properties of real-world networks.
+% preserve assortative
+% mixing patterns, degree distribution to some extent, but not local clustering
+% and degree-clustering correlation.
+
+
+% Random walk models, first introduced by Vazquez \cite{vazquez2000knowing,
+% vazquez2003growing}, jointly explain the emergence of multiple properties
+% observed in real networks under constraints of partial access and limited
+% information.
+First introduced by Vazquez \cite{vazquez2000knowing}, random walk models are inherently local.
+Models \cite{blum2006random} in which
+new nodes only link to terminal nodes of short random walks generate
+networks with power law degree distributions \cite{chebolu2008pagerank} and
+small diameter \cite{mehrabian2016sa} but do not preserve clustering. Models
+such as \texttt{SK} \cite{saramaki2004scale}
+and \texttt{HZ} \cite{herrera2011generating}, in which new nodes probabilistically link to
+each visited nodes incorporate triadic closure but are not flexible enough to preserve
+{skewed} local clustering of real-world networks, as shown in~\Cref{sub:Experimental Results}.
+Recursive random walk models such as \texttt{FF} \cite{leskovec2005graphs}
+preserve temporal properties such as shrinking diameter but considerably overestimate local clustering.
+Furthermore, existing random walk models do not account for nodal attributes.
+%  disregard the effect of homophily and do not model attribute mixing
+% patterns.
+
+% \textbf{Recent Work}:
+% P{\'a}lovics et al. \cite{palovics2017raising} use preferential and uniform
+% attachment to model the decreasing power law exponent of real-world, undirected
+% networks in which average degree increases over time. Singh et al.
+% \cite{singh2017relay} (\texttt{RL}) augment preferential attachment to explain
+% the shift in popularity of nodes over time via the concept of relay linking.
+% Both models do not incorporate mechanisms to preserve clustering, attribute
+% mixing patterns, and resource constraints that affect how individuals form edges
+% in real-world networks.
+
+To summarize, existing models do not accurately explain how resource constrained and local processes
+\textit{jointly} preserve multiple global network properties of attributed networks.
+
+% Growth models that account for the effect of attribute homophily on edge formation
+% jointly preserve assortative mixing patterns and a few structural properties observed
+% in real-world attributed networks. These models
+% can be broadly categorized as (a) fitness-based model that define fitness as a
+% function of attribute similarity and (b) microscopic models of network
+% evolution that require complete temporal information about edge arrivals \&
+% deletion. In~\Cref{sub:Experimental Results}, we observe that fitness-based
+% models \cite{de2013scale,karimi2017visibility} such as \texttt{HPA} and
+% microscopic models \cite{gong2012evolution,zheleva2009co} such as \texttt{SAN}
+% can preserve assortative mixing patterns and degree distribution to some extent,
+% but disregard clustering, degree-clustering correlation and resource
+% constraints.
+
+
+% Preferential attachment and fitness-based mechanisms make two strong assumptions.
+% First, both mechanisms require nodes to link
+% uniformly at random to \textit{any} node in the network \textit{or} have explicit
+% knowledge of the degree/fitness of every node in the network.
+% This assumption is
+% unrealistic because individuals in real networks form edges under partial
+% information and limited access constraints.
+% Second, by assuming that successive edge formations are independent,
+% both mechanisms
+% disregard the effect of triadic closure on edge formation.
+% Extensions of preferential
+% attachment \cite{mossa2002truncation,zeng2005construction,wang2009local} that
+% incorporate resource constraints disregard network properties other than
+% power law degree distribution and small diameter.
+%  by restricting access to newly added nodes or a
+% small set of nodes uniformly sampled from the network
+% . However, these models are
+% simple, proof-of-concept methods that disregard network properties other than
+% power law degree distribution and small diameter.
+% Another set of models
+% \cite{holme2002growing,klemm2002highly,leskovec2008microscopic}, including \texttt{HK},
+% incorporate triadic closure using triangle closing mechanisms, which increase \textit{average} local
+% clustering by forming edges between nodes with one or more common neighbors.
+% However, as shown in~\Cref{sec:Experiments}, \texttt{HK} cannot preserve
+% the \textit{skewed} clustering distribution and degree-clustering correlation
+% observed in real networks.
+% and contradict a key empirical finding: the
+% probability of edge formation increases as a function of neighborhood overlap
+% \cite{kossinets2006empirical}.
+
+
+% Random walk models, first introduced by Vazquez \cite{vazquez2000knowing,
+% vazquez2003growing}, jointly explain the emergence of multiple properties
+% observed in real networks under constraints of partial access and limited
+% information. Unlike previous mechanisms, random walk models are inherently local;
+% New nodes initiate random walk(s) to explore neighborhoods of
+% existing nodes and link to visited nodes. Models \cite{blum2006random} in which
+% new nodes nodes only link to terminal nodes of short random walks generate
+% networks with power law degree distributions \cite{chebolu2008pagerank} and
+% small diameter \cite{mehrabian2016sa} but without high clustering. Models
+% \cite{herrera2011generating,saramaki2004scale} such as \texttt{SK} \&
+% \texttt{HZ}, in which new nodes initiate a single random walk and
+% probabilistically link to visited nodes, implicitly incorporate triadic closure
+% and can generate networks with high average local clustering. Moreover,
+% recursive random walk models \cite{leskovec2005graphs,vazquez2003growing} such
+% as \texttt{FF}, wherein nodes perform a probabilistic breadth first search to
+% link to existing nodes, preserve temporal properties such as shrinking
+% diameter. However, our experimental results in~\Cref{sec:Experiments} suggest
+% that these models --- \texttt{HZ}, \texttt{SK} and \texttt{FF} --- do not accurately preserve
+% the clustering distribution and/or degree-clustering correlation observed
+% in real networks. Existing random walk models also disregard the effect of homophily on network formation.
+
+
+
+% There has been extensive work on network growth models that \textit{explain} how
+% a subset of structural properties of real world networks emerge from edge
+% formation mechanisms over time. In this section, we describe four edge formation mechanisms underlying network
+% growth models: preferential attachment \cite{jeong2003measuring} and its
+% extensions, fitness \cite{albert2002statistical}, triangle closing mechanisms
+% \cite{bianconi2014triadic} and random walks \cite{vazquez2000knowing}.  These
+% edge formation mechanisms explain the emergence of multiple structural
+% properties of real networks, but make one or more strong assumptions.
+
+% Preferential attachment models such as the Barabasi-Albert model \cite{barabasi1999emergence} and Vertex
+% Copying model \cite{kumar2000stochastic} explain the emergence of power law degree
+% distributions of the form $p(k) = c\cdot k^{-\alpha}$, commonly observed in real
+% networks. In preferential attachment models, new nodes that join the network
+% form edges to existing nodes with probability proportional to their degree. This
+% implies that high degree nodes accumulate edges quicker than low degree nodes.
+% An intuitive explanation of preferential attachment is that new nodes are more
+% likely to link to ``popular'' high degree nodes than relatively unknown, low
+% degree nodes. However, preferential attachment implicitly assumes that edge
+% formation depends only on degree and cannot explain why real networks exhibit
+% high clustering or degree distributions that do follow power law.
+
+% Unlike preferential attachment models, fitness models are flexible enough to
+% generate networks with varying degree distributions and degree correlation. The
+% inability of preferential attachment to preserve multiple structural properties
+% suggests that factors other than degree influence edge formation. In fitness
+% models, new nodes that join the network form edges to existing nodes with
+% probability proportional to their fitness. The fitness $\phi_i $ of node $v_i$
+% is a function of intrinsic nodal properties that influence edge formation. The
+% structural properties a fitness model preserves depends on the exact definition
+% of fitness. For example, the fitness model introduced in \cite{bianconi2001bose} increases fitness
+% as a function of degree and node recency. This can preserve temporal dynamics
+% such as decay in popularity \cite{wang2013quantifying} of old nodes in citation networks. Simpler fitness
+% models can generate degree distributions that follow power law, exponential or
+% lognormal \cite{medo2011temporal} distributions. However, since new nodes form each edge
+% \textit{independently}, fitness alone cannot explain the emergence of high local
+% clustering or the bivariate relationship between degree and clustering observed
+% in real networks.
+
+% Edge formation mechanisms proposed by the above network growth models make
+% two strong assumptions.
+% \begin{itemize}
+%     \item \textbf{Complete access to information}
+%     These mechanisms require nodes to link uniformly at random to \textit{any}
+%     node in the network or have explicit knowledge of the degree/fitness of
+%     every node in the network. This assumption is unrealistic because nodes in
+%     real networks form edges partial information and limited access constraints.
+%
+%     \item \textbf{Successive edge formations are independent} There is a strong, implicit
+%     assumption that a node's decision to link to another node is independent of the
+%     nodes to which it has already linked. This assumption contradicts a key empirical
+%     finding that the probability of edge formation increases as a function
+%     of neighborhood overlap in social, information and citation networks.
+% \end{itemize}
+%
+% % triangle closing
+% Extensions of preferential attachment and fitness models \cite{holme2002growing,klemm2002highly} using triangle
+% closing mechanisms explain why social \& information networks have high
+% average local clustering \cite{newman2001clustering}. In these models, a new node that joins the network
+% ``closes triangles'' by linking to neighbors of nodes it has already linked to
+% based on degree or fitness. Closing triangles increases the number of edges
+% between neighbors, thereby increasing the average local clustering. Triangle
+% closing mechanisms essentially model triadic closure, a sociological process
+% that explains why two nodes with mutual neighbor(s) have an increased
+% probability of connection. In~\Cref{sec:Experiments}, we show that these
+% models are not flexible enough to capture the skewness and variance in
+% clustering distributions of real networks.
+%
+% % limited info
+% A few models \cite{mossa2002truncation,zeng2005construction,wang2009local} adapt
+% preferential attachment and fitness to model network growth under constraints of
+% limited access and information. These models incorporate constraints by
+% restricting access to recent nodes or a small set of nodes uniformly sampled
+% from the network. However, these simple models are proof-of-concept methods that
+% do not generate networks with varying degree distributions and realistic local
+% clustering distributions.
+
+% Random walk models jointly explain multiple structural properties of real
+% networks under constraints of limited access and information. New nodes explore
+% neighborhoods of existing nodes without any assumption of global information and
+% use simple rules to form edges. New nodes that join the network perform one or
+% more random walks to link to existing nodes. For example, the Random Surfer
+% model \cite{blum2006random}, in which new nodes link to the terminal nodes of short random walks,
+% generate networks that exhibit power law degree distributions. Importantly, this
+% model explains preferential attachment as an \textit{emergent} property of local
+% proceses. Random walk models in which new nodes perform random walk(s) and link
+% to \text{any} visited node incorporate triadic closure and generate networks
+% with heavy tailed degree distribution and high local clustering \cite{herrera2011generating}. In~\Cref{sec:Experiments}, we show that models based on random walks outpeform
+% well-known \textit{global} edge formation mechanisms in preserving structural
+% properties of citation networks. However, current random walk models are
+% either inflexible or too simple to accurately capture local clustering observed
+% in real networks.
+
+% % summary
+% To summarize, network growth models use global or local edge formation mechanism(s) to
+% explain structural properties of real networks. Structural properties preserved
+% by global edge formation mechanisms such as preferential attachment can be
+% preserved by local processes such as random walks as well. However, unlike
+% random walks, extensions of global processes such as preferential attachment \&
+% fitness models make strong, unrealistic assumptions.
