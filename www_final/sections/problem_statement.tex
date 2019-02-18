@@ -1,4 +1,4 @@
-%!TEX root = ../draft.tex
+%!TEX root = ../main.tex
 
 \section{Problem Statement}
 \label{sec:Problem Statement}
@@ -8,21 +8,24 @@ sets of nodes \& edges and each node has an attribute value $b \in B$.
 The goal is to develop a directed network growth model that preserves structural
 and attribute based properties observed in $G$. The growth model should be
 normative, accurate and parsimonious:
-\begin{enumerate}
-    \item \textbf{Normative}: The model should account for normative behavior. In real-world
-    networks, multiple sociological phenomena influence how individuals form edges under
-    constraints of limited global information and partial network access.
-    \item \textbf{Accurate}: The model should preserve key structural
-    and attribute based properties such as heavy tailed degree distribution, skewed
-    local clustering, negatively correlated degree-clustering relationship
-    and attribute mixing patterns.
-    \item \textbf{Interpretability}: The model should be expressive enough to
-    generate networks with varying structural properties, while having as few parameters as possible.
-    % Model parameters should intuitively control structural
-    % properties.
-\end{enumerate}
+
+\textbf{Normative}: The model should account for multiple sociological phenomena that influence how individuals form edges under constraints of limited global information and partial network access.
+
+\textbf{Accurate}: The model should preserve key structural
+and attribute based properties: degree distribution,
+local clustering, degree-clustering relationship and attribute mixing patterns.
+
+\textbf{Parsimonious}: The model should be able to
+generate networks with tunable structural properties, while having few parameters.
+
+% \begin{enumerate}
+%     \item \textbf{Normative}: The model should account for multiple sociological phenomena that influence how individuals form edges under
+%     constraints of limited global information and partial network access.
+%     \item \textbf{Accurate}: The model should preserve key structural
+%     and attribute based properties: degree distribution,
+%     local clustering, degree-clustering relationship and attribute mixing patterns.
+%     \item \textbf{Parsimonious}: The model should be expressive enough to
+%     generate networks with tunable structural properties, while having as few parameters as possible.
+% \end{enumerate}
 
 Next, we present empirical analysis on real-world datasets to motivate our attributed random walk model.
-
-
-
