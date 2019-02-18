@@ -42,47 +42,48 @@ and describe evaluation metrics used to fit models to the datasets.
 growth models representative of the key edge formation
 mechanisms: preferential attachment, fitness, triangle closing and random walks.
 Two of the eight models account for attribute homophily and preserve attribute mixing patterns,
-as listed below:
-
-		\noindent{\textbf{(1) Dorogovtsev-Mendes-Samukhin model}} \cite{dorogovtsev2000structure}  (\texttt{DMS})
-		is a preferential attachment model that generates directed scale-free graphs. In this model,
-		the probability of linking to a node is proportional to the sum of its in-degree and ``initial attractiveness.''
-
-		\noindent{\textbf{(2) Relay Linking model}} \cite{singh2017relay} (\texttt{RL}) comprises
-		preferential attachment models for directed networks that use relay linking to model
-		node popularity over time. We use the iterated preferential relay-cite (IPRC) variant, which best fits
-		real-world network properties.
-
-		\noindent{\textbf{(3) Kim-Altmann model}} \cite{kim2017effect} (\texttt{KA}) is a fitness-based model that defines
-		fitness as the product of degree and attribute similarity. It generates {attributed} networks
-		with assortative mixing and power law degree distribution.
-		To generate directed networks, we modify \texttt{KA} to form directed edges to nodes in proportion to their in-degree.
-
-		\noindent{\textbf{(4) Holme-Kim model}} \cite{holme2002growing} (\texttt{HK}) is a preferential attachment model
-		that generates scale-free, clustered, undirected networks using a triangle-closing mechanism.
-		To generate directed networks, we modify \texttt{HK} to form directed edges to nodes in proportion to their in-degree
-		and close triangles in their undirected 1-hop neighborhood.
-
-
-		\noindent{\textbf{(5) Social Attribute Network model}} \cite{gong2012evolution} (\texttt{SAN}) generates
-		scale-free, clustered, attributed networks via attribute-augmented
-		preferential attachment and triangle closing processes.
-		We modify \texttt{SAN} to create directed edges and thereby produce directed networks.
-		% We also note that
-		% the edge formation mechanism in \texttt{SAN} considerably simplifies for bibliographic network datasets,
-		% wherein all edges are formed at once.
-
-		\noindent{\textbf{(6) Herera-Zufiria model}} \cite{saramaki2004scale} (\texttt{SK})
-		is a random walk model that generates scale-free, undirected networks with tunable average clustering.
-		In order to generate directed networks, we allow the random walk mechanism in \texttt{SK} to traverse edges in any direction.
-
-		\noindent{\textbf{(7) Saramaki-Kaski}} \cite{herrera2011generating} (\texttt{HZ}) is a random walk model
-		that generates scale-free networks with tunable average local clustering. To generate directed networks,
-		we modify \texttt{HZ} to allow its random walk mechanism to traverse edges in any direction.
-
-		\noindent{\textbf{(8) Forest Fire model}} \cite{leskovec2005graphs} (\texttt{FF}) is a recursive random walk model
-		that can generate directed networks with shrinking diameter over time,
-		heavy-tailed degree distributions and high clustering.
+as listed in~\Cref{table:models}.
+% as listed below:
+%
+% 		\noindent{\textbf{(1) Dorogovtsev-Mendes-Samukhin model}} \cite{dorogovtsev2000structure}  (\texttt{DMS})
+% 		is a preferential attachment model that generates directed scale-free graphs. In this model,
+% 		the probability of linking to a node is proportional to the sum of its in-degree and ``initial attractiveness.''
+%
+% 		\noindent{\textbf{(2) Relay Linking model}} \cite{singh2017relay} (\texttt{RL}) comprises
+% 		preferential attachment models for directed networks that use relay linking to model
+% 		node popularity over time. We use the iterated preferential relay-cite (IPRC) variant, which best fits
+% 		real-world network properties.
+%
+% 		\noindent{\textbf{(3) Kim-Altmann model}} \cite{kim2017effect} (\texttt{KA}) is a fitness-based model that defines
+% 		fitness as the product of degree and attribute similarity. It generates {attributed} networks
+% 		with assortative mixing and power law degree distribution.
+% 		To generate directed networks, we modify \texttt{KA} to form directed edges to nodes in proportion to their in-degree.
+%
+% 		\noindent{\textbf{(4) Holme-Kim model}} \cite{holme2002growing} (\texttt{HK}) is a preferential attachment model
+% 		that generates scale-free, clustered, undirected networks using a triangle-closing mechanism.
+% 		To generate directed networks, we modify \texttt{HK} to form directed edges to nodes in proportion to their in-degree
+% 		and close triangles in their undirected 1-hop neighborhood.
+%
+%
+% 		\noindent{\textbf{(5) Social Attribute Network model}} \cite{gong2012evolution} (\texttt{SAN}) generates
+% 		scale-free, clustered, attributed networks via attribute-augmented
+% 		preferential attachment and triangle closing processes.
+% 		We modify \texttt{SAN} to create directed edges and thereby produce directed networks.
+% 		% We also note that
+% 		% the edge formation mechanism in \texttt{SAN} considerably simplifies for bibliographic network datasets,
+% 		% wherein all edges are formed at once.
+%
+% 		\noindent{\textbf{(6) Herera-Zufiria model}} \cite{saramaki2004scale} (\texttt{SK})
+% 		is a random walk model that generates scale-free, undirected networks with tunable average clustering.
+% 		In order to generate directed networks, we allow the random walk mechanism in \texttt{SK} to traverse edges in any direction.
+%
+% 		\noindent{\textbf{(7) Saramaki-Kaski}} \cite{herrera2011generating} (\texttt{HZ}) is a random walk model
+% 		that generates scale-free networks with tunable average local clustering. To generate directed networks,
+% 		we modify \texttt{HZ} to allow its random walk mechanism to traverse edges in any direction.
+%
+% 		\noindent{\textbf{(8) Forest Fire model}} \cite{leskovec2005graphs} (\texttt{FF}) is a recursive random walk model
+% 		that can generate directed networks with shrinking diameter over time,
+% 		heavy-tailed degree distributions and high clustering.
 
 % \begin{enumerate}
 % 	\item{\textbf{Dorogovtsev-Mendes-Samukhin model}} \cite{dorogovtsev2000structure}  (\texttt{DMS})
@@ -127,30 +128,30 @@ as listed below:
 % \end{enumerate}
 
 % in~\Cref{table:models}.
-% \begin{table}[t]
-%  \center
-%  {
-%   \begin{tabular}[c]{llcc} \toprule
-%   Model &  Abbreviation & Type & Attributed \\ \midrule
-%   Dorogovtsev et al.~\cite{dorogovtsev2000structure} & \texttt{DMS} & \texttt{PA} & No  \\
-%   Relay Linking~\cite{singh2017relay} 						  & \texttt{RL} & \texttt{PA} & No  \\
-%   Kim-Altmann~\cite{kim2017effect} 							  & \texttt{KA} & \texttt{PA} & Yes  \\ \midrule
-%   Social Attribute Network~\cite{gong2012evolution} 	  & \texttt{SAN} & \texttt{PA+TC} & Yes  \\
-%   Holme-Kim~\cite{holme2002growing} 						  & \texttt{HK} & \texttt{PA+TC} & No  \\ \midrule
-%   Herera-Zufiria~\cite{herrera2011generating} 				  & \texttt{HZ} & \texttt{RW} & No  \\
-%   Saramaki-Kaski~\cite{saramaki2004scale} 					  & \texttt{SK} & \texttt{RW} & No  \\
-%   Forest Fire~\cite{leskovec2005graphs} 					  & \texttt{FF} & \texttt{RW} & No  \\
-%    \bottomrule
-%   \end{tabular}
-%   \vspace{1mm}
-%   \caption{
-%   	  We evaluate the performance of our model \texttt{ARW} relative to 3 preferential attachment
-% 	  (\texttt{PA}) models, 2 pref. attachment \& triangle closing (\texttt{PA+TC}) models and 3 random walk (\texttt{RW}) models.
-%   }
-%   \label{table:models}
-%  }
-%  \vspace{-10pt}
-% \end{table}
+\begin{table}[t]
+ \center
+ {
+  \begin{tabular}[c]{llcc} \toprule
+  Model &  Abbreviation & Type & Attributed \\ \midrule
+  Dorogovtsev et al.~\cite{dorogovtsev2000structure} & \texttt{DMS} & \texttt{PA} & No  \\
+  Relay Linking~\cite{singh2017relay} 						  & \texttt{RL} & \texttt{PA} & No  \\
+  Kim-Altmann~\cite{kim2017effect} 							  & \texttt{KA} & \texttt{PA} & Yes  \\ \midrule
+  Social Attribute Network~\cite{gong2012evolution} 	  & \texttt{SAN} & \texttt{PA+TC} & Yes  \\
+  Holme-Kim~\cite{holme2002growing} 						  & \texttt{HK} & \texttt{PA+TC} & No  \\ \midrule
+  Herera-Zufiria~\cite{herrera2011generating} 				  & \texttt{HZ} & \texttt{RW} & No  \\
+  Saramaki-Kaski~\cite{saramaki2004scale} 					  & \texttt{SK} & \texttt{RW} & No  \\
+  Forest Fire~\cite{leskovec2005graphs} 					  & \texttt{FF} & \texttt{RW} & No  \\
+   \bottomrule
+  \end{tabular}
+  \vspace{1mm}
+  \caption{
+  	  We evaluate the performance of our model \texttt{ARW} relative to 3 preferential attachment
+	  (\texttt{PA}) models, 2 pref. attachment \& triangle closing (\texttt{PA+TC}) models and 3 random walk (\texttt{RW}) models.
+  }
+  \label{table:models}
+ }
+ \vspace{-10pt}
+\end{table}
 
 \textit{Ensuring Fair Comparison}. To ensure fair comparison, we modify existing models in three ways.
 First, for \texttt{DMS}, \texttt{SAN}, \texttt{KA} do not have an explicitly defined initial graph,
