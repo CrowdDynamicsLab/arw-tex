@@ -1,9 +1,9 @@
 %!TEX root = ../main.tex
 
 \begin{figure*}
-	\vspace{-20pt}
+	\vspace{-15pt}
     \centering
-    \includegraphics[width=\linewidth]{arw}
+    \includegraphics[width=.9\linewidth]{arw}
     \caption{Edge formation in \texttt{ARW}: consider
     an incoming node $u$ with outdegree ${m=3}$ and attribute value {$B(u)=\textsc{red} \in \{\textsc{red},\textsc{green}\}$}.
     In fig. 3a, $u$ joins the network and selects seed $v_a$ via \textsc{Select-Seed}.
@@ -12,7 +12,7 @@
     Node $u$ halts the random walk after linking to $v_a$, $v_c$ \& $v_d$.
     }
     \label{fig:randomwalk}
-	% \vspace{-8pt}
+	\vspace{-8pt}
 \end{figure*}
 
 \section{Attributed Random Walk Model}
@@ -64,7 +64,12 @@ existing nodes.
 
 The edge formation mechanism consists of two components: \textsc{Select-Seed} and
 \textsc{Random-Walk}. As shown in~\Cref{fig:randomwalk}, an incoming node $u$ with attribute value $B(u)$ that joins the
-network at time $t$ first selects a seed node using \textsc{Select-Seed}:
+network at time $t$ first selects a seed node using \textsc{Select-Seed}.
+
+\textsc{Select-Seed} accounts for homophilic preferences of incoming nodes using
+parameters $\psame$ and $\pdiff$ to tune attribute preferences.
+In~\Cref{fig:randomwalk}, node $u$ selects a seed node and initiates a
+random walk using \textsc{Random-Walk} to form $m(t)$ links.
 \\\\
 \tikzstyle{background rectangle}=[thin,draw=black]
 \begin{tikzpicture}[show background rectangle]
@@ -85,10 +90,6 @@ network at time $t$ first selects a seed node using \textsc{Select-Seed}:
 % The attribute parameter $p_a$ incorporates the attribute preferences of incoming nodes
 % into the model.
 
-\textsc{Select-Seed} accounts for homophilic preferences of incoming nodes using
-parameters $\psame$ and $\pdiff$, which incorporate attribute preferences of incoming nodes.
-In~\Cref{fig:randomwalk}, node $u$ selects a seed node and initiates a
-random walk using \textsc{Random-Walk} to form $m(t)$ links.
 The \textsc{Random-Walk} mechanism consists of four parameters: attribute-based parameters
 $\psame$ \& $\pdiff$ model edge formation decisions and the jump parameter $\pjump$ \&
 out-link parameter $\pout$ characterize random walk traversals:
@@ -150,19 +151,20 @@ exogenous factors (e.g., venue, topic) may influence node out-degree.
 Next, we explain how each parameter is necessary to conform to normative
 behavior of individuals in evolving networks.
 
+\vspace{-9pt}
 \subsection{\texttt{ARW} and Normative Behavior}
 \label{sub:Model Interpretation}
 The Attributed Random Walk model unifies multiple sociological phenomena
 into its edge formation mechanisms.
 
 \newtheoremstyle{exampstyle}
-  {2pt} % Space above
-  {2pt} % Space below
+  {1pt} % Space above
+  {1pt} % Space below
   {\itshape} % Body font
   {} % Indent amount
   {\bfseries} % Theorem head font
   {.} % Punctuation after theorem head
-  {.25em} % Space after theorem head
+  {.05em} % Space after theorem head
   {} % Theorem head spec (can be left empty, meaning `normal')
 
 \theoremstyle{exampstyle} \newtheorem{ph}{Phenomenon}
@@ -171,19 +173,22 @@ into its edge formation mechanisms.
 	(Limited Resources) Individuals are boundedly rational~\cite{simon1972theories,gigerenzer1996reasoning,lipman1995information}
 	actors that form edges under constraints of limited information and partial network access.
 \end{ph}
-\texttt{ARW} uses random walk traversals to incorporate constraints of limited information
-and partial network access. A new node $u$ selects a seed node from which it
-initiates a biased random walk. Then, $u$ uses simple rules to connect to each visited
-nodes probabilistically and halts the walk after forming $m(t)$ edges, as shown in~\Cref{fig:randomwalk}. Random walks require information only about the
-1-hop neighborhood of a few visited nodes, thereby accounting for  the constraints of limited information and partial network access.
+% \texttt{ARW} uses random walk traversals to incorporate constraints of limited information
+% and partial network access.
+As shown in ~\Cref{fig:randomwalk}, \textsc{Random-Walk} only requires information only about the
+1-hop neighborhood of a few visited nodes, thereby accounting for the constraints of limited information and partial network access.
+% A new node $u$ selects a seed node from which it
+% initiates a biased random walk. Then, $u$ uses simple rules to connect to each visited
+% nodes probabilistically and halts the walk after forming $m(t)$ edges, as shown in~\Cref{fig:randomwalk}. Random walks require information only about the
+% 1-hop neighborhood of a few visited nodes, thereby accounting for  the constraints of limited information and partial network access.
 
 \begin{ph}
 	(Structural Constraints) Network distance
 	act as a constraint that limits long-range connections.  \cite{35626}
 \end{ph}
 
-We incorporate structural constraints into \texttt{ARW} using $\pjump$, the probability with
-which a new node jumps back to its seed node after each step of the random walk. This implies
+We incorporate structural constraints using $\pjump$, the probability with
+which a new node jumps back to its seed node after every step of the random walk. This implies
 that the probability with which the new node is at most $k$ steps from its seed node is $(1-\pjump)^k$;
 as a result, $\pjump$ controls the extent to which nodes' random walks explore the network to form edges.
 
@@ -193,12 +198,13 @@ as a result, $\pjump$ controls the extent to which nodes' random walks explore t
 \end{ph}
 
 When attribute data is absent, \texttt{ARW} controls
-the effect of triadic closure on link formation using $\plink$. This is because
-a new node $u$ closes a triad through its random walk by linking to both, a visited node
-and its neighbor, with probability proportional to $\plink^2$.
-Similarly, in attributed networks, the probability of triad completion equals $pq$,
-where $p$ and $q$ can equal $\psame$ or $\pdiff$, depending on the attribute values of
-$u$ and the visited nodes.
+the effect of triadic closure on link formation using $\plink$ because
+with probability proportional to $\plink^2$,
+a new node $u$ closes a triad through its random traversal by linking to both, a visited node
+and its neighbor,
+% Similarly, in attributed networks, the probability of triad completion equals $pq$,
+% where $p$ and $q$ can equal $\psame$ or $\pdiff$, depending on the attribute values of
+% $u$ and the visited nodes.
 
 \begin{ph}
 	(Attribute Homophily) Nodes that have similar attributes are more likely
@@ -345,10 +351,9 @@ Therefore, we sample the attribute value $B(u)$ of node $u$, that joins $\hat{G}
 $t$, from $P_{\textsc{g}}(B{\mbox{ | year}=y(t)})$, the observed attribute
 distribution conditioned on the year of arrival of node $u$.
 
-To summarize, \texttt{ARW}
-intuitively describes how individuals form edges under resource constraints.
+To summarize,
 \texttt{ARW} uses four parameters ---$\psame$, $\pdiff$, $\pjump$, $\pout$--- to incorporate
-individuals' biases towards similar, proximate and high degree nodes.
+resource-constrained individuals' biases towards similar, proximate and high degree nodes.
 % We note that a mathematical analysis of \texttt{ARW} appears to lead to novel
 % theoretical questions about random walks on directed graphs.
 % Unfortunately, unlike the case of undirected graphs, there is no
@@ -356,4 +361,4 @@ individuals' biases towards similar, proximate and high degree nodes.
 % on general directed graphs, thereby making the analysis of random walk models
 % like \texttt{ARW} quite complex. \harshay{Improve theory justification
 Next, we discuss our experiments on the performance of $\texttt{ARW}$
-in accurately preserving {multiple} structural and attribute properties of real networks.
+in preserving global properties of real networks.

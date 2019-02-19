@@ -29,6 +29,15 @@
 \section{Introduction}
 \label{sec:Introduction}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=\columnwidth]{introduction_plot}
+    \caption{We contrast our proposed model, Attributed Random Walk (\texttt{ARW}), with a non-attributed growth model~\cite{holme2002growing} to underscore the importance of using attributes for network growth.}
+	\label{fig:intro_plot}
+  \vspace{-20pt}
+\end{figure}
+
+
 
 % what is the problem?
 
@@ -70,14 +79,15 @@ degree distributions, they are unrealistic: preferential attachment and vertex
 copying require global node-level knowledge or complete network access respectively.
 Additionally, they do not account for the role of assortative mixing ~\cite{newman2002assortative} via nodal attributes (e.g., venue of paper, political interests of Facebook users) in network formation.
 
-Recent papers tackle resource constraints
-\cite{mossa2002truncation,zeng2005construction,wang2009local} as well as nodal
+Recent papers account for resource constraints
+\cite{mossa2002truncation,zeng2005construction,wang2009local} and nodal
 attributes \cite{de2013scale,gong2012evolution}. However, the former disregard
 attributes and the latter do not provide a realistic representation of edge
-formation under resource constraints. Furthermore, both sets of models do not
-jointly preserve multiple structural properties. Developing an interpretable and
-accurate model of attributed network growth that accounts for resource constraints and observed sociological phenomena is non-trivial.
+formation under constraints. Furthermore, both sets of models do not
+jointly preserve multiple structural properties.
 
+We aim to develop a growth model that accounts for resource constraints and sociological phenomena
+influencing edge formation in addition to preserving global network structure.
 We make three key contributions.
 First, we propose a simple and accurate model of attributed network growth.
 Second, our model is based on local processes to form edges, without recourse to global network information.
@@ -88,19 +98,6 @@ Third, our model unifies multiple sociological phenomena---bounded rationality; 
 % \item \textbf{Local information:} Our model is based on a random walk and uses local processes to form edges, without recourse to global information of the network.
 % \item \textbf{Unified account:} To the best of our knowledge, \texttt{ARW} is the first model that accounts for multiple sociological phenomena---bounded rationality; structural constraints; triadic closure; attribute homophily; preferential attachment---through an entirely local process to model global network structure and attribute mixing patterns.
 % \end{enumerate}
-
-
-% what did we do?
-
-\begin{figure}
-	\centering
-	\includegraphics[width=\columnwidth]{introduction_plot}
-    \caption{We contrast our proposed model, Attributed Random Walk (\texttt{ARW}), with a non-attributed growth model~\cite{holme2002growing} to underscore the importance of using attributes for network growth.}
-	\label{fig:intro_plot}
-  \vspace{-13pt}
-\end{figure}
-
-
 
 
 The proposed model---Attributed Random Walk (\texttt{ARW})---jointly explains
@@ -115,7 +112,7 @@ chooses an outgoing link or incoming link to visit another node; it links to
 each visited node with some probability and halts after it has exhausted its
 budget to form connections.
 Our experiments on six large-scale network datasets indicate that the proposed growth model outperforms
-eight state-of-the-art network growth models, including attributed growth models, by a
+eight state-of-the-art network growth models by a
 statistically significant margin of 2.5--$10\times$.
 
 
