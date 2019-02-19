@@ -2,8 +2,11 @@
 
 \section{Related Work}
 \label{sec:Related Work}
-Network growth models seek to explain a subset of structural properties observed in real
-networks. Below, we discuss relevant work on modeling network growth.
+% Network growth models seek to explain a subset of structural properties observed in real
+% networks.
+Now, we discuss relevant work on modeling network growth.
+Please refer to the
+extended version of the paper on arXiv for a detailed review of existing work.
 % We point the reader to
 % extensive surveys \cite{newman2003structure,albert2002statistical} of network growth models
 % for more information.
@@ -14,8 +17,39 @@ networks. Below, we discuss relevant work on modeling network growth.
 % \textbf{Preferential Attachment \& Fitness}:
 Preferential attachment and fitness-based models \cite{bell2017network,medo2011temporal,bianconi2001bose,caldarelli2002scale}
 can preserve heavy-tailed degree distribution, small diameter \cite{bollobas2004diameter} and temporal dynamics \cite{wang2013quantifying}
-of real-world networks. Furthermore, while extensions of preferential attachment \cite{mossa2002truncation,zeng2005construction,wang2009local},
-they disregard network properties such as clustering and mixing patterns.
+of real-world networks. Furthermore, extensions of preferential attachment \cite{mossa2002truncation,zeng2005construction,wang2009local} that account for
+partial network access disregard network properties such as clustering and mixing patterns.
+A set of models
+\cite{holme2002growing,klemm2002highly,leskovec2008microscopic}
+couple preferential attachment with triangle closing mechanisms to incorporate triadic closure.
+While this increases {average} local clustering by forming edges between nodes
+with one or more common neighbors, as shown in~\Cref{sec:Experiments}, it does not
+accurately preserve distributional properties of local clustering.
+
+
+Models \cite{de2013scale,karimi2017visibility,gong2012evolution,zheleva2009co}
+that account for attribute mixing can be largely categorized as (a) fitness-based model that define fitness as a function of
+attribute similarity and (b) "microscopic" growth models  that require
+complete temporal information about edge insertions \& deletion.
+In~\Cref{sub:Experimental Results}, we show that attributed network models
+\texttt{SAN} and \texttt{KA} preserve mixing patterns but do not account for other
+structural properties of real-world networks.
+
+First introduced by Vazquez \cite{vazquez2000knowing}, random walk models are inherently local.
+Models \cite{blum2006random} in which
+new nodes only link to terminal nodes of short random walks generate
+networks with power law degree distributions \cite{chebolu2008pagerank} and
+small diameter \cite{mehrabian2016sa} but do not preserve clustering. Models
+such as \texttt{SK} \cite{saramaki2004scale}
+and \texttt{HZ} \cite{herrera2011generating}, in which new nodes probabilistically link to
+each visited nodes incorporate triadic closure but are not flexible enough to preserve
+{skewed} local clustering, as shown in~\Cref{sub:Experimental Results}.
+Recursive random walk models such as \texttt{FF} \cite{leskovec2005graphs}
+preserve temporal properties such as shrinking diameter but considerably overestimate local clustering.
+Furthermore, existing random walk models do not account for nodal attributes.
+
+To summarize, existing models do not accurately explain how resource constrained and local processes
+\textit{jointly} preserve multiple global network properties of attributed networks.
 
 % a new node $u$ links to an existing node $v$
 % with probability proportional to the attachment function $f(k_v)$, a function of
@@ -68,25 +102,12 @@ they disregard network properties such as clustering and mixing patterns.
 % correlation observed in real networks.
 
 
-A set of models
-\cite{holme2002growing,klemm2002highly,leskovec2008microscopic}
-incorporate triadic closure using triangle closing mechanisms.
-While this increases {average} local clustering by forming edges between nodes
-with one or more common neighbors, as shown in~\Cref{sec:Experiments}, it cannot
-accurately preserve distributional properties of local clustering.
 % model the distribution over the local clustering coefficient or the
 % relationship between in-degree and clustering.
 % models
 % based on preferential attachment and triangle closing do not preserve the local
 % clustering of low degree nodes.
 
-Models \cite{de2013scale,karimi2017visibility,gong2012evolution,zheleva2009co}
-that account for attribute mixing patterns can be broadly categorized as (a) fitness-based model that define fitness as a function of
-attribute similarity and (b) microscopic models of network evolution that require
-complete temporal information about edge arrivals \& deletion. Our experiment
-results in~\Cref{sub:Experimental Results} show that well-known attributed network models
-\texttt{SAN} and \texttt{KA} cannot jointly preserve mixing patterns and multiple structural
-properties of real-world networks.
 % preserve assortative
 % mixing patterns, degree distribution to some extent, but not local clustering
 % and degree-clustering correlation.
@@ -96,18 +117,7 @@ properties of real-world networks.
 % vazquez2003growing}, jointly explain the emergence of multiple properties
 % observed in real networks under constraints of partial access and limited
 % information.
-First introduced by Vazquez \cite{vazquez2000knowing}, random walk models are inherently local.
-Models \cite{blum2006random} in which
-new nodes only link to terminal nodes of short random walks generate
-networks with power law degree distributions \cite{chebolu2008pagerank} and
-small diameter \cite{mehrabian2016sa} but do not preserve clustering. Models
-such as \texttt{SK} \cite{saramaki2004scale}
-and \texttt{HZ} \cite{herrera2011generating}, in which new nodes probabilistically link to
-each visited nodes incorporate triadic closure but are not flexible enough to preserve
-{skewed} local clustering of real-world networks, as shown in~\Cref{sub:Experimental Results}.
-Recursive random walk models such as \texttt{FF} \cite{leskovec2005graphs}
-preserve temporal properties such as shrinking diameter but considerably overestimate local clustering.
-Furthermore, existing random walk models do not account for nodal attributes.
+
 %  disregard the effect of homophily and do not model attribute mixing
 % patterns.
 
@@ -121,8 +131,6 @@ Furthermore, existing random walk models do not account for nodal attributes.
 % mixing patterns, and resource constraints that affect how individuals form edges
 % in real-world networks.
 
-To summarize, existing models do not accurately explain how resource constrained and local processes
-\textit{jointly} preserve multiple global network properties of attributed networks.
 
 % Growth models that account for the effect of attribute homophily on edge formation
 % jointly preserve assortative mixing patterns and a few structural properties observed
