@@ -15,14 +15,15 @@
 % \textbf{Preferential Attachment \& Fitness}:
 Preferential attachment and fitness-based models \cite{bell2017network,medo2011temporal,bianconi2001bose,caldarelli2002scale}
 can preserve heavy-tailed degree distribution, small diameter \cite{bollobas2004diameter} and temporal dynamics \cite{wang2013quantifying}
-of real-world networks. Furthermore, extensions of preferential attachment \cite{mossa2002truncation,zeng2005construction,wang2009local} that account for
-partial network access disregard network properties such as clustering and mixing patterns.
-A set of models
+of real-world networks. Extensions of preferential attachment \cite{mossa2002truncation,zeng2005construction,wang2009local} that account for
+partial network access disregard properties such as clustering and mixing patterns.
+Models
 \cite{holme2002growing,klemm2002highly,leskovec2008microscopic}
-couple preferential attachment with triangle closing mechanisms to incorporate triadic closure.
-While this increases {average} local clustering by forming edges between nodes
-with one or more common neighbors, as shown in~\Cref{sec:Experiments}, it does not
-accurately preserve distributional properties of local clustering.
+couple preferential attachment with triangle closing to incorporate triadic closure.
+This increases {average} local clustering by forming edges between nodes
+with one or more common neighbors, as shown in~\Cref{sec:Experiments}
+% but does not
+% accurately preserve distributional properties of local clustering.
 
 
 Models \cite{de2013scale,karimi2017visibility,gong2012evolution,zheleva2009co}
