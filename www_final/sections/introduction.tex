@@ -53,11 +53,6 @@ local clustering and diverse attribute mixing patterns. However, we lack an
 understanding of local, resource-constrained mechanisms that incorporate
 sociological factors to jointly explain the emergence of multiple structural properties.
 Additionally, accurate network growth models are useful for synthesizing networks and extrapolating existing real-world networks.
-% The problem of developing a model of network growth, where individuals act under
-% resource constraints, including access to only local information is hard. The
-% problem lies in identifying simple mechanisms with few parameters that unifies
-% multiple sociological phenomena to \textit{jointly} preserve structural
-% properties and attribute mixing patterns of attributed networks.
 
 
 % why is it important?
@@ -93,12 +88,6 @@ First, we propose a simple and accurate model of attributed network growth.
 Second, our model is based on local processes to form edges, without recourse to global network information.
 Third, our model unifies multiple sociological phenomena---bounded rationality; structural constraints; triadic closure; attribute homophily; preferential attachment---to jointly  model global network structure and attribute mixing patterns.
 
-% We have three primary contributions:
-% \item \textbf{Attributed:} We propose an interpretable and accurate model of attributed network growth.
-% \item \textbf{Local information:} Our model is based on a random walk and uses local processes to form edges, without recourse to global information of the network.
-% \item \textbf{Unified account:} To the best of our knowledge, \texttt{ARW} is the first model that accounts for multiple sociological phenomena---bounded rationality; structural constraints; triadic closure; attribute homophily; preferential attachment---through an entirely local process to model global network structure and attribute mixing patterns.
-% \end{enumerate}
-
 
 The proposed model---Attributed Random Walk (\texttt{ARW})---jointly explains
 the emergence of in-degree distribution, local clustering, clustering-degree
@@ -115,13 +104,6 @@ Our experiments on six large-scale network datasets indicate that the proposed g
 eight state-of-the-art network growth models by a
 statistically significant margin of 2.5--$10\times$.
 
-
-
-
-% \texttt{ARW} preserves key structural properties---in-degree distribution, clustering and
-% indegree-clustering relationship---with high accuracy.
-% We analyze the parameter space of the model to show how each parameter intuitively controls
-% one or more key structural properties.
 
 The rest of the paper is organized as follows.
 We begin by defining the problem statement in~\Cref{sec:Problem Statement}.
