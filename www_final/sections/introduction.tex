@@ -19,7 +19,7 @@
   time period $T$. In attributed networks, each node has a categorical attribute value that belongs to set $A$ of size $|A|$.
   The networks exhibit lognormal (\texttt{LN}) in-degree distribution with mean $\mu$ and standard deviation $\sigma$,
   high average local clustering (${\texttt{LCC}}$) \& attribute assortativity (\texttt{AA}) coefficient and
-  densify over time with power law (\texttt{DPL}) exponent $\alpha$.}
+  densify over time with densification power law (\texttt{DPL}) exponent $\alpha$.}
   \label{table:datasets}
   \label{table:netstats}
  }
@@ -68,10 +68,10 @@ individuals possess {complete} knowledge of in-degree or fitness of every node
 in the network. An equivalent formulation---vertex copying
 \cite{kumar2000stochastic}---induces preferential attachment: for every
 citation, a node would pick a paper uniformly at random from \textit{all}
-papers, and either cite it or copy its citations. Notice that vertex copying assumes individuals have complete access to the network and forms each
+papers, and either cite it or copy its citations. Notice that vertex copying assumes individuals have complete access to the network and form each
 edge independently. Although these models explain the emergence of power law
 degree distributions, they are unrealistic: preferential attachment and vertex
-copying require global node-level knowledge or complete network access respectively.
+copying require global node-level knowledge and complete network access respectively.
 Additionally, they do not account for the role of assortative mixing ~\cite{newman2002assortative} via nodal attributes (e.g., venue of paper, political interests of Facebook users) in network formation.
 
 Recent papers account for resource constraints

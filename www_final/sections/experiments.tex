@@ -52,8 +52,8 @@ as listed in~\Cref{table:models}.
   \end{tabular}
   \vspace{1mm}
   \caption{
-  	  We evaluate the performance of our model \texttt{ARW} relative to 3 preferential attachment
-	  (\texttt{PA}) models, 2 pref. attachment \& triangle closing (\texttt{PA+TC}) models and 3 random walk (\texttt{RW}) models.
+  	  We evaluate the performance of our model \texttt{ARW} relative to three preferential attachment
+	  (\texttt{PA}) models, two pref. attachment \& triangle closing (\texttt{PA+TC}) models and 3 random walk (\texttt{RW}) models.
   }
   \label{table:models}
  }
@@ -106,7 +106,7 @@ corresponding rows in~\Cref{fig:exp_table}.  We use green ticks in~\Cref{fig:exp
 annotate models that preserve attribute assortativity up to two decimal places.
 
 Existing models fail to \textit{jointly} preserve multiple properties
-because they either do not account for mechanisms such as triadic closure and homophily
+because they either do not account for triadic closure and homophily
 or are not flexible enough to generate networks with tunable structural properties.
 Preferential attachment models---\texttt{DMS}, \texttt{RL}, \texttt{KA}---preserve in-degree
 distributions (\Cref{fig:exp_table}A) but not clustering because they do not account for triadic closure
@@ -123,15 +123,14 @@ formation process.
 \begin{figure}
 	\centering
 	% \vspace{-3pt}
-	\includegraphics[width=.85\linewidth]{experiments_barplot}
+	\includegraphics[width=\linewidth]{experiments_barplot}
 	% \vspace{-10pt}
 		\caption{\texttt{ARW} outperforms
-			existing network models in jointly preserving key structural properties---in-degree
-			distribution, local clustering distribution and degree-clustering relationship---
-			by a significant margin of 2.5x-10x.
+			existing models in jointly preserving key structural properties of node in-degree
+			and local clustering by a significant margin of 2.5x-10x.
 		}
 		\label{fig:barplot}
-		\vspace{-10pt}
+		\vspace{-14pt}
 \end{figure}
 
 ~\Cref{fig:exp_table} clearly indicates the effectiveness
@@ -139,7 +138,6 @@ of \texttt{ARW} in {jointly} preserving multiple
 global network properties. \texttt{ARW} preserves observed
 in-degree distributions by adjusting nodes' bias towards high degree nodes
 using $\pout$.
-
 \texttt{ARW} matches the local clustering
 distribution  (\Cref{fig:exp_table}B) and in-degree \& clustering relationship
 (\Cref{fig:exp_table}C) with high accuracy using $\pjump$ and
@@ -149,7 +147,7 @@ the attribute parameters $\psame$ and $\pdiff$.
 To summarize, \texttt{ARW} unifies sociological phenomena into a single
 mechanism to jointly preserve key network properties significantly
 better than existing models, as shown in~\Cref{fig:barplot}.
-Code pertinent to \texttt{ARW} is available online \footnote{Code: https://github.com/harshays/ARW}.
+Code pertinent to \texttt{ARW} is available online \footnote{Code: https://github.com/CrowdDynamicsLab/ARW}.
 Please refer to the extended version of
-our paper \footnote{Extended version of the paper: https://arxiv.org/abs/1712.10195} for
+our paper \cite{shah2017growing} for
 more information.
